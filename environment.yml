@@ -1,0 +1,27 @@
+name: mlops-workshop
+
+channels:
+    - conda-forge
+
+dependencies:
+  - pip
+  - pip:
+    - tensorflow
+    - dtreeviz
+    - lrcurve
+  - python=3.8
+  - scikit-learn
+  - pandas
+  - seaborn
+  - jupyter
+  - notebook
+  - numpy
+  - matplotlib
+  - evidently
+  - prometheus_client
+  - mlflow
+  - Flask
+  - flask_cors
+  - Werkzeug
+  - requests
+  - pyyaml
