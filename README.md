@@ -41,5 +41,9 @@ $ conda env create -f environment-m1.yml
 and later activate the environment:
 
 ```
-$ conda activate mlops-workshop
+$ conda activate mlops-workshop-d2d
 ```
+
+### Monitoring Drift
+
+Monitoring is based on https://github.com/evidentlyai/evidently/tree/main/examples/integrations/grafana_monitoring_service and code is copied from there. Start monitoring as described there.
