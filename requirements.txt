@@ -16,3 +16,5 @@ requests
 pyyaml
 dtreeviz
 lrcurve
+scipy
+causalgraphicalmodels

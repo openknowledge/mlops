@@ -25,3 +25,6 @@ dependencies:
   - Werkzeug
   - requests
   - pyyaml
+  - scipy
+  - causalgraphicalmodels
+
