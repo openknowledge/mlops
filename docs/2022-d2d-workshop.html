@@ -640,43 +640,106 @@ Fear of deploys is the largest source of technical debt and wasted time in most 
 	<textarea data-template>
 ### Bevor es los geht
 
-https://www.m3-konferenz.de/veranstaltung-14132-0-mlops-mit-python-und-tensorflow.html
+https://www.data2day.de/veranstaltung-15183-0-mlops-mit-python.html
 
-<div style="display: flex;">
-<div style="flex: 50%;">
-
-1. Agenda im Netz ist nur der grobe Ablauf, länge der Blöcke flexibel nach Bedarf, offizielles Ende ist schon 16:00
-1. Diese Folien: https://bit.ly/m3-2022-mlops
-1. Falls noch nicht geschehen, bitte das Projekt wie in der Beschreibung (link oben) *lokal* installieren
+1. WLAN: xxx
+1. Diese Folien: https://bit.ly/data2day-2022-mlops
+1. Falls noch nicht geschehen, bitte das Projekt wie in der Beschreibung (link oben) installieren
 1. Nachher gibt es noch Zeit und es gibt auch einen Fallback
-	</div>
-<div style="flex: 50%; font-size: x-large;">
-<img src='img/wlan.jpg' style="height: 400px;">
 
-</div>
-</div>
-	
+_Bei Problemen den Nachbar oder Tobias und Olli fragen_   
+</textarea>
+</section>
 
-_Bei Problemen den Nachbar oder Olli und Lars fragen_   
+<!-- 
+MLOps mit Python
+
+https://www.data2day.de/veranstaltung-15183-0-mlops-mit-python.html
+
+Agenda:
+
+09:00 Uhr: Beginn
+
+Einführung
+- MLOps: Phasen und Workflow in einem ML Projekt
+- Daten entstehen über die Zeit
+- Unser Fallbeispiel und Datenbasis
+
+10:45 - 11:00 Uhr: Kaffeepause
+
+Ein lauffähiges ML System
+- Installation und Start des ML Systems
+  - Docker
+  - Flask
+- wichtige Metriken
+- Was kann man wie testen? 
+
+12:30 - 13:30 Uhr: Mittagspause
+
+Betrieb
+* Benutzung des Modells simulieren
+* Drifts, Monitoring, Alerting
+* Evidently, Prometheus, Grafana
+* Bewertung von Drift
+
+15:00 - 15:15 Uhr: Kaffeepause
+
+Abschluss / Rückblick
+* Ausblick: was passiert nach Produktivsetzung?
+* Offene Fragen
+
+ca. 16:00 Uhr: Ende
+
+
+TECHNISCHE ANFORDERUNGEN
+Falls ihr ein Gerät eurer Firma verwendet, überprüft vorher bitte, ob eines der folgenden, gelegentlich vorkommenden Probleme bei euch auftreten könnte.
+Workshop-Teilnehmer:in hat keine Administrator-Rechte.
+Corporate Laptops mit übermäßig penibler Sicherheitssoftware
+Gesetzte Corporate-Proxies, über die man in der Firma kommunizieren muss, die aber in einer anderen Umgebung entsprechend nicht erreicht werden.
+
+Vorbereitung
+Dieser Workshop geht davon aus, dass du bereits eine Python-Entwicklungsumgebung mit IDE, Python Distribution und Git 
+auf deinem Rechner lauffähig hast.
+Sollte das nicht der Fall sein und du nicht sicher bist, welche Software passt, installiere bitte:
+* Anaconda: https://www.anaconda.com/products/individual
+* Visual Studio Code: https://code.visualstudio.com/
+* Git: https://git-scm.com/downloads
+* Docker: https://docs.docker.com/get-docker/
+
+Wir werden auf einem Beispielprojekt arbeiten. Hab bitte bereits vor dem Workshop
+das Projekt https://github.com/openknowledge/mlops-data2day geklont und wie im Readme beschrieben installiert.
+ -->
+
+ <section data-markdown class="todo">
+	<textarea data-template>
+### MLOps @ Gitlab
+
+* For traditional software, logic is made explicit through code, while on for ML the logic is implicit in the data, and extracted through a variety of technique's.
+* Note that MLOps is not a branch of DevOps, it's a superset of it.
+
+
+ https://gitlab.com/gitlab-org/incubation-engineering/mlops/meta/-/issues/58
 </textarea>
 </section>
 
 
 			<section data-markdown>
 				<textarea data-template>
-## MLOps mit Python und TensorFlow         
-### Machine Learning betrachtet als ein Engineering Problem       
+## MLOps mit Python         
 
-M3 2022, https://www.m3-konferenz.de/veranstaltung-14132-0-mlops-mit-python-und-tensorflow.html
+data2day 2022, https://www.data2day.de/veranstaltung-15183-0-mlops-mit-python.html
+
+Tobias Kurzydym / lars.roewekamp@openknowledge.de
 
 Oliver Zeigermann / oliver.zeigermann@openknowledge.de
 
-Lars Röwekamp / lars.roewekamp@openknowledge.de
 
 <!-- Folien: https://bit.ly/m3-2022-mlops -->
 Folien: https://openknowledge.github.io/mlops-data2day/2022-d2d-workshop.html
     </textarea>
 			</section>
+
+
 
 <section data-markdown>
   <textarea data-template>
@@ -726,61 +789,34 @@ Head of AI@OpenKnowledge
 		<textarea data-template>
 # Agenda
 
-* Phase 0: Grundlagen MLOps, Unser Beispiel, Installation
-* Phase 1: Exploration
-* Phase 2: Professionalisierung
-* Phase 3: Produktion
+* Grundlagen MLOps, Unser Beispiel
+* Ein lauffähiges ML System
+* Betrieb
+* Abschluss / Rückblick
 
 </textarea>
 	</section>
-
 
 	<section data-markdown>
 		<textarea data-template>
 # Agenda
 
-* _Phase 0: Grundlagen MLOps, Unser Beispiel, Installation_
-* Phase 1: Exploration
-* Phase 2: Professionalisierung
-* Phase 3: Produktion
+* _Grundlagen MLOps, Unser Beispiel_
+* Ein lauffähiges ML System
+* Betrieb
+* Abschluss / Rückblick
 
 </textarea>
 	</section>
+
 
 	<section data-markdown>
 		<textarea data-template>
-## Installation
+## MLOps: Phasen und Workflow in einem ML Projekt
 
+ML Projekte sind speziell
 </textarea>
-	</section>
-
-	<section data-markdown style="font-size: x-large;" class="hands-on">
-		<textarea data-template>
-## Hands-On 0 - Die Arbeitsumgebung überprüfen und kennen lernen
-
-*Wir gehen zusammen durch das Notebook*
-
-1. Wir empfehlen: arbeitet zusammen mit euren direkten Nachbarn
-1. Sagt kurz Hallo
-1. Falls das Projekt noch nicht installiert ist, dies bitte lokal tun, wie hier beschrieben unter Vorbereitung installieren: https://www.m3-konferenz.de/veranstaltung-14132-0-mlops-mit-python-und-tensorflow.html
-1. `conda activate mlops-workshop`
-1. `cd workspace`
-1. `jupyter notebook`
-1. http://localhost:8888/notebooks/insurance_ml.ipynb
-
-https://www.m3-konferenz.de/veranstaltung-14132-0-mlops-mit-python-und-tensorflow.html
-
-falls es Installationsprobleme gibt: https://colab.research.google.com/github/DJCordhose/insurance-ml/blob/main/workspace/insurance_ml.ipynb
-</textarea>
-	</section>
-
-	<section data-markdown>
-		<textarea data-template>
-## Grundlagen MLOps
-
-</textarea>
-	</section>
-
+</section>
 
 <section data-markdown class="fragments">
 ### Was ist MLOps?
@@ -815,6 +851,16 @@ Das gilt nicht nur für ML Modelle, aber bei diesen ist es offensichtlicher
 </textarea>
 </section>
 
+
+<section data-markdown>
+	<textarea data-template>
+### Realistischer als mir lieb ist
+
+By far, the most accurate representation of machine learning pipelines in the real world 🍿 😀
+
+https://twitter.com/bindureddy/status/1552073812157403136
+</textarea>
+</section>
 
 <section data-markdown>
 _MLOps today is in a very messy state with regards to tooling, practices, and standards. However, this is to be expected
@@ -853,6 +899,54 @@ https://www.mihaileric.com/posts/mlops-is-a-mess/
 * Es gibt mit Sicherheit andere Ansätze, die auch gut funktionieren
 
 </section>
+
+<section data-markdown>
+	<textarea data-template>
+
+## Unser Fallbeispiel und Datenbasis
+
+Daten entstehen über die Zeit
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+# Agenda
+
+* Grundlagen MLOps, Unser Beispiel
+* _Ein lauffähiges ML System_
+* Betrieb
+* Abschluss / Rückblick
+
+</textarea>
+</section>
+
+<section data-markdown>
+# VON HIER AN NUR MATERIAL	
+</section>
+
+
+
+
+	<section data-markdown style="font-size: x-large;" class="hands-on">
+		<textarea data-template>
+## Hands-On 0 - Die Arbeitsumgebung überprüfen und kennen lernen
+
+*Wir gehen zusammen durch das Notebook*
+
+1. Wir empfehlen: arbeitet zusammen mit euren direkten Nachbarn
+1. Sagt kurz Hallo
+1. Falls das Projekt noch nicht installiert ist, dies bitte lokal tun, wie hier beschrieben unter Vorbereitung installieren: https://www.m3-konferenz.de/veranstaltung-14132-0-mlops-mit-python-und-tensorflow.html
+1. `conda activate mlops-workshop`
+1. `cd workspace`
+1. `jupyter notebook`
+1. http://localhost:8888/notebooks/insurance_ml.ipynb
+
+https://www.m3-konferenz.de/veranstaltung-14132-0-mlops-mit-python-und-tensorflow.html
+
+falls es Installationsprobleme gibt: https://colab.research.google.com/github/DJCordhose/insurance-ml/blob/main/workspace/insurance_ml.ipynb
+</textarea>
+	</section>
 
 
 <section data-markdown>
