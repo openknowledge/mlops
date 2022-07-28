@@ -10,6 +10,7 @@ dependencies:
     - dtreeviz
     - lrcurve
     - causalgraphicalmodels
+    - evidently
   - python=3.8
   - scikit-learn
   - pandas
@@ -18,7 +19,6 @@ dependencies:
   - notebook
   - numpy
   - matplotlib
-  - evidently
   - prometheus_client
   - Flask
   - flask_cors
