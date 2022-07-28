@@ -1,4 +1,4 @@
-name: mlops-workshop
+name: mlops-workshop-d2d
 
 channels:
     - apple
@@ -11,6 +11,7 @@ dependencies:
     - tensorflow-metal
     - dtreeviz
     - lrcurve
+    - causalgraphicalmodels
   - python=3.8
   - tensorflow-deps
   - scikit-learn
@@ -22,11 +23,9 @@ dependencies:
   - matplotlib
   - evidently
   - prometheus_client
-  - mlflow
   - Flask
   - flask_cors
   - Werkzeug
   - requests
   - pyyaml
   - scipy
-  - causalgraphicalmodels

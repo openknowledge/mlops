@@ -1,4 +1,4 @@
-name: mlops-workshop
+name: mlops-workshop-d2d
 
 channels:
     - conda-forge
@@ -9,6 +9,7 @@ dependencies:
     - tensorflow
     - dtreeviz
     - lrcurve
+    - causalgraphicalmodels
   - python=3.8
   - scikit-learn
   - pandas
@@ -19,12 +20,10 @@ dependencies:
   - matplotlib
   - evidently
   - prometheus_client
-  - mlflow
   - Flask
   - flask_cors
   - Werkzeug
   - requests
   - pyyaml
   - scipy
-  - causalgraphicalmodels
 

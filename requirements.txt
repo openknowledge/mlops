@@ -7,7 +7,6 @@ seaborn
 scikit-learn
 evidently
 prometheus-client
-mlflow
 tensorflow
 Flask
 flask_cors
