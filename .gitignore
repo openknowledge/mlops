@@ -1,3 +1,6 @@
 *Zone.Identifier
 datasets
 .ipynb_checkpoints
+__pycache__
+classifier
+classifier.*
