@@ -9,6 +9,12 @@ networks:
   back-tier:
 
 services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile.app
+    ports:
+      - "8080:5000"
   evidently_service:
     build:
       context: .
