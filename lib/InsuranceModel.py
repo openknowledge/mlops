@@ -13,7 +13,7 @@ class InsuranceModel:
         self.power_range = power_range
 
     # https://keras.io/guides/serialization_and_saving/
-    def load_model(self, model_path='classifier', keras_format=None):
+    def load(self, model_path='classifier', keras_format=None):
         if keras_format is None:
             keras_format = self.keras_format
 
