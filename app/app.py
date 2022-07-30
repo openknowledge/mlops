@@ -1,18 +1,24 @@
 #!/usr/bin/env python
 
-import logging
-from flask import Flask, request, jsonify
-from flask_cors import CORS
 import sys
 sys.path.append('../lib')
 # print(sys.path)
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
 from model_prediction import predict
+import logging
+from flask import Flask, request, jsonify
+from flask_cors import CORS
+
 
 app = Flask(__name__)
 CORS(app)
 
-logging.basicConfig(filename='req.log')
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    filename='req.log')
 
 data_logger = logging.getLogger('DataLogger')
 data_logger.setLevel(logging.INFO)

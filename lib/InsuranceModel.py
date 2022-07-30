@@ -36,5 +36,5 @@ class InsuranceModel:
         """
 
         X = [[training, age, emergency_breaking, braking_distance, power, miles]]
-        probas = self.model.predict(X)[0]
+        probas = self.model.predict(X, verbose=0)[0]
         return probas
