@@ -10,7 +10,7 @@ model_path = "/home/olli/mlops-data2day/app/classifier"
 # model_path = "/python_server/classifier"
 
 insurance_model = InsuranceModel()
-insurance_model.load_model(model_path, keras_format=True)
+insurance_model.load(model_path, keras_format=True)
 
 baseline_model = BaseLineClassifier()
 

@@ -3,7 +3,7 @@ from lrcurve import KerasLearningCurve
 from InsuranceModel import InsuranceModel
 
 class TrainableInsuranceModel(InsuranceModel):
-    def __init__(self, model, data=None, batch_size=32, **kwargs):
+    def __init__(self, model=None, data=None, batch_size=32, **kwargs):
         InsuranceModel.__init__(self, model, **kwargs)
         self.model = model
         self.data = data

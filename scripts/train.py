@@ -37,8 +37,8 @@ def main(data_path: str, model_path: str) -> None:
 
     trainableModel = TrainableInsuranceModel(model, data)
     trainableModel.train()
-    ((train_loss, train_metric), (test_loss, test_metric)) = trainableModel.evaluate()
-    logging.info(f"Model trained to train / test accuracy: {train_metric}/{test_metric}")
+    ((_, train_metric), (_, test_metric)) = trainableModel.evaluate()
+    logging.info(f"Model trained to train / test accuracy: {train_metric} / {test_metric}")
 
     logging.info("Save model to %s", model_path)
     trainableModel.save(model_path)
