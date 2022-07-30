@@ -53,9 +53,6 @@ app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {"/metrics": prometheus_client
 @dataclasses.dataclass
 class MonitoringServiceOptions:
     datasets_path: str
-    min_reference_size: int
-    use_reference: bool
-    moving_reference: bool
     window_size: int
     calculation_period_sec: int
 
@@ -113,7 +110,8 @@ class MonitoringService:
 
         self.metrics = {}
         self.next_run_time = {}
-        self.hash = hashlib.sha256(pd.util.hash_pandas_object(self.reference["bike_random_forest"]).values).hexdigest()
+        # self.hash = hashlib.sha256(pd.util.hash_pandas_object(self.reference["bike_random_forest"]).values).hexdigest()
+        self.hash = "42"
         self.hash_metric = prometheus_client.Gauge("evidently:reference_dataset_hash", "", labelnames=["hash"])
 
     def iterate(self, dataset_name: str, new_rows: pd.DataFrame):
@@ -241,4 +239,6 @@ def iterate(dataset: str):
 
 
 if __name__ == "__main__":
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0', port=8085)
+
+    

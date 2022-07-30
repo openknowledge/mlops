@@ -27,12 +27,15 @@ class NumpyEncoder(json.JSONEncoder):
 
 
 def send_data_row(dataset_name: str, data: Dict) -> None:
-    print(f"Send a data item for {dataset_name}")
+    # print(f"Send a data item for {dataset_name}")
+    encoded_data = json.dumps([data], cls=NumpyEncoder)
+    # print(data)
+
 
     try:
         response = requests.post(
             f"http://localhost:8085/iterate/{dataset_name}",
-            data=json.dumps([data], cls=NumpyEncoder),
+            data=encoded_data,
             headers={"content-type": "application/json"},
         )
 
@@ -66,10 +69,12 @@ def main(sleep_timeout: int) -> None:
         datasets[dataset_name] = new_data
         max_index = max(max_index, new_data.shape[0])
 
+    print(f"Max index is {max_index}")
     for idx in range(0, max_index):
         for dataset_name, dataset in datasets.items():
             dataset_size = dataset.shape[0]
             data = dataset.iloc[idx % dataset_size].to_dict()
+            print(f"Send data for {dataset_name} with index {idx}")
             send_data_row(dataset_name, data)
 
         print(f"Wait {sleep_timeout} seconds till the next try.")
@@ -84,7 +89,7 @@ if __name__ == "__main__":
         "-t",
         "--timeout",
         type=float,
-        default=2,
+        default=0,
         help="Sleep timeout between data send tries in seconds.",
     )
     args = parser.parse_args()
