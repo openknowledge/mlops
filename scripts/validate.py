@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 
+from data import InsuranceData
+from TrainableInsuranceModel import TrainableInsuranceModel
+import sys
+import pandas as pd
+import numpy as np
 import argparse
 import logging
 import os
 from tabnanny import verbose
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
-import numpy as np
-import pandas as pd
-import sys
 sys.path.append('../lib')
 # print(sys.path)
 
-from TrainableInsuranceModel import TrainableInsuranceModel
-from data import InsuranceData
 
 def setup_logger() -> None:
     logging.basicConfig(
@@ -23,6 +23,7 @@ def setup_logger() -> None:
             logging.StreamHandler()
         ]
     )
+
 
 def main(data_path: str, model_path: str) -> None:
     logging.info(f"Validating model {model_path} on dataset {data_path}")
@@ -41,7 +42,8 @@ def main(data_path: str, model_path: str) -> None:
     assert test_metric > .85
     logging.info(f"Model test accuracy of {test_metric} exceeds 85%")
     assert abs(train_metric - test_metric) < .05
-    logging.info(f"Accuracy spread of {abs(train_metric - test_metric)} is below 5% (checking or overfitting here)")
+    logging.info(
+        f"Accuracy spread of {abs(train_metric - test_metric)} is below 5% (checking or overfitting here)")
 
     # output distributions
     model = insurance_model.model
@@ -53,20 +55,21 @@ def main(data_path: str, model_path: str) -> None:
     tolerance = 0.15
     expected_count = len(X) / 3
     for count in counts:
-        assert count in range(int(expected_count * (1 - tolerance)), int(expected_count * (1 + tolerance)))
+        assert count in range(
+            int(expected_count * (1 - tolerance)), int(expected_count * (1 + tolerance)))
     logging.info(f"Counts {counts} are within {tolerance} of {expected_count}")
 
     # certainty distribution
     logging.info(f"Checking certainty distribution of outputs")
     y_pred_probas = model.predict(X, verbose=0).max(axis=1)
-    logging.info(f"Min: {y_pred_probas.min()}, mean: {y_pred_probas.mean()}, max: {y_pred_probas.max()}")
+    logging.info(
+        f"Min: {y_pred_probas.min()}, mean: {y_pred_probas.mean()}, max: {y_pred_probas.max()}")
     assert y_pred_probas.min() > .4
     assert y_pred_probas.mean() > 0.7
     assert y_pred_probas.max() > 0.99
-    logging.info(f"Certainty distribution of outputs is within expected bounds")
-    
+    logging.info(
+        f"Certainty distribution of outputs is within expected bounds")
 
-    
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(

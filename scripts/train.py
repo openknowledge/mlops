@@ -1,17 +1,16 @@
 #!/usr/bin/env python3
 
+from model import create_model, create_normalizer
+from data import InsuranceData
+from TrainableInsuranceModel import TrainableInsuranceModel
+import sys
 import argparse
 import logging
 import os
 os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 
-import sys
 sys.path.append('../lib')
 # print(sys.path)
-
-from TrainableInsuranceModel import TrainableInsuranceModel
-from data import InsuranceData
-from model import create_model, create_normalizer
 
 
 def setup_logger() -> None:
@@ -23,25 +22,29 @@ def setup_logger() -> None:
         ]
     )
 
+
 def main(data_path: str, model_path: str) -> None:
     logging.info("Generate model for dataset %s", data_path)
     data_path = os.path.abspath(data_path)
     model_path = os.path.abspath(model_path)
-    
+
     data = InsuranceData(data_path)
     X_train, _, _, _ = data.get_split()
     normalizer = create_normalizer(X_train)
-    model = create_model(num_features=X_train.shape[1], num_categories=3, normalizer=normalizer)
+    model = create_model(
+        num_features=X_train.shape[1], num_categories=3, normalizer=normalizer)
 
     logging.info("Train model")
 
     trainableModel = TrainableInsuranceModel(model, data)
     trainableModel.train()
     ((_, train_metric), (_, test_metric)) = trainableModel.evaluate()
-    logging.info(f"Model trained to train / test accuracy: {train_metric} / {test_metric}")
+    logging.info(
+        f"Model trained to train / test accuracy: {train_metric} / {test_metric}")
 
     logging.info("Save model to %s", model_path)
     trainableModel.save(model_path)
+
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
