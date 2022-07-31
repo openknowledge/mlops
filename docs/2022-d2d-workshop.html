@@ -922,6 +922,288 @@ Daten entstehen über die Zeit
 </section>
 
 <section data-markdown>
+	<textarea data-template>
+# Agenda
+
+* Grundlagen MLOps, Unser Beispiel
+* Ein lauffähiges ML System
+* _Betrieb / Monitoring_
+* Abschluss / Rückblick
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Wir erinnern uns: ML Modelle brauchen permanentes Monitoring und Wartung
+
+<img src='img/mlops/modell-vergammelt.jpg'>
+
+</textarea>
+</section>
+<section data-markdown class="fragments">
+### Grundregel
+
+* Alle haben Probleme in Produktion
+* Es gibt kein fehlerfreies System 
+  * jedenfalls nicht für lange
+* Ziel ist es, Fehler schnell 
+  * zu entdecken
+  * zu analysieren
+  * und entsprechende ihrer Schwere zu adressieren
+
+</section>
+
+	<section data-markdown class="fragments">
+		<textarea data-template>
+### Woher weiß man, dass man ein neues Modell in Produktion braucht?
+
+1. Schon in der Explorationsphase prüfen wie sich das Modell auf neueren Daten verhält
+   * wie schnell degradiert die Performance?
+   * Mindestens einmal im Jahr, damit man überhaupt noch weiß wie es geht
+1. Wenn die Metrik des Modells nachlässt in Produktion
+   * Dafür braucht man die Ground Truth der Daten aus Produktion
+   * Manchmal bekommt man diese unmittelbar nach der Vorhersage durch die Reaktion eines menschlichen Benutzers
+   * Oft aber auch erst nach nennenswerter Verzögerung 
+1. Wenn sich die Verteilung der Daten der Anfragen oder Vorhersagen deutlich von denen des Trainings unterscheiden 
+
+</textarea>
+	</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Monitoring mit Evidently, Prometheus und Grafana
+
+<!-- <img src="img/mlops/monitoring-components.png"> -->
+<img src="img/mlops/evidently_grafana_service.png">
+
+<small>https://evidentlyai.com/blog/evidently-and-grafana-ml-monitoring-live-dashboards
+<br>
+https://docs.evidentlyai.com/integrations/evidently-and-grafana
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+### Wir setzen einen eigenen Monitoring-Server auf
+
+* Basiert auf Prometheus, Grafana und Evidently
+* Code basiert auf https://github.com/evidentlyai/evidently/tree/main/examples/integrations/grafana_monitoring_service
+* Nicht direkt Teil des eigentlichen Prod-Servers
+* Zusätzliche Requests werden gegen den Monitoring-Server gemacht
+* Requests über die Zeit verteilt werden simuliert
+</section>
+	
+<section data-markdown>
+### Prometheus
+
+Metric Server
+
+* https://prometheus.io/
+* https://prometheus.io/docs/prometheus/latest/getting_started/
+  * https://prometheus.io/download/
+
+</section>
+
+<section data-markdown>
+### Grafana
+
+Visualisierung mit Dashboards
+	
+https://play.grafana.org/
+</section>
+
+<section data-markdown>
+### Evidently
+
+ML Performance Monitoring
+	
+https://evidentlyai.com/
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Übersicht der Services
+
+* Monitoring App
+  * Endpunkt für die Registrierung von Datensätzen: http://localhost:8085/iterate/<dataset\> (POST)
+	* Nutzlast per JSON Body, kann Prediction enthalten z.B.: `[{"speed": 99.0, "age": 28.0, "miles": 21.0, "group": 2.0, "risk": 0.2110376180699707}]`  
+  * Metrics aus Evidently: http://localhost:8085/metrics
+    * über `app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {"/metrics": prometheus_client.make_wsgi_app()})`
+
+* Promethus: http://localhost:9090
+* Grafana: http://localhost:3000
+
+*Erfordert das Starten des Monitoring Services (kommt später)*	
+</textarea>
+</section>
+
+
+<section data-markdown>
+	<textarea data-template>
+### Drift-Erkennung mit Prometheus, Evidently und Grafana
+
+<img src="img/mlops/grafana-evidently-drift.png">
+
+https://docs.evidentlyai.com/reports/data-drift
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Wie erkennt man Drift?
+
+* Es wird ein Statistischer Test auf den Eingabe-Daten ausgeführt
+* Unsere Features sind numerisch und kategorisch
+  * in `monitoring/metrics_app/config.yaml` festgelegt
+* Die Anfragen in Production werden verglichen mit Referenz-Datensatz, den wir zum Training benutzt haben (`monitoring/datasets/insurance`)
+* Evidently sucht als Default eine passende Metrik aus, es muss also nicht unser Problem sein
+* Man kann aber auch von Hand konfigurieren, sowohl Test als auch Parameter
+  * https://docs.evidentlyai.com/user-guide/customization/options-for-statistical-tests
+  * https://docs.evidentlyai.com/user-guide/customization/options-for-data-target-drift
+
+https://docs.evidentlyai.com/reports/data-drift
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Welcher Statistischer Test / welche Metrik?
+
+es gibt leider nicht den einen passenden Test
+
+* manche passen nur gut für kleine (< 1000) Datenmengen
+  * unsere Datenmengen sind größer als 1000
+* manche können nicht nur auf numerischen sondern kategorischen Daten arbeiten
+  * wir brauchen beides
+* manche sind zwischen 0 und 1 normiert
+  * das ist uns eher egal
+* unsere Metriken
+  * Wasserstein Metrik für numerische Daten
+  * Jensen-Shannon Distanz für kategorische Daten  
+
+https://evidentlyai.com/blog/data-drift-detection-large-datasets
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Die Wasserstein-Metrik
+
+_Wenn jede Verteilung als ein Haufen von „Erde“ angehäuft auf dem metrischen Raum betrachtet wird, dann beschreibt diese
+Metrik die minimalen „Kosten“ der Umwandlung eines Haufens in den anderen._
+
+* nicht zu sensitiv, zeigt nur größere Veränderungen an
+* normiert in Veränderungen in Standardabweichungen
+* kann (offensichtlich) über 1 gehen
+* ab 0.1 gehen wir von einem Drift aus
+* funktioniert nur für numerische Daten
+
+https://de.wikipedia.org/wiki/Wasserstein-Metrik
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Jensen-Shannon Divergenz
+
+* Jensen-Shannon Distanz ist wie Wurzel aus der Divergenz, das ist unsere Metrik
+* zwischen 0 und 1
+* ab 0.1 gehen wir von einem Drift aus
+* funktioniert auch für kategorische Daten
+* basiert auf Kullback–Leibler Divergenz, relative Entropie
+* Histogramme werden verglichen, Größe des Samples daher egal
+* Binning für kategorische Daten offensichtlich
+* Intuition: wie viel Information/Entropie/Überraschung steckt im Unterschied der beiden Verteilungen?
+
+
+https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence
+https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence
+</textarea>
+</section>
+
+<!-- <section data-markdown class="fragments">
+	<textarea data-template>
+### P-Werte
+
+* die statistische Verteilung der jeweiligen Features
+* weicht diese im Prod signifikant von der Verteilung im Training ab?
+* diese Abweichung wird über eine Metrik berechnet
+* es kommt eine Konfidenz heraus, ob die Verteilungen unterschiedlich sind
+* ab (default) 95% Konfidenz geht man von einer Abweichung aus 
+* das bedeutet, dass es eine 5% Wahrscheinlichkeit gibt, dass die Verteilungen eigentlich doch gleich sind, man es aber nur gerade schlechte Beispiele sieht
+
+https://de.wikipedia.org/wiki/P-Wert
+</textarea>
+</section> -->
+
+<section data-markdown>
+	<textarea data-template>
+# Agenda
+
+* Grundlagen MLOps, Unser Beispiel
+* Ein lauffähiges ML System
+* Betrieb
+* _Abschluss / Rückblick_
+
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Wir gehen zurück in die Phasen I und II
+
+* hier wird wieder in Notebooks gearbeitet
+* die Bibliotheken werden inkludiert und bei jeder Änderung neu geladen
+* Jupyter Lab bietet eine gemeine Oberfläche für Notebooks und Bibliotheken
+* Eine Kombination von Visual Studio Code und Jupyer Notebooks ist ebenso möglich
+<!-- * Selbst Colab erlaubt das Arbeiten auf einer Kombination von Notebooks und Bibliotheken
+* Referenz: Module in Colab nutzen: https://colab.research.google.com/drive/1hDUO1-EzMVtVt6snmgrR1I1A36oPp4J9 -->
+* Rückker in Phase I muss nicht radikal sein
+* wenn Ansatz vergleichbar kann Phase II so erhalten bleiben
+* neue Ergebnisse fliesen dann iterativ in die Professionalisierung
+
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+<textarea data-template>
+### Zusammenfassung
+
+1. Machine Learning Projekte können in Phasen gedacht werden
+1. In der ersten Phase macht man möglichst schnelle Experimente
+1. Sollte sich eine Idee als tragfähig erweisen, professionalisiert man die Idee
+1. Dies ist Voraussetzung und Grundlage für Produktion
+1. In Produktion ergeben sich besondere Herausforderung im Bereich Monitoring
+1. Typischerweise müssen Machine Learning Systeme regelmäßig nachtrainiert und gepflegt werden
+</textarea>
+</section>
+
+		<section data-markdown>
+			<textarea data-template>
+# Vielen Dank
+
+MLOps mit Python und TensorFlow
+Machine Learning betrachtet als ein Engineering Problem
+
+M3 2022, https://www.m3-konferenz.de/veranstaltung-14132-0-mlops-mit-python-und-tensorflow.html
+
+Bleibt gern im Kontakt
+
+Oliver Zeigermann / oliver.zeigermann@openknowledge.de
+https://www.linkedin.com/in/oliver-zeigermann-34989773/
+https://twitter.com/DJCordhose
+
+Lars Röwekamp / lars.roewekamp@openknowledge.de
+
+Folien: https://bit.ly/m3-2022-mlops
+
+</textarea>
+		</section>
+
+<section data-markdown>
 # VON HIER AN NUR MATERIAL	
 </section>
 
@@ -1642,127 +1924,6 @@ https://twitter.com/marktenenholtz/status/1528021809697792003</small>
 		</textarea>
 </section>
 	 -->
-<section data-markdown class="fragments">
-### Grundregel
-
-* Alle haben Probleme in Produktion
-* Es gibt kein fehlerfreies System 
-  * jedenfalls nicht für lange
-* Ziel ist es, Fehler schnell 
-  * zu entdecken
-  * zu analysieren
-  * und entsprechende ihrer Schwere zu adressieren
-
-</section>
-
-	<section data-markdown class="fragments">
-		<textarea data-template>
-### Woher weiß man, dass man ein neues Modell in Produktion braucht?
-
-1. Mindestens einmal im Jahr, damit man überhaupt noch weiß wie es geht
-1. Wenn die Metrik des Modells nachlässt in Produktion
-1. Dafür braucht man die Ground Truth der Daten aus Produktion
-1. Manchmal bekommt man diese unmittelbar nach der Vorhersage durch die Reaktion eines menschlichen Benutzers
-1. Oft aber auch erst nach nennenswerter Verzögerung 
-1. Wenn sich die Verteilung der Daten der Anfragen deutlich von denen des Trainings unterscheiden 
-
-</textarea>
-	</section>
-
-
-<section data-markdown>
-### Wir setzen einen eigenen Monitoring-Server auf
-
-* Basiert auf Prometheus, Grafana und Evidently
-* Code basiert auf https://github.com/evidentlyai/evidently/tree/main/examples/integrations/grafana_monitoring_service
-* Nicht direkt Teil des eigentlichen Prod-Servers
-* Zusätzliche Requests werden gegen den Monitoring-Server gemacht
-* Requests über die Zeit verteilt werden simuliert
-</section>
-	
-<section data-markdown>
-### Prometheus
-
-Metric Server
-
-* https://prometheus.io/
-* https://prometheus.io/docs/prometheus/latest/getting_started/
-  * https://prometheus.io/download/
-
-</section>
-
-<section data-markdown>
-### Grafana
-
-Visualisierung mit Dashboards
-	
-https://play.grafana.org/
-</section>
-
-<section data-markdown>
-### Evidently
-
-ML Performance Monitoring
-	
-https://evidentlyai.com/
-</section>
-
-<section data-markdown>
-	<textarea data-template>
-### Zusammenspiel der Komponenten
-
-<!-- <img src="img/mlops/monitoring-components.png"> -->
-<img src="img/mlops/evidently_grafana_service.png">
-
-https://docs.evidentlyai.com/integrations/evidently-and-grafana
-</textarea>
-</section>
-
-<section data-markdown>
-	<textarea data-template>
-### Übersicht der Services
-
-* Monitoring App
-  * Endpunkt für die Registrierung von Datensätzen: http://localhost:8085/iterate/<dataset\> (POST)
-	* Nutzlast per JSON Body, kann Prediction enthalten z.B.: `[{"speed": 99.0, "age": 28.0, "miles": 21.0, "group": 2.0, "risk": 0.2110376180699707}]`  
-  * Metrics aus Evidently: http://localhost:8085/metrics
-    * über `app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {"/metrics": prometheus_client.make_wsgi_app()})`
-
-* Promethus: http://localhost:9090
-* Grafana: http://localhost:3000
-
-*Erfordert das Starten des Monitoring Services (kommt später)*	
-</textarea>
-</section>
-
-
-<section data-markdown>
-	<textarea data-template>
-### Drift-Erkennung mit Prometheus, Evidently und Grafana
-
-<img src="img/mlops/grafana-evidently-drift.png">
-
-https://docs.evidentlyai.com/reports/data-drift
-</textarea>
-</section>
-
-<section data-markdown class="fragments">
-	<textarea data-template>
-### Wie erkennt man Drift?
-
-* Es wird ein Statistischer Test auf den Eingabge-Daten ausgeführt
-* Unsere Features sind numerisch
-  * in `monitoring/metrics_app/config.yaml` festgelegt
-* Die Anfragen in Production werden verglichen mit Referenz-Datensatz, den wir zum Training benutzt haben (`monitoring/datasets/insurance`)
-* Evidently sucht als Default eine passende Metrik aus, es muss also nicht unser Problem sein
-* Man kann aber auch von Hand konfigurieren, sowohl Test als auch Parameter
-  * https://docs.evidentlyai.com/user-guide/customization/options-for-statistical-tests
-  * https://docs.evidentlyai.com/user-guide/customization/options-for-data-target-drift
-
-https://docs.evidentlyai.com/reports/data-drift
-
-</textarea>
-</section>
 
 <!-- <section data-markdown class="fragments">
 	<textarea data-template>
@@ -2042,57 +2203,6 @@ Nicht die Welt ändert sich, sondern unsere Kodierung davon
  -->
 
 
-	<section data-markdown class="fragments">
-		<textarea data-template>
-### Wir gehen zurück in die Phasen I und II
-
-* hier wird wieder in Notebooks gearbeitet
-* die Bibliotheken werden inkludiert und bei jeder Änderung neu geladen
-* Jupyter Lab bietet eine gemeine Oberfläche für Notebooks und Bibliotheken
-* Eine Kombination von Visual Studio Code und Jupyer Notebooks ist ebenso möglich
-<!-- * Selbst Colab erlaubt das Arbeiten auf einer Kombination von Notebooks und Bibliotheken
-* Referenz: Module in Colab nutzen: https://colab.research.google.com/drive/1hDUO1-EzMVtVt6snmgrR1I1A36oPp4J9 -->
-* Rückker in Phase I muss nicht radikal sein
-  * wenn Ansatz vergleichbar kann Phase II so erhalten bleiben
-  * neue Ergebnisse fliesen dann iterativ in die Professionalisierung
-
-</textarea>
-	</section>
-
-<section data-markdown class="fragments">
-	<textarea data-template>
-### Zusammenfassung
-
-1. Machine Learning Projekte können in Phasen gedacht werden
-1. In der ersten Phase macht man möglichst schnelle Experimente
-1. Sollte sich eine Idee als tragfähig erweisen, professionalisiert man die Idee
-1. Dies ist Voraussetzung und Grundlage für Produktion
-1. In Produktion ergeben sich besondere Herausforderung im Bereich Monitoring
-1. Typischerweise müssen Machine Learning Systeme regelmäßig nachtrainiert und gepflegt werden
-</textarea>
-</section>
-
-			<section data-markdown>
-				<textarea data-template>
-# Vielen Dank
-
-MLOps mit Python und TensorFlow
-Machine Learning betrachtet als ein Engineering Problem
-
-M3 2022, https://www.m3-konferenz.de/veranstaltung-14132-0-mlops-mit-python-und-tensorflow.html
-
-Bleibt gern im Kontakt
-
-Oliver Zeigermann / oliver.zeigermann@openknowledge.de
-https://www.linkedin.com/in/oliver-zeigermann-34989773/
-https://twitter.com/DJCordhose
-
-Lars Röwekamp / lars.roewekamp@openknowledge.de
-
-Folien: https://bit.ly/m3-2022-mlops
-
-    </textarea>
-			</section>
 
 
 		</div>
