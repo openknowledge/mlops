@@ -1056,8 +1056,8 @@ https://docs.evidentlyai.com/reports/data-drift
 
 * Es wird ein Statistischer Test auf den Eingabe-Daten ausgeführt
 * Unsere Features sind numerisch und kategorisch
-  * in `monitoring/metrics_app/config.yaml` festgelegt
-* Die Anfragen in Production werden verglichen mit Referenz-Datensatz, den wir zum Training benutzt haben (`monitoring/datasets/insurance`)
+  * in `metrics_app/config.yaml` festgelegt
+* Die Anfragen in Production werden verglichen mit Referenz-Datensatz, den wir zum Training benutzt haben (`datasets/insurance`)
 * Evidently sucht als Default eine passende Metrik aus, es muss also nicht unser Problem sein
 * Man kann aber auch von Hand konfigurieren, sowohl Test als auch Parameter
   * https://docs.evidentlyai.com/user-guide/customization/options-for-statistical-tests
