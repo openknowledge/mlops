@@ -6,8 +6,10 @@ import tensorflow as tf
 
 # FIXME: this should be configurable
 MIN_PROBA_THRESHOLD = 0.5
-model_path = "/home/olli/mlops-data2day/app/classifier"
+# os.path.abspath("mydir/myfile.txt")
+# model_path = "/home/olli/mlops-data2day/app/classifier"
 # model_path = "/python_server/classifier"
+model_path = "classifier"
 
 insurance_model = InsuranceModel()
 insurance_model.load(model_path, keras_format=True)
