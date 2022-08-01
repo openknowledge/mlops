@@ -439,17 +439,6 @@ https://github.com/prometheus/alertmanager
 
 <section data-markdown class="todo">
 	<textarea data-template>
-### Metrics for Data Drift Detection
-
-Erstmal in Notebook ausprobieren
-
-* https://twitter.com/EmeliDral/status/1539510180609761280
-* https://evidentlyai.com/blog/data-drift-detection-large-datasets
-</textarea>
-</section>
-
-<section data-markdown class="todo">
-	<textarea data-template>
 
 Emeli Dral (@EmeliDral) twitterte um 7:52 AM on Do., Juni 09, 2022:
 Finally published the ML monitoring tutorial I gave at the Stanford CS 329S course!
@@ -723,9 +712,64 @@ das Projekt https://github.com/openknowledge/mlops-data2day geklont und wie im R
 </section>
 
 
+<section data-markdown>
+	<textarea data-template>
+### Story (auch für Talk mit Schwerpunkt auf hinteren Teil)
+
+Orchestrierung hier händisch, es geht um das Konzept und welches Tool das richtige ist hängt vom Projekt und der Umgebung ab.
+
+1. Problemstellung: innovative Kfz-Versicherungsgesellschaft
+1. Notebook Server Starten
+1. Exploration durchgehen: http://localhost:8888/notebooks/notebooks/exploration.ipynb
+   1. Features
+   1. Was wollen wir vorhersagen?
+1. Überblick über die 3 Phasen, wieso kann ich damit nicht in Prod gehen
+1. Professionalisierung: Notebook in Libs und Scripte
+1. Build: Scripte manuell laufen lassen
+   1. `(mlops-workshop-d2d) olli@DESKTOP-BEN73DP:~/mlops-data2day/scripts$ ./train.py -d ../data/reference.csv -m classifier`
+   1. `(mlops-workshop-d2d) olli@DESKTOP-BEN73DP:~/mlops-data2day/scripts$ ./validate.py -d ../data/reference.csv -m classifier`
+   1. Modell in app Ordner schieben
+   1. Diskussion: Modell und Daten sind groß oder Binary, versionieren, aber nicht in Git
+1. Produktion
+   1. `(mlops-workshop-d2d) olli@DESKTOP-BEN73DP:~/mlops-data2day/app$ ./app.py`
+   1. `http://localhost:8080/ping`
+   1. `(mlops-workshop-d2d) olli@DESKTOP-BEN73DP:~/mlops-data2day$ python -m http.server`
+   1. `http://localhost:8000/app/client.html`
+   1. in `app/client.html` Werte anpassen und herumspielen damit
+1. Produktion in Docker
+   1. Notwendig: Volumes von Prometheus und Grafana platt machen, um von 0 zu starten???
+   1. `(base) olli@DESKTOP-BEN73DP:~/mlops-data2day$ docker compose up --build`
+   1. `http://localhost:8085/metrics`
+   1. `http://localhost:9090`
+   1. `http://localhost:3000/`
+1. Produktion simulieren
+   1. Story:
+      1. die Performance des Modells degradiert
+	  1. aber wir haben erst nach Jahren eine Ground Truth, die uns das anhand der Metrik zeigt
+	  1. wir simulieren 3 Jahre Betrieb mit
+         1. Leute werden immer Älter, das passiert aber langsam (age)
+	     1. Es wird immer weniger Auto gefahren, Leute steigen um auf die Bahn und öffentliche Verkehrsmittel (miles)
+	     1. Die Sicherheit der Autos wird immer besser und der Einfluss der individuellen Fahrleistung wird verringert (emergency_breaking, pred) 
+   1. `(mlops-workshop-d2d) olli@DESKTOP-BEN73DP:~/mlops-data2day$ ./scripts/example_run_request.py` 
+   1. `http://localhost:8085/metrics`
+   1. `http://localhost:3000/d/U54hsxv7k/evidently-data-drift-dashboard?orgId=1&refresh=5s`
+1. Analyse   
+  1. Drift ist offensichtlich, aber gibt es überhaupt ein Problem?
+  1. http://localhost:8888/notebooks/notebooks/analysis.ipynb
+  1. Letztlich bekommen wir GT rein von Daten, die 2 Jahre alt sind
+  1. `(mlops-workshop-d2d) olli@DESKTOP-BEN73DP:~/mlops-data2day/scripts$ ./validate.py -d ../data/month-12.csv -m classifier`
+  1. Performance des Modells ist stark zurück gegangen
+  1. Wir sollten neu trainieren: zurück zu Phase II 
+  1. `(mlops-workshop-d2d) olli@DESKTOP-BEN73DP:~/mlops-data2day/scripts$ ./train.py -d ../data/month-12.csv -m classifier`
+  1. Neues Modell erfüllt nicht mehr unsere Anforderungen: zurück zu Phase I
+     1. Anforderungen ändern?
+	 1. Modell tunen?
+</textarea>
+</section>
+
 			<section data-markdown>
 				<textarea data-template>
-## MLOps mit Python         
+# MLOps mit Python         
 
 data2day 2022, https://www.data2day.de/veranstaltung-15183-0-mlops-mit-python.html
 
