@@ -1,7 +1,5 @@
 #!/usr/bin/env python3
 
-from data import InsuranceData
-from TrainableInsuranceModel import TrainableInsuranceModel
 import sys
 import pandas as pd
 import numpy as np
@@ -14,6 +12,8 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 sys.path.append('../lib')
 # print(sys.path)
 
+from data import InsuranceData
+from TrainableInsuranceModel import TrainableInsuranceModel
 
 def setup_logger() -> None:
     logging.basicConfig(
@@ -37,6 +37,9 @@ def main(data_path: str, model_path: str) -> None:
     # basics metrics
     logging.info(f"Checking basic metrics")
     ((_, train_metric), (_, test_metric)) = insurance_model.evaluate()
+    logging.info(
+        f"Model train / test accuracy: {train_metric} / {test_metric}")
+
     assert train_metric > .85
     logging.info(f"Model train accuracy of {train_metric} exceeds 85%")
     assert test_metric > .85

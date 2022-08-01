@@ -1,8 +1,5 @@
 #!/usr/bin/env python3
 
-from model import create_model, create_normalizer
-from data import InsuranceData
-from TrainableInsuranceModel import TrainableInsuranceModel
 import sys
 import argparse
 import logging
@@ -12,6 +9,9 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 sys.path.append('../lib')
 # print(sys.path)
 
+from model import create_model, create_normalizer
+from data import InsuranceData
+from TrainableInsuranceModel import TrainableInsuranceModel
 
 def setup_logger() -> None:
     logging.basicConfig(
