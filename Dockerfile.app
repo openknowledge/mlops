@@ -4,6 +4,7 @@ COPY ./requirements.txt /
 RUN pip install -r requirements.txt
 
 COPY ./app /python_server
+COPY ./lib /lib
 
 WORKDIR /python_server
 EXPOSE 5000
