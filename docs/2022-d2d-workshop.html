@@ -753,13 +753,13 @@ Orchestrierung hier händisch, es geht um das Konzept und welches Tool das richt
    1. `http://localhost:3000/d/U54hsxv7k/evidently-data-drift-dashboard?orgId=1&refresh=5s`
 1. Analyse   
   1. Drift ist offensichtlich, aber gibt es überhaupt ein Problem?
-  1. http://localhost:8888/notebooks/notebooks/analysis.ipynb
   1. Letztlich bekommen wir GT rein von Daten, die 2 Jahre alt sind
   1. `(mlops-workshop-d2d) olli@DESKTOP-BEN73DP:~/mlops-data2day/scripts$ ./validate.py -d ../data/month-12.csv -m classifier`
   1. Performance des Modells ist stark zurück gegangen
   1. Wir sollten neu trainieren: zurück zu Phase II 
   1. `(mlops-workshop-d2d) olli@DESKTOP-BEN73DP:~/mlops-data2day/scripts$ ./train.py -d ../data/month-12.csv -m classifier`
   1. Neues Modell erfüllt nicht mehr unsere Anforderungen: zurück zu Phase I
+    1.   1. http://localhost:8888/notebooks/notebooks/analysis.ipynb
      1. Anforderungen ändern?
 	 1. Modell tunen?
 </textarea>
@@ -769,7 +769,10 @@ Orchestrierung hier händisch, es geht um das Konzept und welches Tool das richt
 	<textarea data-template>
 # Vorbereitung
 
-* Sicher geben, dass der auch auf Colab läuft: https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/exploration.ipynb
+* Sicher geben, dass die auch auf Colab laufen: 
+  * https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/exploration.ipynb
+  * https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/analysis.ipynb
+
 </textarea>
 </section>
 
@@ -969,6 +972,13 @@ https://www.mihaileric.com/posts/mlops-is-a-mess/
 </textarea>
 </section>
 
+<section data-markdown>
+	<textarea data-template>
+### Kausales Modell
+
+<img src='img/insurance-causal-model.png' style="height: 100%;">
+</textarea>
+</section>
 
 <section data-markdown>
 	<textarea data-template>
@@ -1235,7 +1245,7 @@ Sinnvoll für Trainingsdaten und Modell
 
 	<section data-markdown class="hands-on">
 		<textarea data-template>
-## Hands-On III - Intro der Produktionsumgebung
+## Hands-On III - Produktionsumgebung
 
 1. Im Ordner `app` ist eine Server-Anwendung vorbereitet
 1. In `app.py` ist ein einfacher Flask Server implementiert
@@ -1245,6 +1255,21 @@ Sinnvoll für Trainingsdaten und Modell
 1. Für HTML clients Web Server auf 8000 starten: `python -m http.server 8000`
 1. http://localhost:8000/app/client.html macht einen einfachen Requests
 1. in `app/client.html` Werte anpassen und herumspielen
+</textarea>
+	</section>
+
+<section data-markdown class="hands-on">
+		<textarea data-template>
+## Hands-On IIIa - Intro Docker Umgebung
+
+1. `Dockerfile.app` enthält die Bauanleitung für das Docker Image
+1. `docker-compose up --build` (Referenz https://docs.docker.com/compose/reference/up/)
+   * baut und startet den Server
+   * started zusätzlich das Monitoring (das wir erstmal integrieren)
+   * Definition in `docker-compose.yaml`
+1. `docker-compose down` stopt alle Services wieder   
+
+https://github.com/openknowledge/mlops-data2day#docker
 </textarea>
 	</section>
 
@@ -1579,32 +1604,6 @@ Folien: https://bit.ly/m3-2022-mlops
 </section>
 
 
-	<!-- <section data-markdown class="hands-on">
-		<textarea data-template>
-## Hands-On IIIa - Intro Docker Umgebung
-
-1. `Dockerfile` enthält die Bauanleitung für das Docker Image
-1. `docker-compose up --build` (Referenz https://docs.docker.com/compose/reference/up/)
-   * baut und startet den Server
-   * started Prometheus und Grafana
-   * Definition in `docker-compose.yaml`
-1. `docker-compose down` stopt alle Services wieder   
-
-https://github.com/DJCordhose/insurance-ml/blob/main/README.md   
-</textarea>
-	</section>
-
-	<section data-markdown class="hands-on">
-		<textarea data-template>
-## Hands-On IIIa - Das Modell in Produktion bringen
-
-1. `app.py` so anpassen, dass damit das eigenen Programm instrumentiert wird 
-1. Starten und mit `client.html` ausprobieren
-1. Optional: Dassselbe mit der Docker-Umgebung 
-
-</textarea>
-	</section>
- -->
 	<section data-markdown>
 	<textarea data-template>
 # Agenda
