@@ -71,6 +71,7 @@ Reveal.initialize({
     document.querySelectorAll(".todo").forEach((n) => n.remove());
     document.querySelectorAll(".local").forEach((n) => n.remove());
     document.querySelectorAll(".hide").forEach((n) => n.remove());
+    document.querySelectorAll(".preparation").forEach((n) => n.remove());
   }
 
   // Changes for both public and presenter version
