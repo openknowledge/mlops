@@ -17,3 +17,4 @@ dtreeviz
 lrcurve
 scipy
 causalgraphicalmodels
+evaluate
