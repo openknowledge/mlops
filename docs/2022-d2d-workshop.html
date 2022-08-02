@@ -759,7 +759,7 @@ Orchestrierung hier händisch, es geht um das Konzept und welches Tool das richt
   1. Wir sollten neu trainieren: zurück zu Phase II 
   1. `(mlops-workshop-d2d) olli@DESKTOP-BEN73DP:~/mlops-data2day/scripts$ ./train.py -d ../data/month-12.csv -m classifier`
   1. Neues Modell erfüllt nicht mehr unsere Anforderungen: zurück zu Phase I
-    1.   1. http://localhost:8888/notebooks/notebooks/analysis.ipynb
+     1. http://localhost:8888/notebooks/notebooks/analysis.ipynb
      1. Anforderungen ändern?
 	 1. Modell tunen?
 </textarea>
@@ -779,21 +779,18 @@ Orchestrierung hier händisch, es geht um das Konzept und welches Tool das richt
 
 			<section data-markdown>
 				<textarea data-template>
-# MLOps mit Python         
+# MLOps mit Python
 
 data2day 2022, https://www.data2day.de/veranstaltung-15183-0-mlops-mit-python.html
 
-Tobias Kurzydym / lars.roewekamp@openknowledge.de
+Tobias Kurzydym / tobias.kurzydym@openknowledge.de
 
 Oliver Zeigermann / oliver.zeigermann@openknowledge.de
 
-
-<!-- Folien: https://bit.ly/m3-2022-mlops -->
-Folien: https://openknowledge.github.io/mlops-data2day/2022-d2d-workshop.html
+Folien: https://bit.ly/d2d-2022-mlops
+<!-- Folien: https://openknowledge.github.io/mlops-data2day/2022-d2d-workshop.html -->
     </textarea>
 			</section>
-
-
 
 <section data-markdown>
   <textarea data-template>
@@ -1298,6 +1295,7 @@ https://twitter.com/karpathy/status/1486215976559398915
 </textarea>
 </section>
 
+
 <section data-markdown>
     <textarea data-template>
 ### Wir erinnern uns: ML Modelle brauchen permanentes Monitoring und Wartung
@@ -1307,7 +1305,7 @@ https://twitter.com/karpathy/status/1486215976559398915
 </textarea>
 </section>
 
-			<section data-markdown class="fragments">
+	<section data-markdown class="fragments">
 ### Phase III: Produktion / Betrieb
 
 in der dritten Phase wird die Lösung in Betrieb genommen
@@ -1353,6 +1351,54 @@ in der dritten Phase wird die Lösung in Betrieb genommen
 </textarea>
 	</section>
 
+<section data-markdown>
+### Die vier goldenen Regeln des traditionellen Monitorings
+
+* Latency
+* Traffic
+* Errors
+* Saturation
+
+https://sre.google/sre-book/monitoring-distributed-systems/	
+</section>
+
+<section data-markdown style="font-size: x-large;">
+	<textarea data-template>
+### Monitoring für ML muss komplexer sein
+
+<img src="img/google-ml-monitoring.png">
+
+Long: https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/aad9f93b86b7addfea4c419b9100c6cdd26cacea.pdf
+Short: https://storage.googleapis.com/pub-tools-public-publication-data/pdf/45742.pdf
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+## Was kann man machen: Frühes Monitoring
+
+* Qualität der Daten
+  * wie verändern sich fehlende oder falsche Felder
+  * Plausibilität
+* Daten Drift
+  * Verteilung der Eingabedaten
+* Prediction Drift   
+  * Was gibt das Modell aus?
+</section>
+
+<section data-markdown>
+## Datenqualität
+
+* Felder
+  * fehlen
+  * ungültig
+  * falsch / unplausibel / Wertebereich verlassen
+* Features 
+  * konstante (die (meisten) Eingaben haben (fast) denselben Wert)
+  * leere
+  * fast leer
+  * Korrelationen zwischen Features
+</section>
+	
 <section data-markdown>
 	<textarea data-template>
 ### Monitoring mit Evidently, Prometheus und Grafana
@@ -1522,6 +1568,77 @@ https://de.wikipedia.org/wiki/P-Wert
 </textarea>
 </section> -->
 
+	<section data-markdown class="hands-on">
+		<textarea data-template>
+## Hands-On IIIb - Monitoring und Sinn daraus machen
+
+### Teil I: Das Monitoring starten 
+
+1. Starte die Monitoring Umgebung in `monitoring` über 
+   * `docker compose up -d --build`
+1. Checke, dass diese Services laufen
+   * Monitoring App, Metrics aus Evidently: http://localhost:8085/metrics
+   * Prometheus: http://localhost:9090
+   * Grafana: http://localhost:3000
+
+</textarea>
+	</section>
+
+	<section data-markdown class="hands-on">
+		<textarea data-template>
+## Hands-On IIIb - Monitoring und Sinn daraus machen
+
+### Teil II: Request simulieren
+
+1. Einloggen in Grafana: http://localhost:3000
+   1. admin/admin
+1. Das Dashboard `Evidently Data Drift Dashboard` aufrufen
+1. Darin den Datensatz `insurance`
+1. Mit `python scripts/example_run_request.py` Anfragen simulieren
+1. Stelle sicher, dass sich das Dashboard aktualisiert
+
+</textarea>
+	</section>
+
+<section data-markdown>
+## Alarm bei Data Drift
+
+* Verändert sich die Art der Eingabedaten?
+  * Oft ausgedrückt durch die Verteilung der einzelnen Features
+
+* Muss nicht notwendig schlimm sein
+  * Wenn entscheidende Features betroffen sind, kann es ein Problem sein 
+* Alarm anhand von
+  * Wichtigkeit der driftenden Features
+  * Anzahl der driftenden Features
+  * Ausmaß des Drifts
+<!-- * Dafür wichtig
+  * Vernünftige Tests anhand der Metriken
+  * Vernünftige Konfidenzintervalle -->
+
+</section>
+
+
+	<section data-markdown class="hands-on">
+		<textarea data-template>
+## Hands-On IIIb, Monitoring und Sinn daraus machen
+
+### Teil III: Einen passenden Grafana Alert erzeugen
+
+1. Einen Alert kann man in Grafana als Regel oder direkt auf einem Dashboard einrichten
+1. Editiere im Dashboard entweder das Panel für die P-Werte oder für den Anteil driftender Features
+1. Im Alert Tab kannst die Bedingung für den Alarm festlegen
+1. Eventuell musst du erst einen Ordner erzeugen: https://grafana.com/docs/grafana/latest/dashboards/dashboard_folders/
+1. Nach dem Speichern sollte ein farbiges Herz auf dem Panel den Status angeben
+1. Stelle sicher, dass dein Alert ausgelöst wird
+1. Im Alerting Menu können Contact Points zur Benachrichtigung angelegt werden
+
+https://grafana.com/docs/grafana/latest/alerting/
+
+</textarea>
+	</section>
+
+
 <section data-markdown>
 	<textarea data-template>
 # Agenda
@@ -1533,6 +1650,39 @@ https://de.wikipedia.org/wiki/P-Wert
 
 </textarea>
 </section>
+
+<section data-markdown style="font-size: x-large;">
+	<textarea data-template>
+## Drift erfordert Interpretation
+
+Wenn die Welt sich ändert, ist Drift zu erwarten und damit ok
+
+|   | Positive Interpretation, keine Maßnahme erforderlich  | Negative Interpretation, Maßnahme erforderlich  |
+|---|---|---|
+| *Data und Prediction Drift*  | wichtige Features haben sich geändert, Modell kommt klar und extrapoliert gut, z.B.: Höheres Alter, mehr Risiko  |  wichtige Features haben sich geändert, Modell extrapoliert nicht sinnvoll |
+| *Data aber kein Prediction Drift*  | keine wichtigen Features geändert, das Modell ist robust genug für den Drift  | wichtige Features geändert, Modell extrapoliert nicht sinnvoll |
+| *Prediction aber kein Data Drift*  | ???  | wichtige Features geändert, die Metric hat das aber nicht detektiert |
+|   |   |   |
+
+</textarea>
+</section>
+
+<section data-markdown>
+## Maßnahmen bei Drift
+
+* Neue Version des Modells trainieren
+  * Neue Daten aufnehmen (und labeln)
+  * Neue Features erzeugen
+* Schnelle Maßnahme
+  * Pre-/Post-Processing des Modells neu kalibrieren
+  * Schwellwerte für Anwendung anpassen
+  * Bestimmte Bereiche ausklammern 
+  * Modell Architektur ändern (oder fixen) und neu trainieren
+* Sehr schnelle Maßnahme: Fallback
+  * Manuell
+  * Heuristik / Baseline
+</section>
+
 
 <section data-markdown class="fragments">
 	<textarea data-template>
@@ -1568,10 +1718,7 @@ https://de.wikipedia.org/wiki/P-Wert
 			<textarea data-template>
 # Vielen Dank
 
-MLOps mit Python und TensorFlow
-Machine Learning betrachtet als ein Engineering Problem
-
-M3 2022, https://www.m3-konferenz.de/veranstaltung-14132-0-mlops-mit-python-und-tensorflow.html
+MLOps mit Python
 
 Bleibt gern im Kontakt
 
@@ -1579,489 +1726,10 @@ Oliver Zeigermann / oliver.zeigermann@openknowledge.de
 https://www.linkedin.com/in/oliver-zeigermann-34989773/
 https://twitter.com/DJCordhose
 
-Lars Röwekamp / lars.roewekamp@openknowledge.de
-
-Folien: https://bit.ly/m3-2022-mlops
-
+Tobias Kurzydym / tobias.kurzydym@openknowledge.de
+https://twitter.com/tkurzydym
 </textarea>
 		</section>
-
-<section data-markdown>
-# VON HIER AN NUR MATERIAL	
-</section>
-
-
-<section data-markdown>
-	<textarea data-template>
-# Agenda
-
-* Phase 0: Grundlagen MLOps, Unser Beispiel, Installation
-* Phase 1: Exploration
-* Phase 2: Professionalisierung
-* _Phase 3: Produktion_
-
-</textarea>
-</section>
-
-
-	<section data-markdown>
-	<textarea data-template>
-# Agenda
-
-* Phase 0: Grundlagen MLOps, Unser Beispiel, Installation
-* Phase 1: Exploration
-* Phase 2: Professionalisierung
-* _Phase 3b: Produktion / Monitoring_
-
-</textarea>
-</section>
-
-<!-- <section data-markdown class="todo">
-### Monitoring ist eine Art Predictive Maintainace
-</section> -->
-
-<!-- <section data-markdown>
-### Die vier goldenen Regeln des traditionellen Monitorings
-
-* Latency
-* Traffic
-* Errors
-* Saturation
-
-https://sre.google/sre-book/monitoring-distributed-systems/	
-</section>
- -->
-
-
-<section data-markdown style="font-size: x-large;">
-	<textarea data-template>
-### Monitoring für ML muss komplexer sein
-
-<img src="img/google-ml-monitoring.png">
-
-Long: https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/aad9f93b86b7addfea4c419b9100c6cdd26cacea.pdf
-Short: https://storage.googleapis.com/pub-tools-public-publication-data/pdf/45742.pdf
-</textarea>
-</section>
-
-<!-- <section data-markdown class="fragments";>
-## Welche Metriken kann man in ML Systemen überwachen?
-
-Entscheidend ist die Performance des Systems
-
-* Technische Metriken
-  * ohnehin verfügbar, weil für das Training erforderlich
-  * accuracy, precision/recall 
-* Business Metriken
-  * z.B.
-	* Umsatz / Gewinn
-	* Umfang Schadensmeldungen
-    * allgemeiner Käufe, Views, Clicks, etc.
-  * oft sinnvoller, aber schwerer zu messen oder schwerer zu quantifizieren
-
-</section> -->
-
-<!-- <section data-markdown class="fragments">
-## Das reicht meist nicht
-
-* Ground Truth liegt erst sehr spät vor
-  * Ob jemand ein guter Kunde ist wissen wir oft erst nach Jahren
-* Manchmal liegt die Ground Truth überhaupt nicht vor
-* Filter Bubble: es werden nur bestimmte Daten gesammelt
-  * wir sammeln nur Daten von Leuten, die auch unsere Kunden werden   
-* Unterschiedliche Teilbereiche können eine unterschiedliche Performanz haben
-  * Während ein Bereich besser wird, kann ein anderer, evtl. kleinerer Bereich deutlich schlechter werden, bei gleichbleibenden Performance
-* Performance kann stark über die Zeit variieren, ohne dass es ein Problem gibt
-  * anhängig von der Art der Anfragen
-  * manchmal mit Regelmäßigkeiten innerhalb eines Tages
-  * Trend in Abweichungen manchmal schwer zu bestimmen   
-</section>
-
-
-<section data-markdown class="fragments">
-## Was kann man machen: Frühes Monitoring
-
-* Qualität der Daten
-  * wie verändern sich fehlende oder falsche Felder
-  * Plausibilität
-* Daten Drift
-  * Verteilung der Eingabedaten
-* Prediction Drift   
-  * Was gibt das Modell aus?
-</section>
-
-<section data-markdown>
-## Datenqualität
-
-* Felder
-  * fehlen
-  * ungültig
-  * falsch / unplausibel / Wertebereich verlassen
-* Features 
-  * konstante (die (meisten) Eingaben haben (fast) denselben Wert)
-  * leere
-  * fast leer
-  * Korrelationen zwischen Features
-</section>
-	
- -->
-<section data-markdown class="fragments">
-	<textarea data-template>
-### Wir lassen das System ein bisschen in Produktion laufen
-
-Mal sehen wie sich das System macht
-
-- Information über Schadensfälle neuer Kunden kommen nur verzögert
-- Aber neue Meldungen über Schandensmeldungen kommen permanent
-- Wir haben keine explizite Kontrolle darüber, wer bei uns versichert werden will und wessen Unfalldaten wir bekommen
-- Es gibt aber eine Tendenz dahin, dasss eher Kunden mit guten Konditionen kommen
-
-<!-- <small>
-
-https://colab.research.google.com/github/DJCordhose/ml-resources/blob/main/notebooks/mlops/3_mlops_shift.ipynb
-</small> -->
-
-</textarea>
-</section>
-
-
-<section data-markdown>
-	<textarea data-template>
-
-<!-- <img src='img/6monts-later.jpg' height="600px"> -->
-<img src='img/2year-later.jpg' height="600px">
-
-</textarea>
-</section>
-
-
-<section data-markdown data-transition="none">
-	<textarea data-template>
-## Ergebnis des Modells nach zwei Jahren
-
-<img src='img/insurance-new/insurance-after-shift.png' class="fragment">
-
-</textarea>
-</section>
-
-
-<section data-markdown data-transition="none">
-	<textarea data-template>
-## Ursprüngliche Daten zum direkten Vergleich
-
-<img src='img/insurance-new/insurance-pred.png'>
-
-</textarea>
-</section>
-
-<section data-markdown class="fragments">
-	<textarea data-template>
-### Was ist hier passiert? 
-
-*Die Welt steht nicht still - Model und Welt laufen auseinander, aus 70%  Genauigkeit werden 65%*
-
-* Elektroautos finden weitere Verbreitung
-* potente Elektroautos haben allgemein deutlich geringere Höchstgeschwindigkeit 
-* aber super Beschleunigung
-* Gute Beschleunigung ist viel eher Ursache für rasante Fahrweise, Unfallwahrscheinlichkeit ist hoch
-* Wir haben aber nur Höchstgeschwindigkeit als Daten (seht im Fahrzeugschein), Korrelation war angenommen
-* Der Cluster mit jungen, schlechten Fahrern ist nach unten gerutscht
-* _Wird nun fälschlich als gut vorhergesagt und werden günstig versichert_
-<!-- * Tatsächlich sehen wir aber viele Unfälle -->
-<!-- - Faherer vielleicht ein bisschen älter geworden -->
-</textarea>
-</section>
-
-<!-- <section data-markdown>
-	<textarea data-template>
-<img src='img/model-eval.png'>
-
-<small>
-
-https://twitter.com/marktenenholtz/status/1528021809697792003</small>
-		</textarea>
-</section>
-	 -->
-
-<!-- <section data-markdown class="fragments">
-	<textarea data-template>
-### Wie wird überprüft?
-
-* die statistische Verteilung der jeweiligen Features
-* weicht diese im Prod signifikant von der Verteilung im Training ab?
-* diese Abweichung wird über eine Metrik berechnet
-* es kommt eine Konfidenz heraus, ob die Verteilungen unterschiedlich sind
-* ab (default) 95% Konfidenz geht man von einer Abweichung aus 
-* das bedeutet, dass es eine 5% Wahrscheinlichkeit gibt, dass die Verteilungen eigentlich doch gleich sind, man es aber nur gerade schlechte Beispiele sieht
-
-https://de.wikipedia.org/wiki/P-Wert
-</textarea>
-</section>
- -->
-<!-- <section data-markdown>
-	<textarea data-template>
-## Die Metrik
-
-### in unserem Fall wird die Wasserstein-Metrik für den Vergleich gewählt
-
-_Wenn jede Verteilung als ein Haufen von „Erde“ angehäuft auf dem metrischen Raum betrachtet wird, dann beschreibt diese
-Metrik die minimalen „Kosten“ der Umwandlung eines Haufens in den anderen._
-
-https://de.wikipedia.org/wiki/Wasserstein-Metrik
-</textarea>
-</section> -->
-
-	<section data-markdown class="hands-on">
-		<textarea data-template>
-## Hands-On IIIb - Monitoring und Sinn daraus machen
-
-### Teil I: Das Monitoring starten 
-
-1. Starte die Monitoring Umgebung in `monitoring` über 
-   * `docker compose up -d --build`
-1. Checke, dass diese Services laufen
-   * Monitoring App, Metrics aus Evidently: http://localhost:8085/metrics
-   * Promethus: http://localhost:9090
-   * Grafana: http://localhost:3000
-
-</textarea>
-	</section>
-
-	<section data-markdown class="hands-on">
-		<textarea data-template>
-## Hands-On IIIb - Monitoring und Sinn daraus machen
-
-### Teil II: Request simulieren
-
-1. Einloggen in Grafana: http://localhost:3000
-   1. admin/admin
-1. Das Dashboard `Evidently Data Drift Dashboard` aufrufen
-1. Darin den Datensatz `insurance`
-1. Mit `python scripts/example_run_request.py` Anfragen simulieren
-1. Stelle sicher, dass sich das Dashboard aktualisiert
-
-</textarea>
-	</section>
-
-<section data-markdown style="font-size: x-large;">
-	<textarea data-template>
-## Drift erfordert Interpretation
-
-Wenn die Welt sich ändert, ist Drift zu erwarten und damit ok
-
-|   | Positive Interpretation, keine Maßnahme erforderlich  | Negative Interpretation, Maßnahme erforderlich  |
-|---|---|---|
-| *Data und Prediction Drift*  | wichtige Features haben sich geändert, Modell kommt klar und extrapoliert gut, z.B.: Höheres Alter, mehr Risiko  |  wichtige Features haben sich geändert, Modell extrapoliert nicht sinnvoll |
-| *Data aber kein Prediction Drift*  | keine wichtigen Features geändert, das Modell ist robust genug für den Drift  | wichtige Features geändert, Modell extrapoliert nicht sinnvoll |
-| *Prediction aber kein Data Drift*  | ???  | wichtige Features geändert, die Metric hat das aber nicht detektiert |
-|   |   |   |
-
-</textarea>
-</section>
-
-<section data-markdown>
-## Alarm bei Data Drift
-
-* Verändert sich die Art der Eingabedaten?
-  * Oft ausgedrückt durch die Verteilung der einzelnen Features
-
-* Muss nicht notwendig schlimm sein
-  * Wenn entscheidende Features betroffen sind, kann es ein Problem sein 
-* Alarm anhand von
-  * Wichtigkeit der driftenden Features
-  * Anzahl der driftenden Features
-  * Ausmaß des Drifts
-<!-- * Dafür wichtig
-  * Vernünftige Tests anhand der Metriken
-  * Vernünftige Konfidenzintervalle -->
-
-</section>
-
-
-<section data-markdown>
-## Maßnahmen bei Drift
-
-* Neue Daten aufnehmen (und labeln)
-* Neue Version des Modells trainieren
-* Schnelle Maßnahme
-  * Pre-/Post-Processing des Modells neu kalibrieren
-  * Schwellwerte für Anwendung anpassen
-  * Bestimmte Bereiche ausklammern 
-  * Modell Architektur ändern (oder fixen) und neu trainieren
-* Sehr schnelle Maßnahme: Fallback
-  * Manuell
-  * Heuristik / Baseline
-</section>
-
-	<section data-markdown class="hands-on">
-		<textarea data-template>
-## Hands-On IIIb, Monitoring und Sinn daraus machen
-
-### Teil III: Einen passenden Grafana Alert erzeugen
-
-1. Einen Alert kann man in Grafana als Regel oder direkt auf einem Dashboard einrichten
-1. Editiere im Dashboard entweder das Panel für die P-Werte oder für den Anteil driftender Features
-1. Im Alert Tab kannst die Bedingung für den Alarm festlegen
-1. Eventuell musst du erst einen Ordner erzeugen: https://grafana.com/docs/grafana/latest/dashboards/dashboard_folders/
-1. Nach dem Speichern sollte ein farbiges Herz auf dem Panel den Status angeben
-1. Stelle sicher, dass dein Alert ausgelöst wird
-1. Im Alerting Menu können Contact Points zur Benachrichtigung angelegt werden
-
-https://grafana.com/docs/grafana/latest/alerting/
-
-</textarea>
-	</section>
-
-<!-- <section data-markdown>
-## Mehr über Monitoring
-</section> -->
-
-<!-- <section data-markdown>
-### Man hat immer Verzögerung bis man weiß, ob die Vorhersagen gut waren
-
-* Wenn man warten kann bis die da sind hat man einen Vorteil
-* manchmal erst nach Jahren
-* Und manchmal weiß man es aber nie
-</section> -->
-
-<!-- <section data-markdown>
-## Drift Detection
-</section>
-
-<section data-markdown>
-## Metriken für Drift 
-
-* Wie viele Predictions sind gültig bzw. werden als gut genug angesehen?
-* Art der Verteilung (z.B. Normal)
-* Parameter einer angenommenen Normalverteilung
-  * Mean
-  * Std Dev
-  * Percentile
-  * min-max
-* Statistische Tests für Konfidenzintervalle
-  * KL Divergence
-  * Kolmogorow-Smirnow-Test  	
-</section>
- -->
-
-<!-- <section data-markdown>
-## Vernünftige Tests: Nicht-Parametrische Tests
-
-</section>
-
-
-<section data-markdown>
-## Vernünftige Tests: Parametrische Tests
-
-* Parametrische Tests sind besser als Nicht-Parametrische für Drift-Detection
-* Müssen für jedes Feature einzeln aufgesetzt werden
-* Sinnvoll wenn man nicht zu viele Features hat und man eine hohe Sicherheit braucht
-* Beispiele für Tests
-  * Z-Test
-    * Es wird eine Normalverteilung angenommen
-    * https://www.statisticshowto.com/probability-and-statistics/hypothesis-testing/z-test/
-    * Z-Test, T-Test des Mittelwerts (m = m0)
-    * Z-Test für eine Proportion https://statologie.de/z-test-eine-proportion/ (p = p0)
-</section>
- -->
-
-	<!-- <section data-markdown class="fragments">
-		<textarea data-template>
-### Probleme: Selection/Survivor Bias
-
-* Wir können nicht aktiv Daten sammeln, sondern nur von unseren Kunden
-* Wir haben keine explizite Kontrolle darüber, wer bei uns versichert werden will und wessen Unfalldaten wir bekommen
-* Es gibt aber eine Tendenz dahin, dasss eher Kunden mit guten Konditionen kommen
-* Mögliche Lösung: ab und zu risikoreichen Personen gute Angebote machen
-* Neues Problem: potentielle Nachvollziehbarkeit
-
-https://en.wikipedia.org/wiki/Survivorship_bias
-</textarea>
-	</section>  -->
-
-	<!-- <section data-markdown class="fragments todo" style="font-size: x-large;">
-### Phase 3: Betrieb
-
-* Schwierigkeit:
-* Müssen wir wieder zurück ins Experiment?
-* Wie finden wir heraus, ob unser Modell gut funktioniert?
-
-* Monitoring
-* Alles was man auch sonst monitort
-* Plus Anfragen sammeln und Vorhersagen mitschreiben
-
-* Achtung Bias
-* Wenn wir nur die vermeintlich guten Kunden annehmen, wie können wir dann einen schlechten erkenen?
-* wir haben ja gar keinen oder nur wenige als Kunden
-* Einen gewissen Prozentsatz mit schlechter Hypothese ein sehr gutes Angebot machen
-
-	</section> -->
-
-	<!-- <section data-markdown class="todo">
-
-- Information über Schadensfälle neuer Kunden kommen nur verzögert
-- Aber neue Meldungen über Schandensmeldungen kommen permanent
-- wie oft neu trainieren?
-- mit welchen Daten? Aktualität vs Datenmenge?
-- wie schnell ändert sich die Welt? wie schnell die Menschen die bei uns Kunden sein wollen?
-- Datensätze schnell statistisch vergleichen mit describe
-	</section>
--->
-
-
-	<!-- <section data-markdown>
-		<textarea data-template>
-### Prozess eines ML-Projekts
-
-<img src='img/sketch/phases.png' style="height: 100%;">    
-</textarea>
-	</section>
-
-
-	<section data-markdown>
-		<textarea data-template>
-### Wieso MLOps oder warum ist ein Modell nie wirklich fertig
-
-_Concept und Data Drift_
-- Vorhersagen werden ohne Nachtraining schlechter 
-- die Welt entwickelt sich weiter und liefert andere Daten
-
-_Passiert_
-- plötzlich (neue oder veränderte Konkurrenten, schwerwiegende Ereignisse) oder
-- schleichend (gesellschaftliche Entwicklungen)
-
-unterschiedliche Abschnitte der Daten können unterschiedlich schnell vergammeln
-
-<small>
-
-https://en.wikipedia.org/wiki/Concept_drift
-<br>
-https://twitter.com/chipro/status/1313921889061015557
-
-</small>
-</textarea>
-	</section> -->			
-
-	<!-- <section data-markdown>
-### Ein vielleicht noch weiter verbreitetes Fehlerbild
-
-Nicht die Welt ändert sich, sondern unsere Kodierung davon
-
-* Beispiel Bild-Daten
-  * float 0..1 vs int 0..255
-  * wie viele Farbkanäle
-* insbesondere Neuronale Netze haben "silent failure"
-* also: Wertebereich checken und Typ der Argumente
-* bei unseren Beispiel: normalisiert vs nicht normalisiert
-* Was monitoren
-  * Verteilung
-  * Kodierung
-
-</section>
- -->
-
-
-
 
 		</div>
 	</div>
