@@ -1,20 +1,39 @@
 version: '3.7'
 
 volumes:
-    prometheus_data: {}
-    grafana_data: {}
+  model_data: {}
+  prometheus_data: {}
+  grafana_data: {}
 
 networks:
   front-tier:
   back-tier:
 
 services:
+  create_insurance_model:
+    build: 
+      context: .
+      dockerfile: Dockerfile.model
+    volumes:
+      - model_data:/model
+    environment:
+      DATASET_PATH: ../data/reference.csv
+      CREATE_MODEL_AT_PATH: ../model/classifier
+
   app:
     build:
       context: .
       dockerfile: Dockerfile.app
     ports:
       - "8080:5000"
+    depends_on:
+      create_insurance_model:
+        condition: service_completed_successfully
+    volumes:
+      - model_data:/model
+    environment:
+      MODEL_PATH: ../model/classifier
+
   evidently_service:
     build:
       context: .
