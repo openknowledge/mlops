@@ -1,3 +1,4 @@
+import os
 import logging
 
 from InsuranceModel import InsuranceModel
@@ -9,7 +10,7 @@ MIN_PROBA_THRESHOLD = 0.5
 # os.path.abspath("mydir/myfile.txt")
 # model_path = "/home/olli/mlops-data2day/app/classifier"
 # model_path = "/python_server/classifier"
-model_path = "classifier"
+model_path = os.getenv('MODEL_PATH', "classifier")
 
 insurance_model = InsuranceModel()
 insurance_model.load(model_path, keras_format=True)

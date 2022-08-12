@@ -45,8 +45,21 @@ def main(data_path: str, model_path: str) -> None:
     logging.info("Save model to %s", model_path)
     trainableModel.save(model_path)
 
+def getArgumentOrEnvAsFallback(argument: any,env_param: str) -> str:
+    if argument:
+        argument
+    else:
+        logging.info(f"Backup to env variable for {env_param}")
+        result = os.getenv(env_param)
+        
+        if not result:
+            exit(f"Please set argument data-path or environment variable {env_param}!")
+            
+        return result
 
 if __name__ == "__main__":
+    setup_logger()
+
     parser = argparse.ArgumentParser(
         description="Training Script"
     )
@@ -54,17 +67,17 @@ if __name__ == "__main__":
         "-d",
         "--data-path",
         type=str,
-        help="Path for training data.",
-        required=True
+        help="Path for training data."
     )
     parser.add_argument(
         "-m",
         "--model-path",
         type=str,
-        help="Path for saving training model.",
-        required=True
+        help="Path for saving training model."
     )
 
     args = parser.parse_args()
-    setup_logger()
-    main(args.data_path, args.model_path)
+    data_path = getArgumentOrEnvAsFallback(args.data_path, "DATASET_PATH")
+    model_path = getArgumentOrEnvAsFallback(args.data_path, "CREATE_MODEL_AT_PATH")
+    
+    main(data_path, model_path)
