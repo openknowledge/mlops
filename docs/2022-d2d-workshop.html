@@ -1281,14 +1281,50 @@ Wenn die Welt sich ändert, ist Drift zu erwarten und damit ok
 * die Bibliotheken werden inkludiert und bei jeder Änderung neu geladen
 * Jupyter Lab bietet eine gemeine Oberfläche für Notebooks und Bibliotheken
 * Eine Kombination von Visual Studio Code und Jupyer Notebooks ist ebenso möglich
-<!-- * Selbst Colab erlaubt das Arbeiten auf einer Kombination von Notebooks und Bibliotheken
-* Referenz: Module in Colab nutzen: https://colab.research.google.com/drive/1hDUO1-EzMVtVt6snmgrR1I1A36oPp4J9 -->
-* Rückker in Phase I muss nicht radikal sein
-* wenn Ansatz vergleichbar kann Phase II so erhalten bleiben
-* neue Ergebnisse fliesen dann iterativ in die Professionalisierung
+* Rückkehr in Phase I muss nicht radikal sein
+  * wenn Ansatz vergleichbar kann Phase II so erhalten bleiben
+  * neue Ergebnisse fliesen dann iterativ in die Professionalisierung ein
 
 </textarea>
 </section>
+
+<section data-markdown>
+	<textarea data-template>
+### Zusammenfassung: Arten von Drift
+
+* _Covariate / Input drift_: Verteilung der Eingabe hat sich geändert
+* _Prior / Label drift_: Verteilung der Vorhersage hat sich geändert
+* _Concept drift_: Zusammenhang zwischen Eingabe und Vorhersage hat sich geändert
+
+<img src="https://docs.seldon.io/projects/alibi-detect/en/stable/_images/bg_2d_drift.png" style="height: 100%;">
+
+<small>https://docs.seldon.io/projects/alibi-detect/en/stable/cd/background.html#what-is-drift
+</small>
+</textarea>
+</section>
+
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Ausblick: Was kann man sonst noch machen
+
+* Outlier-Detection
+  * Unser Modell wird nicht extrapolieren können
+  * Werte außerhalb des Trainings-Bereichs werden wahrscheinlich unrealistisch sicher vorhergesagt
+  * Ausreißer müssen ohne Ground Truth entdeckt werden 
+* Adversarial Detection
+  * Bestimmte Eingaben können absichtlich eine grob falsche Vorhersage herbei führen 
+  * Solche Eingaben können erkannt und korrigiert werden
+  * Dazu kann z.B. ein Autoencoder benutzt werden, der die Eingabe korrigiert
+
+
+<small>https://docs.seldon.io/projects/alibi-detect/en/stable/od/methods.html
+<br>
+https://docs.seldon.io/projects/alibi-detect/en/stable/ad/methods.html
+</small>
+</textarea>
+</section>
+
 
 <section data-markdown class="fragments">
 <textarea data-template>
