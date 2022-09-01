@@ -148,6 +148,30 @@ What would be the 3-4 main actionable takeaways you would like your audience to 
 2. Drift of various types is a problem not only of machine learning, but all heuristic business code
 3. Detecting, evaluating and acting upon drift is the most critical part of the machine learning lifecycle 
 
+
+---
+
+MlOps - a problem of mindset 
+
+kross@fortiss.org
+
+"Fit a model on a given dataset sampled from a distribution that represents our problem" could be a casual way of describing the classic idea of machine learning.
+ 
+This, however, does not reflect the challenges of many modern machine learning projects. Data does not simply exist and the sample people are working on often is not static, but rather gets generated incrementally in smaller batches. Also, the distribution the data is sampled from can change with the domain it comes from.
+
+In this talk we will address the following questions:
+- Workflow: What kind of workflow reflects a more incremental take on machine learning?
+- Training for Production: How can we anticipate if our model works well in production and when to retrain?
+- Explainability: How can we find out how our model works to check for bias and analysis of degradation?
+- Unwanted Bias: Data sampled in the past is used to predict the future. How can we find out if our model has bias that is (no longer) wanted?
+- Testing: What is a proper way of testing a model to find regressions from previous cycles?
+- Monitoring: How do we detect when our model actually degrades in production and how do we react?
+
+
+Oliver Zeigermann is Head Of AI at Open Knowledge, a leading provider of machine learning services. 
+He is an O’Reilly book author and the author of a Manning video course. Oliver has been a speaker at various conferences 
+including ODSC West, TensorFlow world, and MLConf. His main interest is in the intersection between traditional software engineering and machine learning.
+
 -->
 
 <section data-markdown>
@@ -1351,6 +1375,34 @@ https://docs.seldon.io/projects/alibi-detect/en/stable/ad/methods.html
   * wir müssen Realitäten abwarten
   * bei Zeitreihen wird auf die nahe Zukunft vorhergesagt, sobald diese Eintritt kann überprüft werden
   * oft sind solche Realitäten erst nach wahrnehmbar und unterliegen statistischen Schwankungen (wie bei uns)
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Ausblick: Wie trainiert man neu/nach/weiter?
+
+<img src="img/mlops/stateful-vs-stateless.png">
+
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Stateful vs Stateless
+
+* Stateful (aka offline)
+  * trainiert das Modell periodisch komplett neu
+  * verhindert "catastrophic forgetting" (https://en.wikipedia.org/wiki/Catastrophic_interference)
+* Stateful (aka online)
+  * trainiert permanent weiter mit kleinen Batches
+  * eine Art des Transfer Learnings
+  * folgt Drifts schnell
+  * erfordert zeitnah neue Datenpaare 
+  * Online Learning for Recommendations at Grubhub: https://arxiv.org/abs/2107.07106
+    * angeblich 45x mal weniger aufwändig als offline
+    * 20% bessere Metric als offline
+
 </textarea>
 </section>
 
