@@ -8,3 +8,4 @@ datasets/bike_gradient_boosting
 datasets/bike_random_forest
 datasets/kdd_k_neighbors_classifier
 *.h5
+!model/*
