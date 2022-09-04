@@ -19,6 +19,8 @@ Reveal.initialize({
   history: true,
   center: true,
   slideNumber: true,
+  transition: 'none', // none/fade/slide/convex/concave/zoom
+
 
   // i need all space i can get
   width: 1100,
