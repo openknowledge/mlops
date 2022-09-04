@@ -13,7 +13,6 @@ dependencies:
     - lrcurve
     - causalgraphicalmodels
     - evidently
-    - evaluate
   - python=3.8
   - tensorflow-deps
   - scikit-learn
