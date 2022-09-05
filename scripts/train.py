@@ -47,7 +47,7 @@ def main(data_path: str, model_path: str) -> None:
 
 def getArgumentOrEnvAsFallback(argument: any,env_param: str) -> str:
     if argument:
-        argument
+        return argument
     else:
         logging.info(f"Backup to env variable for {env_param}")
         result = os.getenv(env_param)
@@ -78,6 +78,6 @@ if __name__ == "__main__":
 
     args = parser.parse_args()
     data_path = getArgumentOrEnvAsFallback(args.data_path, "DATASET_PATH")
-    model_path = getArgumentOrEnvAsFallback(args.data_path, "CREATE_MODEL_AT_PATH")
-    
+    model_path = getArgumentOrEnvAsFallback(args.model_path, "CREATE_MODEL_AT_PATH")
+
     main(data_path, model_path)
