@@ -258,7 +258,7 @@ Wir werden auf einem Beispielprojekt arbeiten. Hab bitte bereits vor dem Worksho
 das Projekt https://github.com/openknowledge/mlops-data2day geklont und wie im Readme beschrieben installiert.
  -->
 
-<section data-markdown class="hide">
+<section data-markdown class="hide" style="font-size: xx-small">
 	<textarea data-template>
 ### Story (auch für Talk mit Schwerpunkt auf hinteren Teil)
 
@@ -337,7 +337,7 @@ Folien: https://bit.ly/d2d-2022-mlops
 * KI ist eher "künftig Informatik"
 * Machine Learning is die zur Zeit wichtigste Technik im Bereich KI
 * Machine Learning ist eine alternative Art, Software zu entwickeln
-* Daher müssen wir die bekannten Techniken der Software Entwicklung auf Machine Learning anwenden
+* Daher sollten wir die bekannten Techniken der Software Entwicklung auf Machine Learning anwenden
 
 </textarea>
 </section>
@@ -585,6 +585,7 @@ Helft bitte euren Nachbarn falls eure Installation schon läuft
 1. Sagt kurz Hallo
 1. Falls noch nicht installiert
    1. Python Umgebung installieren (z.B. Miniconda, Achtung M1): https://docs.conda.io/en/latest/miniconda.html
+   1. Git LFS installieren: https://git-lfs.github.com/
    1. Projekt klonen: https://github.com/openknowledge/mlops-data2day
    1. Abhängigkeiten installieren: https://github.com/openknowledge/mlops-data2day#local-installation-for-development
 1. `jupyter notebook`
@@ -633,7 +634,7 @@ Helft bitte euren Nachbarn falls eure Installation schon läuft
 
 <section data-markdown style="font-size: xx-large;" class="hands-on">
 	<textarea data-template>
-## Hands-On 1 - Exploration nachvollziehen
+## Hands-On 1 - Exploration gemeinsam durchgehen
 
 Wir gehen zusammen durch das Notebook
 
@@ -646,6 +647,43 @@ http://localhost:8888/notebooks/notebooks/exploration.ipynb
 * Wie gut ist das Modell?
 
 falls es Installationsprobleme gibt: https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/exploration.ipynb
+</textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+### Exkursion: Architektur
+
+_Die Summe der wichtigen Entscheidungen_
+
+Was bedeutet dabei wichtig?
+- nur schwer änderbar, aber mit einer gewissen Unsicherheit verbunden
+- haben das Potential das Projekt zum scheitern zu bringen
+- so gewichtig, dass sie Einfluss haben auf das was man sinnvoll bauen kann  
+- nur weil man eine Entscheidung nicht bewusst trifft, heißt nicht, dass sie nicht wichtig ist
+
+Diese Definition ist allgemein auch unabhängig von ML gängig
+    </textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large;" class="hands-on">
+	<textarea data-template>
+## Hands-On 1b - Exploration nachvollziehen
+
+* Tut euch wieder im Team zusammen
+* führt das Notebook Schritt für Schritt aus
+* versucht *alle* Unklarheiten zu klären
+* falls das im Team nicht geht, fragt gern Olli
+
+_Welche Architektur-Entscheidungen sind hier bereits getroffen worden?_
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Phase I: Architektur-Entscheidungen sammeln
+
+``model-card.md``
 </textarea>
 </section>
 
@@ -770,7 +808,7 @@ _wer will Scripte in Produktion?_
 * Bestimmte Teile eines Notebooks haben sich als stabil herausgestellt und sollten nicht bei jeder Kopie entkoppelt werden
 * Alles was sich nach Software anfühlt (Klassen, Funktionen, etc.) ist auch Software
   * diese Teile sollten auch wie solche behandelt werden  
-* Professionalisierung muss gut abhängen
+* Professionalisierung muss oft gut abhängen
   * Es stellt sich erst langsam heraus, was in ein Modul gehört
   * erste Version der extrahierten Module ist mit Sicherheit nicht endgültig
 </textarea>
@@ -786,7 +824,7 @@ _wer will Scripte in Produktion?_
 
 <section data-markdown>
 	<textarea data-template>
-### CI/C
+### CI/CD bei klassischem DevOps
 
 <img src="img/ci-cd-flow-desktop.png" style="height: 100%">
 
@@ -808,12 +846,15 @@ https://www.redhat.com/en/topics/devops/what-is-ci-cd
 	<textarea data-template>
 ## Hands-On II - Scripte, manuelles CI/CD
 
+_Wir führen unsere Pipeline aus und sehen uns gemeinsam die Scripte an_
+
 1. `cd scripts`
 1. Modell trainieren: `./train.py -d ../data/reference.csv -m classifier`
 1. Modell validieren: `./validate.py -d ../data/reference.csv -m classifier`
 1. Deploy: Modell in `app` Ordner schieben
 
 Diskussion:
+1. Was hältst du von der Professionalisierung? Was hättest du anders gemacht?
 1. Machen die Validierungen für dich Sinn, was könnte sonst noch Sinn machen? 
    * Inspiration: https://storage.googleapis.com/pub-tools-public-publication-data/pdf/45742.pdf
 1. Kennst du bereits Werkzeuge für Workflows und Orchestrierung?   
@@ -823,7 +864,17 @@ Diskussion:
 
 <section data-markdown>
 	<textarea data-template>
-### Typische Werkzeuge für Worksflows und Orchestrierung
+## Phase II: Architektur-Entscheidungen sammeln
+
+*Professionalisierung*
+
+``model-card.md``
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Typische Werkzeuge für Workflows und Orchestrierung
 
 * Java, allgemein: https://www.jenkins.io/
 * TensorFlow, Tfx: https://www.tensorflow.org/tfx
@@ -847,7 +898,7 @@ Sinnvoll für Trainingsdaten und Modell
 </section>
 
 
-<section data-markdown class="fragments">
+<!-- <section data-markdown class="fragments">
 		<textarea data-template>
 ### Eine ML Lösung hat 2 Artefakte: Code und Modell
 
@@ -855,10 +906,9 @@ Sinnvoll für Trainingsdaten und Modell
 * Daten und Modell muss extern gehalten, aber zusammen mit Code versioniert werden
 * Modell beschreibt einen Ausschnitt der Realität. Wie finde ich heraus wie gut es das tut uns vor allem für relevante Teile der Welt und was mache ich wenn sich das ändert
 * Richtung: Benchmark und Monitoring der Lösung in Produktion
-<!-- * Prod geht auf Code und Modell Binaries, Modell Graph überall ausführen -->
 
 </textarea>
-	</section>
+	</section> -->
 
 	<section data-markdown>
 		<textarea data-template>
@@ -884,37 +934,65 @@ Sinnvoll für Trainingsdaten und Modell
 </textarea>
 </section>
 
-
-
 	<section data-markdown class="hands-on">
 		<textarea data-template>
-## Hands-On III - Produktionsumgebung
+## Hands-On IIIa - Lokale Produktionsumgebung
 
 1. Im Ordner `app` ist eine Server-Anwendung vorbereitet
 1. In `app.py` ist ein einfacher Flask Server implementiert
 1. `cd app`
 1. Start über `python app.py`
-1. Checken, ob der Service läuft: `http://localhost:8080/ping`
+1. Checken, ob der Service läuft: http://localhost:8080/ping
 1. Für HTML clients Web Server auf 8000 starten: `python -m http.server 8000`
 1. http://localhost:8000/app/client.html macht einen einfachen Requests
-1. in `app/client.html` Werte anpassen und herumspielen
+1. in `app/client.html` Werte anpassen
+   * auf dich als Fahrer
+   * außerhalb des gültigen Bereichs des Models 
 </textarea>
 	</section>
+
+  	<section data-markdown class="hands-on">
+		<textarea data-template>
+## Hands-On IIIb - Server Code verstehen
+
+1. `app/app.py` und `app/model_prediction.py` enthalten den Server Code
+1. Sieh dir an, wie entschieden wird, ob das ML Modell genommen wird
+1. Findest du die Bedingungen sinnvoll?
+1. Passe sie deinen Vorstellungen an und probiere das Modell wieder über den Client aus
+1. Kannst du dir auch einen Test für diese differenziertere Vorhersage denken? 
+</textarea>
+	</section>
+
 
 <section data-markdown class="hands-on">
 		<textarea data-template>
-## Hands-On IIIa - Intro Docker Umgebung
+## Hands-On IIIc - Docker Umgebung
 
 1. `Dockerfile.app` enthält die Bauanleitung für das Docker Image
 1. `docker-compose up --build` (Referenz https://docs.docker.com/compose/reference/up/)
+   * auf M1 Mac kann der `app`-Service nicht über Docker gestartet werden, daher diesen Abschnitt aus `docker-compose.yml` löschen
+   * startet einen Service zum Trainieren unseres Modells
    * baut und startet den Server
-   * started zusätzlich das Monitoring (das wir erstmal integrieren)
+   * startet zusätzlich das Monitoring (ignorieren wir erst einmal)
    * Definition in `docker-compose.yaml`
 1. `docker-compose down` stopt alle Services wieder   
+1. http://localhost:8000/app/client.html kann den über Docker gestarteten Server wieder ansprechen
 
-https://github.com/openknowledge/mlops-data2day#docker
+<small>https://github.com/openknowledge/mlops-data2day#docker
+</small>
+
 </textarea>
 	</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Phase II: Architektur-Entscheidungen sammeln
+
+*Betrieb*
+
+``model-card.md``
+</textarea>
+</section>
 
 
 <section data-markdown>
@@ -1070,7 +1148,7 @@ https://docs.evidentlyai.com/integrations/evidently-and-grafana
 * Requests über die Zeit verteilt werden simuliert
 </section>
 	
-<section data-markdown>
+<!-- <section data-markdown>
 ### Prometheus
 
 Metric Server
@@ -1096,7 +1174,7 @@ ML Performance Monitoring
 	
 https://evidentlyai.com/
 </section>
-
+ -->
 <section data-markdown>
 	<textarea data-template>
 ### Übersicht der Services
@@ -1126,7 +1204,7 @@ https://docs.evidentlyai.com/reports/data-drift
 
 <section data-markdown class="fragments">
 	<textarea data-template>
-### Wie erkennt man Drift?
+### Wie erkennen wir Drift?
 
 * Es wird ein Statistischer Test auf den Eingabe-Daten ausgeführt
 * Unsere Features sind numerisch und kategorisch
@@ -1219,7 +1297,7 @@ https://de.wikipedia.org/wiki/P-Wert
 
 ### Teil I: Das Monitoring starten 
 
-1. Starte die Monitoring Umgebung in `monitoring` über 
+1. Starte die Monitoring Umgebung (das ist wahrscheinlich bereits im vorherigen Schritt passiert) 
    * `docker compose up -d --build`
 1. Checke, dass diese Services laufen
    * Monitoring App, Metrics aus Evidently: http://localhost:8085/metrics
@@ -1228,6 +1306,16 @@ https://de.wikipedia.org/wiki/P-Wert
 
 </textarea>
 	</section>
+
+<section data-markdown>
+  <textarea data-template>
+### Produktion simulieren
+
+* wir simulieren 3 Jahre Betrieb
+* jeder Monat hat 1500 Datensätze
+* insgesamt 36 Monate, 54.000 Datensätze
+  </textarea>
+</section>
 
 	<section data-markdown class="hands-on">
 		<textarea data-template>
@@ -1241,9 +1329,32 @@ https://de.wikipedia.org/wiki/P-Wert
 1. Darin den Datensatz `insurance`
 1. Mit `python scripts/example_run_request.py` Anfragen simulieren
 1. Stelle sicher, dass sich das Dashboard aktualisiert
+1. Was beobachtest du? Welche Features driften? Wie kann man das erklären?
 
 </textarea>
 	</section>
+
+  <section data-markdown>
+  <textarea data-template>
+### Manche Features driften
+
+<img src="img/feature-drift.png">
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+### Was ist passiert?
+
+* die Performance des Modells degradiert wahrscheinlich
+* aber wir haben erst nach Jahren eine Ground Truth, die uns das anhand der Metrik zeigt
+* als Ersatzmetrik nehmen wir Feature drift
+  * miles: extremer Drift
+  * age: signifikanter Drift
+  * emergency_breaking: signifikanter Drift
+
+  </textarea>
+</section>
 
 <section data-markdown>
 ## Alarm bei Data Drift
@@ -1263,8 +1374,30 @@ https://de.wikipedia.org/wiki/P-Wert
 
 </section>
 
+<section data-markdown>
+### Drift braucht Interpretation
+  
+1. Leute werden immer Älter, das passiert aber langsam (age)
+1. Es wird immer weniger Auto gefahren, Leute steigen um auf die Bahn und öffentliche Verkehrsmittel (miles)
+1. Die Sicherheit der Autos wird immer besser und der Einfluss der individuellen Fahrleistung wird verringert (emergency_breaking, pred) 
+ 
+</textarea>
+</section>
 
-	<section data-markdown class="hands-on">
+<section data-markdown>
+	<textarea data-template>
+### Wir schummeln leicht
+## Wir nutzen die Ground Truth von in einem Jahr     
+
+1. `./validate.py -d ../data/month-12.csv -m classifier`
+1. Performance des Modells ist tatsächlich stark zurück gegangen
+1. Unsere Interpretation des Drifts war eine gute Ersatzmetrik
+</textarea>
+</section>
+
+
+
+	<!-- <section data-markdown class="hands-on">
 		<textarea data-template>
 ## Hands-On IV, Monitoring und Sinn daraus machen
 
@@ -1282,7 +1415,7 @@ https://grafana.com/docs/grafana/latest/alerting/
 
 </textarea>
 	</section>
-
+ -->
 
 <section data-markdown>
 	<textarea data-template>
@@ -1292,64 +1425,6 @@ https://grafana.com/docs/grafana/latest/alerting/
 * Ein lauffähiges ML System
 * Betrieb
 * _Abschluss / Rückblick_
-
-</textarea>
-</section>
-
-<section data-markdown style="font-size: x-large;">
-	<textarea data-template>
-## Drift erfordert Interpretation
-
-Wenn die Welt sich ändert, ist Drift zu erwarten und damit ok
-
-|   | Positive Interpretation, keine Maßnahme erforderlich  | Negative Interpretation, Maßnahme erforderlich  |
-|---|---|---|
-| *Data und Prediction Drift*  | wichtige Features haben sich geändert, Modell kommt klar und extrapoliert gut, z.B.: Höheres Alter, mehr Risiko  |  wichtige Features haben sich geändert, Modell extrapoliert nicht sinnvoll |
-| *Data aber kein Prediction Drift*  | keine wichtigen Features geändert, das Modell ist robust genug für den Drift  | wichtige Features geändert, Modell extrapoliert nicht sinnvoll |
-| *Prediction aber kein Data Drift*  | ???  | wichtige Features geändert, die Metric hat das aber nicht detektiert |
-|   |   |   |
-
-</textarea>
-</section>
-
-<section data-markdown class="todo">
-	<textarea data-template>
-## Analyse des Drifts
-
-http://localhost:8888/notebooks/notebooks/analysis.ipynb
-
-Fallback: https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/analysis.ipynb
-</textarea>
-</section>
-
-<section data-markdown>
-## Maßnahmen bei Drift
-
-* Neue Version des Modells trainieren
-  * Neue Daten aufnehmen (und labeln)
-  * Neue Features erzeugen
-* Schnelle Maßnahme
-  * Pre-/Post-Processing des Modells neu kalibrieren
-  * Schwellwerte für Anwendung anpassen
-  * Bestimmte Bereiche ausklammern 
-  * Modell Architektur ändern (oder fixen) und neu trainieren
-* Sehr schnelle Maßnahme: Fallback
-  * Manuell
-  * Heuristik / Baseline
-</section>
-
-
-<section data-markdown class="fragments">
-	<textarea data-template>
-### Wir gehen zurück in die Phasen I und II
-
-* hier wird wieder in Notebooks gearbeitet
-* die Bibliotheken werden inkludiert und bei jeder Änderung neu geladen
-* Jupyter Lab bietet eine gemeine Oberfläche für Notebooks und Bibliotheken
-* Eine Kombination von Visual Studio Code und Jupyer Notebooks ist ebenso möglich
-* Rückkehr in Phase I muss nicht radikal sein
-  * wenn Ansatz vergleichbar kann Phase II so erhalten bleiben
-  * neue Ergebnisse fliesen dann iterativ in die Professionalisierung ein
 
 </textarea>
 </section>
@@ -1369,6 +1444,106 @@ Fallback: https://colab.research.google.com/github/openknowledge/mlops-data2day/
 </textarea>
 </section>
 
+<section data-markdown style="font-size: x-large;">
+	<textarea data-template>
+## Drift erfordert Interpretation
+
+Wenn die Welt sich ändert, ist Drift zu erwarten und damit ok
+
+|   | Positive Interpretation, keine Maßnahme erforderlich  | Negative Interpretation, Maßnahme erforderlich  |
+|---|---|---|
+| *Data und Prediction Drift*  | wichtige Features haben sich geändert, Modell kommt klar und extrapoliert gut, z.B.: Höheres Alter, mehr Risiko  |  wichtige Features haben sich geändert, Modell extrapoliert nicht sinnvoll |
+| *Data aber kein Prediction Drift*  | keine wichtigen Features geändert, das Modell ist robust genug für den Drift  | wichtige Features geändert, Modell extrapoliert nicht sinnvoll |
+| *Prediction aber kein Data Drift*  | ???  | wichtige Features geändert, die Metric hat das aber nicht detektiert |
+|   |   |   |
+
+</textarea>
+</section>
+
+<section data-markdown>
+## Maßnahmen bei Drift
+
+* Neue Version des Modells trainieren
+  * Neue Daten aufnehmen (und labeln)
+  * Neue Features erzeugen
+* Schnelle Maßnahme
+  * Pre-/Post-Processing des Modells neu kalibrieren
+  * Schwellwerte für Anwendung anpassen
+  * Bestimmte Bereiche ausklammern 
+  * Modell Architektur ändern (oder fixen) und neu trainieren
+* Sehr schnelle Maßnahme: Fallback
+  * Manuell
+  * Heuristik / Baseline
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Wir gehen zurück in die Phasen I und II
+
+* hier wird wieder in Notebooks gearbeitet
+* die Bibliotheken werden inkludiert und bei jeder Änderung neu geladen
+* Jupyter Lab bietet eine gemeine Oberfläche für Notebooks und Bibliotheken
+* Eine Kombination von Visual Studio Code und Jupyer Notebooks ist ebenso möglich
+* Rückkehr in Phase I muss nicht radikal sein
+  * wenn Ansatz vergleichbar kann Phase II so erhalten bleiben
+  * neue Ergebnisse fliesen dann iterativ in die Professionalisierung ein
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Rückkehr in Phase II: Wie trainiert man neu/nach/weiter?
+
+<img src="img/mlops/stateful-vs-stateless.png">
+
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Stateful vs Stateless
+
+* Stateless (aka offline)
+  * trainiert das Modell periodisch komplett neu
+  * verhindert "catastrophic forgetting" (https://en.wikipedia.org/wiki/Catastrophic_interference)
+* Stateful (aka online)
+  * trainiert permanent weiter mit kleinen Batches
+  * eine Art des Transfer Learnings
+  * folgt Drifts schnell
+  * erfordert zeitnah neue Datenpaare 
+  * Online Learning for Recommendations at Grubhub: https://arxiv.org/abs/2107.07106
+    * angeblich 45x mal weniger aufwändig als offline
+    * 20% bessere Metric als offline
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Beispiel für Stateless / Offline Training    
+
+1. Wir trainieren weiterhin mit einem einzelnen Monat
+1. Wir könnten auch ältere Daten nehmen, aber durch den Drift scheint der neueste Datensatz am erfolgversprechendsten
+1. `./train.py -d ../data/month-12.csv -m classifier`
+1. Das Training erfüllt unsere Anforderungen nicht mehr
+1. Entweder
+   1. Anforderungen anpassen oder
+   1. Zurück an den Zeichentisch (Phase I)
+      1. Model tunen
+      1. Andere Features nehmen?
+</textarea>
+</section>
+
+
+<section data-markdown>
+	<textarea data-template>
+## Analyse des Drifts für Phase I
+
+http://localhost:8888/notebooks/notebooks/analysis.ipynb
+
+Fallback: https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/analysis.ipynb
+</textarea>
+</section>
 
 <section data-markdown class="fragments">
 	<textarea data-template>
@@ -1417,34 +1592,6 @@ https://docs.seldon.io/projects/alibi-detect/en/stable/ad/methods.html
   * wir müssen Realitäten abwarten
   * bei Zeitreihen wird auf die nahe Zukunft vorhergesagt, sobald diese Eintritt kann überprüft werden
   * oft sind solche Realitäten erst nach wahrnehmbar und unterliegen statistischen Schwankungen (wie bei uns)
-</textarea>
-</section>
-
-<section data-markdown class="fragments">
-	<textarea data-template>
-### Ausblick: Wie trainiert man neu/nach/weiter?
-
-<img src="img/mlops/stateful-vs-stateless.png">
-
-</textarea>
-</section>
-
-<section data-markdown class="fragments">
-	<textarea data-template>
-### Stateful vs Stateless
-
-* Stateful (aka offline)
-  * trainiert das Modell periodisch komplett neu
-  * verhindert "catastrophic forgetting" (https://en.wikipedia.org/wiki/Catastrophic_interference)
-* Stateful (aka online)
-  * trainiert permanent weiter mit kleinen Batches
-  * eine Art des Transfer Learnings
-  * folgt Drifts schnell
-  * erfordert zeitnah neue Datenpaare 
-  * Online Learning for Recommendations at Grubhub: https://arxiv.org/abs/2107.07106
-    * angeblich 45x mal weniger aufwändig als offline
-    * 20% bessere Metric als offline
-
 </textarea>
 </section>
 
