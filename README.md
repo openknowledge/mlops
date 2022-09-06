@@ -18,7 +18,7 @@ You should then be able to access the Prometheus dashboard on `http://localhost:
 
 ### Local installation for development
 
-Create an `mlops-workshop` conda environment executing:
+Create an `mlops-workshop` conda environment in the cloned project directory by executing:
 
 ```
 $ conda env create -f environment.yml
