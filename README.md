@@ -1,5 +1,25 @@
 # ML Ops Data2Day
 
+### Local installation for development
+
+Create an `mlops-workshop` conda environment in the cloned project directory by executing:
+
+```
+$ conda env create -f environment.yml
+```
+
+For Apple with an M1 processor install the the appropriate [Miniconda](https://docs.conda.io/en/latest/miniconda.html) version. You can create the `mlops-workshop` conda environment executing:
+
+```
+$ conda env create -f environment-m1.yml
+```
+
+Either way you need to activate the environment after installation:
+
+```
+$ conda activate mlops-workshop-d2d
+```
+
 ### Docker
 
 For this workshop you will need [Docker](https://docs.docker.com/get-docker/) and [Docker Compose](https://docs.docker.com/compose/install/) running on your machine. *(on mac os and Windows docker-compose is installed with Docker by default)*
@@ -16,33 +36,6 @@ docker-compose up --build
 
 You should then be able to access the Prometheus dashboard on `http://localhost:9090` and Grafana on `http://localhost:3000`.
 
-### Local installation for development
-
-We provide both `requirements.txt` and `environment.yml` to install packages.
-
-You can install the packages using `pip`:
-
-```
-$ pip install -r requirements.txt
-```
-
-You can create an `mlops-workshop` conda environment executing:
-
-```
-$ conda env create -f environment.yml
-```
-
-For Apple with an M1 processor install the the appropriate [Miniconda](https://docs.conda.io/en/latest/miniconda.html) version. You can create the `mlops-workshop` conda environment executing:
-
-```
-$ conda env create -f environment-m1.yml
-```
-
-and later activate the environment:
-
-```
-$ conda activate mlops-workshop-d2d
-```
 
 ### Monitoring Drift
 
