@@ -18,15 +18,7 @@ You should then be able to access the Prometheus dashboard on `http://localhost:
 
 ### Local installation for development
 
-We provide both `requirements.txt` and `environment.yml` to install packages.
-
-You can install the packages using `pip`:
-
-```
-$ pip install -r requirements.txt
-```
-
-You can create an `mlops-workshop` conda environment executing:
+Create an `mlops-workshop` conda environment executing:
 
 ```
 $ conda env create -f environment.yml
