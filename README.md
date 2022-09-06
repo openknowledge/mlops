@@ -30,7 +30,7 @@ For Apple with an M1 processor install the the appropriate [Miniconda](https://d
 $ conda env create -f environment-m1.yml
 ```
 
-and later activate the environment:
+Either way you need to activate the environment after installation:
 
 ```
 $ conda activate mlops-workshop-d2d
