@@ -17,6 +17,7 @@ dependencies:
   - seaborn
   - jupyter
   - notebook
+  - jupyterlab
   - numpy
   - matplotlib
   - prometheus_client

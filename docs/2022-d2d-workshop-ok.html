@@ -190,15 +190,12 @@ including ODSC, TensorFlow world, and MLConf. His main interest is in the inters
 
 1. WLAN: xxx
 1. Diese Folien: https://bit.ly/d2d-2022-mlops
-1. Installieren (falls noch nicht passiert)
-   1. Git : https://git-scm.com/downloads
-   1. Docker: https://docs.docker.com/get-docker/
-1. Projekt klonen
-   * https://github.com/openknowledge/mlops-data2day
-   * `git clone git@github.com:openknowledge/mlops-data2day.git`
-1. Docker images starten
-   * Im Projekt-Verzeichnis: `docker compose up`
-1. Falls ihr es jetzt nicht hinbekommt, gibt es später noch Zeit für die Installation
+1. Falls noch nicht geschehen, bitte das Projekt installieren
+   1. Python Umgebung installieren (z.B. Miniconda, Achtung M1): https://docs.conda.io/en/latest/miniconda.html
+   1. Git LFS installieren: https://git-lfs.github.com/
+   1. Projekt klonen: https://github.com/openknowledge/mlops-data2day
+   1. Abhängigkeiten über Conda installieren: https://github.com/openknowledge/mlops-data2day#local-installation-for-development
+1. Nachher gibt es noch Zeit und es gibt auch einen Fallback
 
 _Bei Problemen den Nachbar oder Tobias und Olli fragen_
 </textarea>
@@ -319,6 +316,16 @@ Orchestrierung hier händisch, es geht um das Konzept und welches Tool das richt
 </section>
  -->
 
+ <section data-markdown class="preparation">
+# Model Karte / Architektur
+
+* Schritt für Schritt anlegen und diskutieren
+* Was sind die Architektur-Entscheidungen?
+
+* Bisschen an das angelehnt: https://huggingface.co/docs/hub/models-cards
+</section>
+
+
 			<section data-markdown>
 				<textarea data-template>
 # MLOps mit Python
@@ -330,8 +337,35 @@ Tobias Kurzydym / tobias.kurzydym@openknowledge.de
 Oliver Zeigermann / oliver.zeigermann@openknowledge.de
 
 Folien: https://bit.ly/d2d-2022-mlops
+<!-- Folien: https://openknowledge.github.io/mlops-data2day/2022-d2d-workshop.html -->
     </textarea>
 			</section>
+
+<section data-markdown>
+  <textarea data-template>
+### MLOps
+
+* KI ist keine Magie
+* KI ist eher "künftig Informatik"
+* Machine Learning is die zur Zeit wichtigste Technik im Bereich KI
+* Machine Learning ist eine alternative Art, Software zu entwickeln
+* Daher sollten wir die bekannten Techniken der Software Entwicklung auf Machine Learning anwenden
+
+</textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+### Spezielle Anforderungen an die Entwicklung von ML Anwendungen
+
+* Modelle so zähmen / trainieren, dass sie überhaupt funktionieren
+* Debuggen
+* In-/Output kodieren
+* Fallback für invalide Input- oder Output-Bereiche
+* Automatisierte Tests
+
+</textarea>
+</section>
 
 <section data-markdown>
   <textarea data-template>
@@ -401,20 +435,60 @@ Head of AI@OpenKnowledge
 </textarea>
 	</section>
 
-  <section data-markdown>
-    <textarea data-template>
-  ### MLOps
-  
-  * KI ist keine Magie
-  * KI ist eher "künftig Informatik"
-  * Machine Learning is die zur Zeit wichtigste Technik im Bereich KI
-  * Machine Learning ist eine alternative Art, Software zu entwickeln
-  * Software soll in Produktion gebracht und dort gehalten werden 
-  * Daher sollten wir die bekannten Techniken der Software Entwicklung auf Machine Learning anwenden
-  
-  </textarea>
-  </section>
-  
+
+	<!-- <section data-markdown>
+		<textarea data-template>
+## MLOps: Phasen und Workflow in einem ML Projekt
+
+ML Projekte sind speziell
+</textarea>
+</section> -->
+
+<section data-markdown class="fragments">
+### Was ist MLOps?
+
+* MLOps ist abgeleitet von DevOps
+* Durch MLOps kommt ML in Produktion und wird in Betrieb gehalten
+* Dazu kommen eine Reihe von Werkzeugen und Praktiken zum Einsatz
+* Überschneidung aus
+  * Softwareentwicklung
+  * Operations
+  * Data Science
+</section>
+
+<section data-markdown class="fragments">
+### Warum MLOps?
+
+* im akademischen Leben zählt für einen Wettbewerb häufig nur der Score (Güte) des Modells
+* dieser Ansatz hat sich im Bereich des Data Science auch in der Praxis breit gemacht
+* die Praxis ist aber keine Kaggle Competition
+* In-Sample Evaluation sagt nur bedingt etwas für Eignung in
+einer praktischen Anwendung aus
+* Out-Of-Sample Evaluation häufig erst im produktiven Betrieb möglich (evtl. nur mitlaufen lassen)
+</section>
+
+<!-- <section data-markdown>
+	<textarea data-template>
+### MLOps @ Gitlab
+
+* For traditional software, logic is made explicit through code, while on for ML the logic is implicit in the data, and extracted through a variety of technique's.
+* Note that MLOps is not a branch of DevOps, it's a superset of it.
+
+ https://gitlab.com/gitlab-org/incubation-engineering/mlops/meta/-/issues/58
+</textarea>
+</section>
+ -->
+
+ <section data-markdown>
+	<textarea data-template>
+_Nothing is static, everything changes. But some things change faster than others. Culture changes slowly. Human nature is even slower._
+
+https://twitter.com/fchollet/status/1540548737302335490
+<br>
+https://de.wikipedia.org/wiki/Panta_rhei
+</textarea>
+</section>
+
  <section data-markdown>
   <textarea data-template>
 ### Machine Learning Anwendungen brauchen Wartung
@@ -435,6 +509,27 @@ Das gilt nicht nur für ML Anwendungen, aber bei diesen ist es offensichtlicher
 </textarea>
 </section>
 
+
+<!-- <section data-markdown>
+	<textarea data-template>
+Fear of deploys is the largest source of technical debt and wasted time in most engineering orgs.
+
+https://twitter.com/mipsytipsy/status/1530664380961943553 
+</textarea>
+</section>
+
+
+	<section data-markdown>
+		<textarea data-template>
+		
+Hidden Technical Dept: https://proceedings.neurips.cc/paper/2015/file/86df7dcfd896fcaf2674f757a2463eba-Paper.pdf
+<br>
+https://developers.google.com/machine-learning/guides/rules-of-ml
+</textarea>
+</section>
+
+
+
 <section data-markdown>
 	<textarea data-template>
 ### Realistischer als mir lieb ist
@@ -453,32 +548,8 @@ Honestly: sometimes I feel defeated because ML observability is so hard. All fac
 https://twitter.com/sh_reya/status/1539420163480489984? 
 </textarea>
 </section>
+ -->
 
-
-<section data-markdown>
-	<textarea data-template>
-### Typische Werkzeuge für Workflows und Orchestrierung
-
-* Java, allgemein: https://www.jenkins.io/
-* TensorFlow, Tfx: https://www.tensorflow.org/tfx
-  * https://www.tensorflow.org/tfx/guide/beam_orchestrator
-  * https://www.tensorflow.org/tfx/guide/airflow
-  * https://www.tensorflow.org/tfx/guide/kubeflow
-* Schießen wie Pilze aus dem Boden
-
-	</textarea>
-</section>
-
-<section data-markdown>
-	<textarea data-template>
-### Große Dateien versionieren
-
-Sinnvoll für Trainingsdaten und Modell 
-
-* git lfs: https://git-lfs.github.com/
-* DVC: https://dvc.org/
-	</textarea>
-</section>
 
 <section data-markdown>
 ### MLOps Is a Mess But That's to be Expected
@@ -520,22 +591,20 @@ https://www.mihaileric.com/posts/mlops-is-a-mess/
 
 <section data-markdown style="font-size: x-large;" class="hands-on">
 	<textarea data-template>
-## Hands-On 0 - Docker Installation überprüfen oder herstellen
+## Hands-On 0 - Lokale Arbeitsumgebung überprüfen oder herstellen
 
 Helft bitte euren Nachbarn, falls eure Installation schon läuft
 
 1. Wir empfehlen: arbeitet zusammen mit euren direkten Nachbarn
 1. Stellt sicher, dass zumindest einer eurer Rechner eine lauffähige Installation hat 
 1. Sagt kurz Hallo
-1. Installieren (falls noch nicht passiert)
-   1. Git : https://git-scm.com/downloads
-   1. Docker: https://docs.docker.com/get-docker/
-1. Projekt klonen
-   * https://github.com/openknowledge/mlops-data2day
-   * `git clone git@github.com:openknowledge/mlops-data2day.git`
-1. Docker images starten
-   * Im Projekt-Verzeichnis: `docker compose up`
-1. Überprüfen, dass Jupyter Lab erreichbar ist   
+1. Falls noch nicht installiert
+   1. Python Umgebung installieren (z.B. Miniconda, Achtung M1): https://docs.conda.io/en/latest/miniconda.html
+   1. Git LFS installieren: https://git-lfs.github.com/
+   1. Projekt klonen: https://github.com/openknowledge/mlops-data2day
+   1. Die Abhängigkeiten des Projekts über Conda installieren wie hier beschrieben: https://github.com/openknowledge/mlops-data2day#local-installation-for-development
+1. `jupyter notebook`
+1. Click auf den angezeigten Link und navigiere zu `notebooks/exploration.ipynb` (http://localhost:8888/notebooks/notebooks/exploration.ipynb)
 
 </textarea>
 </section>
@@ -560,40 +629,89 @@ Helft bitte euren Nachbarn, falls eure Installation schon läuft
 </textarea>
 </section>
 
-<!-- <section data-markdown>
+<section data-markdown>
 	<textarea data-template>
 ### Kausales Modell
 
 <img src='img/insurance-causal-model.png' style="height: 300px;">
 </textarea>
 </section>
- -->
-<section data-markdown>
-### Features
-* Fahrer
-  * *training*: 0/1, hat der Fahrer ein Fahrertraining absolviert
-  *	*age*: Alter des Fahrers in Jahren
-* Fahrzeug  
-  *	*emergency_breaking* (sic!): 0/1, hat das Fahrzeug ein Notbremssystem 
-  *	*braking_distance*: Bremsweg aus Tempo 100
-  * *power*: Leistung in KW
-*	*miles*: Jährliche Fahrleistung in Meilen
-* Das wollen wir vorhersagen
-  *	*risk*: Unfallrisiko, nach unten und nach oben offen, kann negativ sein
-  *	*group* / *group_name*:	Einteilung in Gruppe anhand des Risikos
-</section>
 
 <section data-markdown>
 	<textarea data-template>
 ## Daten entstehen über die Zeit
-
-
-<img src="img/zeitstrahl.jpg">    
-
-Die Ground Truth (GT) kommt verzögert und kann sich über die Zeit noch verändern
-
+1. Am Anfang haben wir keine empirischen Daten
+1. Wir bewerten Kunden anhand eines einfachen Regelsystems
+1. Ground Truth kommt verzögert und kann sich über die Zeit noch verändern
+1. Wir sprechen eher von Jahren als Monaten 
 </textarea>
 </section>
+
+<section data-markdown style="font-size: xx-large;" class="hands-on">
+	<textarea data-template>
+## Hands-On 1 - Exploration gemeinsam durchgehen
+
+Wir gehen zusammen durch das Notebook
+
+http://localhost:8888/notebooks/notebooks/exploration.ipynb
+
+* Dieser Stand ist das Ende mancher Projekte, bei uns ist es der Anfang
+* Was sind die Features?
+* Was wollen wir vorhersagen?
+* Was für eine Art Modell haben wir?
+* Wie gut ist das Modell?
+
+falls es Installationsprobleme gibt: https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/exploration.ipynb
+</textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+### Exkursion: Architektur
+
+_Die Summe der wichtigen Entscheidungen_
+
+Was bedeutet dabei wichtig?
+- nur schwer änderbar, aber mit einer gewissen Unsicherheit verbunden
+- haben das Potential das Projekt zum scheitern zu bringen
+- so gewichtig, dass sie Einfluss haben auf das was man sinnvoll bauen kann  
+- nur weil man eine Entscheidung nicht bewusst trifft, heißt nicht, dass sie nicht wichtig ist
+
+Diese Definition ist allgemein auch unabhängig von ML gängig
+    </textarea>
+</section>
+
+<section data-markdown style="font-size: xx-large;" class="hands-on">
+	<textarea data-template>
+## Hands-On 1b - Exploration nachvollziehen
+
+* Tut euch wieder im Team zusammen
+* führt das Notebook Schritt für Schritt aus
+* versucht *alle* Unklarheiten zu klären
+* falls das im Team nicht geht, fragt gern Olli
+
+_Welche Architektur-Entscheidungen sind hier bereits getroffen worden?_
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Phase I: Architektur-Entscheidungen sammeln
+
+``model-card.md``
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Typische Checks bei Deep Learning
+
+<img src="img/rasbt-deep.png">
+
+https://twitter.com/rasbt/status/1565798671781961728    
+  </textarea>
+</section>
+
 
 <section data-markdown>
 	<textarea data-template>
@@ -603,15 +721,6 @@ Die Ground Truth (GT) kommt verzögert und kann sich über die Zeit noch veränd
 * _Ein lauffähiges ML System_
 * Betrieb
 * Abschluss / Rückblick
-
-</textarea>
-</section>
-
-<section data-markdown>
-	<textarea data-template>
-### Phasen eines ML Projekts
-
-<img src="img/ml-workflow/6.PNG" class="fragment">
 
 </textarea>
 </section>
@@ -631,23 +740,33 @@ funktionsfähiges Modell entwickelt.
 
 	</section>
 
-  <section data-markdown style="font-size: xx-large;" class="hands-on">
-    <textarea data-template>
-## Hands-On 1 - Exploration gemeinsam durchgehen
+  <section data-markdown>
+	<textarea data-template>
+    ### Kann man sinnvoll direkt in Produktion gehen?
 
-* Neuronales Netzwerk mit TensorFlow
-* 3 Hidden Layers, 100 Neuronen pro Layer
-* 1500 Datensätze insgesamt
-* Training auf allen Features
-* Test/Validation auf 300 Datensätzen
-* Training auf 1200 Datensätze
-* Normalisierung auf Trainingsdatensätzen
-* Accuracy Training/Test > 85%
+<img src="img/ml-workflow/6.PNG" class="fragment">
 
-https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/exploration.ipynb
+</textarea>
+</section>
 
-  </textarea>
-  </section>  
+<section data-markdown class="fragments">
+<textarea data-template>
+## Was will man da denn in Produktion bringen?
+
+_ein Modell steht nicht für sich allein_
+* es braucht Code für Vor- und Nachbearbeitung
+* es ist eingebettet in andere Systeme
+
+_wer will Scripte in Produktion?_
+* Notebooks sind interaktive Scripte
+* Wie ruft man das auf?
+* Welches bringen wir in Produktion?
+* Wie versionieren wir das? 
+* Tests/Dokumentation?
+* Debugging/Show References/Refactor/Autocomplete/Quick Fix/etc.?
+
+</textarea>
+</section>
 
 <section data-markdown>
 	<textarea data-template>
@@ -736,18 +855,7 @@ https://www.redhat.com/en/topics/devops/what-is-ci-cd
 <img src="img/devops-vs-mlops.png" style="height: 600px">
 </textarea>
 </section>
-
-<section data-markdown>
-	<textarea data-template>
-## Hands-On II - wie wollen wir das Modell validieren?
-
-* bei automatisiertem Training können wir ein erfolgreiches Training nicht mehr manuell überwachen
-* wie könnten automatisierte Tests auf dem Modell aussehen?
-* Diskutiert mit euren Nachbarn und schreibt eure Vorschläge auf
-* Inspiration: https://storage.googleapis.com/pub-tools-public-publication-data/pdf/45742.pdf
-
-</textarea>
-</section>
+	
 
 <section data-markdown style="font-size: x-large;" class="hands-on">
 	<textarea data-template>
@@ -764,11 +872,60 @@ _Wir führen unsere Pipeline aus und sehen uns gemeinsam die Scripte an_
 1. Deploy: Modell in `app` Ordner schieben
 
 Aufgabe:
-1. Welche Validierungen werden verwendet?
+1. Sorge dafür, dass die Scripte durchlaufen
 1. Passe ggf. die Werte an, sodass alle Scripte durchlaufen
-1. Ergänzt das Validation Script mit euren Validierungen, wenn sie einfach umzusetzen sind
+1. Machen die Validierungen für dich Sinn, was könnte sonst noch Sinn machen? 
+   * Inspiration: https://storage.googleapis.com/pub-tools-public-publication-data/pdf/45742.pdf
 </textarea>
 </section>
+
+<section data-markdown>
+	<textarea data-template>
+## Phase II: Architektur-Entscheidungen sammeln
+
+*Professionalisierung*
+
+``model-card.md``
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Typische Werkzeuge für Workflows und Orchestrierung
+
+* Java, allgemein: https://www.jenkins.io/
+* TensorFlow, Tfx: https://www.tensorflow.org/tfx
+  * https://www.tensorflow.org/tfx/guide/beam_orchestrator
+  * https://www.tensorflow.org/tfx/guide/airflow
+  * https://www.tensorflow.org/tfx/guide/kubeflow
+* Schießen wie Pilze aus dem Boden
+
+	</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Große Dateien versionieren
+
+Sinnvoll für Trainingsdaten und Modell 
+
+* git lfs: https://git-lfs.github.com/
+* DVC: https://dvc.org/
+	</textarea>
+</section>
+
+
+<!-- <section data-markdown class="fragments">
+		<textarea data-template>
+### Eine ML Lösung hat 2 Artefakte: Code und Modell
+
+* Beides muss in Prod gebracht werden
+* Daten und Modell muss extern gehalten, aber zusammen mit Code versioniert werden
+* Modell beschreibt einen Ausschnitt der Realität. Wie finde ich heraus wie gut es das tut uns vor allem für relevante Teile der Welt und was mache ich wenn sich das ändert
+* Richtung: Benchmark und Monitoring der Lösung in Produktion
+
+</textarea>
+	</section> -->
 
 	<section data-markdown>
 		<textarea data-template>
@@ -780,22 +937,30 @@ Aufgabe:
 
 * Was geht nicht in Produktion
   * Training
-  * Validierungen
   * Analytics
   * Visualisierung
 </textarea>
 	</section>
 
+
+	<section data-markdown>
+	<textarea data-template>
+### Wie kann man ML in Produktion bringen?
+
+<img src="img/mlops/Micro-ML.png">
+</textarea>
+</section>
+
 	<section data-markdown class="hands-on">
 		<textarea data-template>
-## Hands-On IIIa - Produktionsumgebung
+## Hands-On IIIa - Lokale Produktionsumgebung
 
 1. Im Ordner `app` ist eine Server-Anwendung vorbereitet
 1. In `app.py` ist ein einfacher Flask Server implementiert
 1. `cd app`
 1. Start über `python app.py`
 1. Checken, ob der Service läuft: http://localhost:8080/ping
-1. Für HTML clients Web Server auf 8000 starten: `python -m http.server 8000` oder lokal aufrufen
+1. Für HTML clients Web Server auf 8000 starten: `python -m http.server 8000`
 1. http://localhost:8000/app/client.html macht einen einfachen Requests
 1. in `app/client.html` Werte anpassen
    * auf dich als Fahrer
@@ -811,8 +976,41 @@ Aufgabe:
 1. Sieh dir an, wie entschieden wird, ob das ML Modell genommen wird
 1. Findest du die Bedingungen sinnvoll?
 1. Passe sie deinen Vorstellungen an und probiere das Modell wieder über den Client aus
+1. Kannst du dir auch einen Test für diese differenziertere Vorhersage denken? 
 </textarea>
 	</section>
+
+
+<section data-markdown class="hands-on">
+		<textarea data-template>
+## Hands-On IIIc - Docker Umgebung
+
+1. `Dockerfile.app` enthält die Bauanleitung für das Docker Image
+1. `docker-compose up --build` (Referenz https://docs.docker.com/compose/reference/up/)
+   * auf M1 Mac kann der `app`-Service nicht über Docker gestartet werden, daher diesen Abschnitt aus `docker-compose.yml` löschen
+   * startet einen Service zum Trainieren unseres Modells
+   * baut und startet den Server
+   * startet zusätzlich das Monitoring (ignorieren wir erst einmal)
+   * Definition in `docker-compose.yaml`
+1. `docker-compose down` stopt alle Services wieder   
+1. http://localhost:8000/app/client.html kann den über Docker gestarteten Server wieder ansprechen
+
+<small>https://github.com/openknowledge/mlops-data2day#docker
+</small>
+
+</textarea>
+	</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Phase II: Architektur-Entscheidungen sammeln
+
+*Betrieb*
+
+``model-card.md``
+</textarea>
+</section>
+
 
 <section data-markdown>
 	<textarea data-template>
@@ -839,6 +1037,15 @@ https://twitter.com/karpathy/status/1486215976559398915
 </section>
 
 
+<section data-markdown>
+    <textarea data-template>
+### Wir erinnern uns: ML Modelle brauchen permanentes Monitoring und Wartung
+
+<img src='img/verfall-2.PNG'>
+
+</textarea>
+</section>
+
 	<section data-markdown class="fragments">
 ### Phase III: Produktion / Betrieb
 
@@ -856,15 +1063,18 @@ in der dritten Phase wird die Lösung in Betrieb genommen
 
 			</section>
 
-<section data-markdown>
-    <textarea data-template>
-### Wir erinnern uns: ML Modelle brauchen permanentes Monitoring und Wartung
+<section data-markdown class="fragments">
+### Grundregel
 
-<img src='img/verfall-2.PNG'>
+* Alle haben Probleme in Produktion
+* Es gibt kein fehlerfreies System 
+  * jedenfalls nicht für lange
+* Ziel ist es, Fehler schnell 
+  * zu entdecken
+  * zu analysieren
+  * und entsprechende ihrer Schwere zu adressieren
 
-</textarea>
 </section>
-
 
 	<section data-markdown class="fragments">
 		<textarea data-template>
@@ -877,15 +1087,64 @@ in der dritten Phase wird die Lösung in Betrieb genommen
    * Dafür braucht man die Ground Truth der Daten aus Produktion
    * Manchmal bekommt man diese unmittelbar nach der Vorhersage durch die Reaktion eines menschlichen Benutzers
    * Oft aber auch erst nach nennenswerter Verzögerung 
-1. *Wenn sich die Verteilung der Daten der Anfragen oder Vorhersagen deutlich von denen des Trainings unterscheiden* 
+1. Wenn sich die Verteilung der Daten der Anfragen oder Vorhersagen deutlich von denen des Trainings unterscheiden 
 
 </textarea>
 	</section>
 
 <section data-markdown>
+### Die vier goldenen Regeln des traditionellen Monitorings
+
+* Latency
+* Traffic
+* Errors
+* Saturation
+
+https://sre.google/sre-book/monitoring-distributed-systems/	
+</section>
+
+<section data-markdown style="font-size: x-large;">
+	<textarea data-template>
+### Monitoring für ML muss komplexer sein
+
+<img src="img/google-ml-monitoring.png">
+
+Long: https://static.googleusercontent.com/media/research.google.com/en//pubs/archive/aad9f93b86b7addfea4c419b9100c6cdd26cacea.pdf
+Short: https://storage.googleapis.com/pub-tools-public-publication-data/pdf/45742.pdf
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+## Was kann man machen: Frühes Monitoring
+
+* Qualität der Daten
+  * wie verändern sich fehlende oder falsche Felder
+  * Plausibilität
+* Daten Drift
+  * Verteilung der Eingabedaten
+* Prediction Drift   
+  * Was gibt das Modell aus?
+</section>
+
+<section data-markdown>
+## Datenqualität
+
+* Felder
+  * fehlen
+  * ungültig
+  * falsch / unplausibel / Wertebereich verlassen
+* Features 
+  * konstante (die (meisten) Eingaben haben (fast) denselben Wert)
+  * leere
+  * fast leer
+  * Korrelationen zwischen Features
+</section>
+	
+<section data-markdown>
 	<textarea data-template>
 ### Monitoring mit Evidently, Prometheus und Grafana
 
+<!-- <img src="img/mlops/monitoring-components.png"> -->
 <img src="img/mlops/evidently_grafana_service.png">
 
 <small>https://evidentlyai.com/blog/evidently-and-grafana-ml-monitoring-live-dashboards
@@ -906,7 +1165,7 @@ https://docs.evidentlyai.com/integrations/evidently-and-grafana
 * Requests über die Zeit verteilt werden simuliert
 </section>
 	
-<section data-markdown>
+<!-- <section data-markdown>
 ### Prometheus
 
 Metric Server
@@ -932,6 +1191,23 @@ ML Performance Monitoring
 	
 https://evidentlyai.com/
 </section>
+ -->
+<section data-markdown>
+	<textarea data-template>
+### Übersicht der Services
+
+* Monitoring App
+  * Endpunkt für die Registrierung von Datensätzen: http://localhost:8085/iterate/<dataset\> (POST)
+	* Nutzlast per JSON Body, kann Prediction enthalten z.B.: `[{"speed": 99.0, "age": 28.0, "miles": 21.0, "group": 2.0, "risk": 0.2110376180699707}]`  
+  * Metrics aus Evidently: http://localhost:8085/metrics
+    * über `app.wsgi_app = DispatcherMiddleware(app.wsgi_app, {"/metrics": prometheus_client.make_wsgi_app()})`
+
+* Promethus: http://localhost:9090
+* Grafana: http://localhost:3000
+
+</textarea>
+</section>
+
 
 <section data-markdown>
 	<textarea data-template>
@@ -1285,33 +1561,6 @@ http://localhost:8888/notebooks/notebooks/analysis.ipynb
 Fallback: https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/analysis.ipynb
 </textarea>
 </section>
-
-<section data-markdown class="fragments">
-## Ausblick: Was kann man sonst noch monitoren?
-
-* Qualität der Daten
-  * wie verändern sich fehlende oder falsche Felder
-  * Plausibilität
-* Daten Drift
-  * Verteilung der Eingabedaten
-* Prediction Drift   
-  * Was gibt das Modell aus?
-</section>
-
-<section data-markdown>
-## Datenqualität
-
-* Felder
-  * fehlen
-  * ungültig
-  * falsch / unplausibel / Wertebereich verlassen
-* Features 
-  * konstante (die (meisten) Eingaben haben (fast) denselben Wert)
-  * leere
-  * fast leer
-  * Korrelationen zwischen Features
-</section>
-	
 
 <section data-markdown class="fragments">
 	<textarea data-template>
