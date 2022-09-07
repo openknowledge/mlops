@@ -863,17 +863,19 @@ https://www.redhat.com/en/topics/devops/what-is-ci-cd
 
 _Wir führen unsere Pipeline aus und sehen uns gemeinsam die Scripte an_
 
+1. `conda activate mlops-workshop-d2d`
 1. `cd scripts`
 1. Modell trainieren: `./train.py -d ../data/reference.csv -m classifier`
+   * Windows: `python train.py -d ..\data\reference.csv -m classifier`
 1. Modell validieren: `./validate.py -d ../data/reference.csv -m classifier`
+   * Windows: `python validate.py -d ..\data\reference.csv -m classifier`
 1. Deploy: Modell in `app` Ordner schieben
 
-Diskussion:
-1. Was hältst du von der Professionalisierung? Was hättest du anders gemacht?
+Aufgabe:
+1. Sorge dafür, dass die Scripte durchlaufen
+1. Passe ggf. die Werte an, sodass alle Scripte durchlaufen
 1. Machen die Validierungen für dich Sinn, was könnte sonst noch Sinn machen? 
    * Inspiration: https://storage.googleapis.com/pub-tools-public-publication-data/pdf/45742.pdf
-1. Kennst du bereits Werkzeuge für Workflows und Orchestrierung?   
-1. Modell und Daten sind groß/binär - sollten wir die versionieren und wenn ja, wie?
 </textarea>
 </section>
 
