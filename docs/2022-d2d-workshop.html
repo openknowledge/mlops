@@ -535,7 +535,7 @@ Helft bitte euren Nachbarn, falls eure Installation schon läuft
    * `git clone git@github.com:openknowledge/mlops-data2day.git`
 1. Docker images starten
    * Im Projekt-Verzeichnis: `docker compose up`
-1. Überprüfen, dass Jupyter Lab erreichbar ist   
+1. Überprüfen, dass Jupyter erreichbar ist: http://localhost:8888/   
 
 </textarea>
 </section>
@@ -644,7 +644,9 @@ funktionsfähiges Modell entwickelt.
 * Normalisierung auf Trainingsdatensätzen
 * Accuracy Training/Test > 85%
 
-https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/exploration.ipynb
+Aus Docker: http://localhost:8888/notebooks/notebooks/exploration.ipynb
+<br>
+Colab Fallback: https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/exploration.ipynb
 
   </textarea>
   </section>  
@@ -718,7 +720,7 @@ https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/
 
 </section>
 
-<section data-markdown>
+<!-- <section data-markdown>
 	<textarea data-template>
 ### CI/CD bei klassischem DevOps
 
@@ -736,10 +738,10 @@ https://www.redhat.com/en/topics/devops/what-is-ci-cd
 <img src="img/devops-vs-mlops.png" style="height: 600px">
 </textarea>
 </section>
-
-<section data-markdown>
+ -->
+<section data-markdown class="hands-on">
 	<textarea data-template>
-## Hands-On II - wie wollen wir das Modell validieren?
+## Hands-On IIa - wie wollen wir das Modell validieren?
 
 * bei automatisiertem Training können wir ein erfolgreiches Training nicht mehr manuell überwachen
 * wie könnten automatisierte Tests auf dem Modell aussehen?
@@ -749,19 +751,19 @@ https://www.redhat.com/en/topics/devops/what-is-ci-cd
 </textarea>
 </section>
 
-<section data-markdown style="font-size: x-large;" class="hands-on">
+<section data-markdown class="hands-on">
 	<textarea data-template>
-## Hands-On II - Scripte, manuelles CI/CD
+## Hands-On IIb - Scripte, manuelles CI/CD
 
 _Wir führen unsere Pipeline aus und sehen uns gemeinsam die Scripte an_
 
-1. `conda activate mlops-workshop-d2d`
+1. Öffne ein Terminal aus deinem Notebook Server heraus (New->Terminal)
 1. `cd scripts`
 1. Modell trainieren: `./train.py -d ../data/reference.csv -m classifier`
-   * Windows: `python train.py -d ..\data\reference.csv -m classifier`
+   <!-- * Windows: `python train.py -d ..\data\reference.csv -m classifier` -->
 1. Modell validieren: `./validate.py -d ../data/reference.csv -m classifier`
-   * Windows: `python validate.py -d ..\data\reference.csv -m classifier`
-1. Deploy: Modell in `app` Ordner schieben
+   <!-- * Windows: `python validate.py -d ..\data\reference.csv -m classifier` -->
+1. Deploy: Modell in `/model` Ordner schieben
 
 Aufgabe:
 1. Welche Validierungen werden verwendet?
@@ -770,49 +772,6 @@ Aufgabe:
 </textarea>
 </section>
 
-	<section data-markdown>
-		<textarea data-template>
-### Nicht aller Code ist für Produktion gedacht		
-
-* Was geht in Produktion
-  * Vorhersage
-  * Monitoring
-
-* Was geht nicht in Produktion
-  * Training
-  * Validierungen
-  * Analytics
-  * Visualisierung
-</textarea>
-	</section>
-
-	<section data-markdown class="hands-on">
-		<textarea data-template>
-## Hands-On IIIa - Produktionsumgebung
-
-1. Im Ordner `app` ist eine Server-Anwendung vorbereitet
-1. In `app.py` ist ein einfacher Flask Server implementiert
-1. `cd app`
-1. Start über `python app.py`
-1. Checken, ob der Service läuft: http://localhost:8080/ping
-1. Für HTML clients Web Server auf 8000 starten: `python -m http.server 8000` oder lokal aufrufen
-1. http://localhost:8000/app/client.html macht einen einfachen Requests
-1. in `app/client.html` Werte anpassen
-   * auf dich als Fahrer
-   * außerhalb des gültigen Bereichs des Models 
-</textarea>
-	</section>
-
-  	<section data-markdown class="hands-on">
-		<textarea data-template>
-## Hands-On IIIb - Server Code verstehen
-
-1. `app/app.py` und `app/model_prediction.py` enthalten den Server Code
-1. Sieh dir an, wie entschieden wird, ob das ML Modell genommen wird
-1. Findest du die Bedingungen sinnvoll?
-1. Passe sie deinen Vorstellungen an und probiere das Modell wieder über den Client aus
-</textarea>
-	</section>
 
 <section data-markdown>
 	<textarea data-template>
@@ -855,6 +814,49 @@ in der dritten Phase wird die Lösung in Betrieb genommen
   * dem Iterieren zurück in Phase I mit neu gewonnenen Erkenntnissen oder einem Neuansatz (häufig ebenfalls ein Zeichen für einen Fehlschlag)
 
 			</section>
+
+	<section data-markdown>
+		<textarea data-template>
+### Nicht aller Code ist für Produktion gedacht		
+
+* Was geht in Produktion
+  * Vorhersage
+  * Monitoring
+
+* Was geht nicht in Produktion
+  * Training
+  * Validierungen
+  * Analytics
+  * Visualisierung
+</textarea>
+	</section>
+
+	<section data-markdown class="hands-on">
+		<textarea data-template>
+## Hands-On IIIa - Produktionsumgebung
+
+1. Im Ordner `app` ist eine Server-Anwendung vorbereitet
+1. In `app.py` ist ein einfacher Flask Server implementiert
+1. Der Server wird bereits über Docker compose gestartet
+1. Checken, ob der Service läuft: http://localhost:8080/ping
+1. Für HTML clients Web Server auf 8000 starten: `python -m http.server 8000` oder lokal aufrufen
+1. http://localhost:8000/app/client.html macht einen einfachen Requests
+1. in `app/client.html` Werte anpassen
+   * auf dich als Fahrer
+   * außerhalb des gültigen Bereichs des Models 
+</textarea>
+	</section>
+
+  	<section data-markdown class="hands-on">
+		<textarea data-template>
+## Hands-On IIIb - Server Code verstehen
+
+1. `app/app.py` und `app/model_prediction.py` enthalten den Server Code
+1. Sieh dir an, wie entschieden wird, ob das ML Modell genommen wird
+1. Findest du die Bedingungen sinnvoll?
+1. Passe sie deinen Vorstellungen an und probiere das Modell wieder über den Client aus
+</textarea>
+	</section>
 
 <section data-markdown>
     <textarea data-template>
@@ -1036,14 +1038,11 @@ https://de.wikipedia.org/wiki/P-Wert
 		<textarea data-template>
 ## Hands-On IV - Monitoring und Sinn daraus machen
 
-### Teil I: Das Monitoring starten 
+### Teil I: Services checken 
 
-1. Starte die Monitoring Umgebung (das ist wahrscheinlich bereits im vorherigen Schritt passiert) 
-   * `docker compose up -d --build`
-1. Checke, dass diese Services laufen
-   * Monitoring App, Metrics aus Evidently: http://localhost:8085/metrics
-   * Prometheus: http://localhost:9090
-   * Grafana: http://localhost:3000
+* Monitoring App, Metrics aus Evidently: http://localhost:8085/metrics
+* Prometheus: http://localhost:9090
+* Grafana: http://localhost:3000
 
 </textarea>
 	</section>
@@ -1067,8 +1066,8 @@ https://de.wikipedia.org/wiki/P-Wert
 1. Einloggen in Grafana: http://localhost:3000
    1. admin/admin
 1. Das Dashboard `Evidently Data Drift Dashboard` aufrufen
-1. Darin den Datensatz `insurance`
-1. Mit `python scripts/example_run_request.py` Anfragen simulieren
+1. Darin den Datensatz `insurance` auswählen
+1. Mit `./scripts/example_run_request.py -e evidently_service.` Anfragen simulieren
 1. Stelle sicher, dass sich das Dashboard aktualisiert
 1. Was beobachtest du? Welche Features driften? Wie kann man das erklären?
 
