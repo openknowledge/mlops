@@ -26,7 +26,7 @@ class NumpyEncoder(json.JSONEncoder):
         return obj
 
 
-def send_data_row(dataset_name: str, data: Dict) -> None:
+def send_data_row(dataset_name: str, data: Dict, host: str = 'localhost') -> None:
     # print(f"Send a data item for {dataset_name}")
     encoded_data = json.dumps([data], cls=NumpyEncoder)
     # print(data)
@@ -34,7 +34,7 @@ def send_data_row(dataset_name: str, data: Dict) -> None:
 
     try:
         response = requests.post(
-            f"http://localhost:8085/iterate/{dataset_name}",
+            f"http://{host}:8085/iterate/{dataset_name}",
             data=encoded_data,
             headers={"content-type": "application/json"},
         )
@@ -52,7 +52,7 @@ def send_data_row(dataset_name: str, data: Dict) -> None:
         print(f"Cannot reach a metrics application, error: {error}, data: {data}")
 
 
-def main(sleep_timeout: int) -> None:
+def main(sleep_timeout: int, host: str = 'localhost') -> None:
     datasets_path = os.path.abspath("datasets")
     if not os.path.exists(datasets_path):
         exit("Cannot find datasets, try to run run_example.py script for initial setup")
@@ -75,7 +75,7 @@ def main(sleep_timeout: int) -> None:
             dataset_size = dataset.shape[0]
             data = dataset.iloc[idx % dataset_size].to_dict()
             print(f"Send data for {dataset_name} with index {idx}")
-            send_data_row(dataset_name, data)
+            send_data_row(dataset_name, data, host)
 
         print(f"Wait {sleep_timeout} seconds till the next try.")
         time.sleep(sleep_timeout)
@@ -92,5 +92,12 @@ if __name__ == "__main__":
         default=0,
         help="Sleep timeout between data send tries in seconds.",
     )
+    parser.add_argument(
+        "-e",
+        "--evidently-host",
+        type=str,
+        default='localhost',
+        help="Metric host",
+    )
     args = parser.parse_args()
-    main(args.timeout)
+    main(args.timeout, args.evidently_host)
