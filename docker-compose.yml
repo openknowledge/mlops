@@ -34,6 +34,19 @@ services:
     environment:
       MODEL_PATH: ../model/classifier
 
+  notebook:
+    build:
+      context: .
+      dockerfile: Dockerfile.notebook
+    ports:
+      - "8888:8888"
+      - "8889:8889"
+    volumes:
+      - ./:/data
+      - model_data:/model
+    environment:
+      MODEL_PATH: ../model/classifier
+
   evidently_service:
     build:
       context: .
