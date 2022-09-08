@@ -9,8 +9,8 @@ os.environ['TF_CPP_MIN_LOG_LEVEL'] = '3'
 sys.path.append('../lib')
 # print(sys.path)
 
-from model import create_model, create_normalizer
 from data import InsuranceData
+from model import create_model, create_normalizer
 from TrainableInsuranceModel import TrainableInsuranceModel
 
 def setup_logger() -> None:
