@@ -1,0 +1,29 @@
+# syntax=docker/dockerfile:1
+
+FROM debian:latest
+
+ENV LANG=C.UTF-8 LC_ALL=C.UTF-8
+ENV PATH=/opt/conda/bin:$PATH
+EXPOSE 8888
+
+COPY environment.yml /environment.yml
+
+RUN <<EOT
+apt update
+apt install -y wget
+wget https://repo.anaconda.com/miniconda/Miniconda3-py39_4.12.0-Linux-$(arch).sh -O /miniconda.sh
+chmod +x /miniconda.sh
+/miniconda.sh -b -p /opt/conda
+rm /miniconda.sh
+conda env create -f environment.yml
+EOT
+
+COPY entrypoint.sh /entrypoint.sh
+
+RUN conda init bash
+RUN mkdir /data
+RUN chmod +x /entrypoint.sh
+RUN echo 'conda activate mlops-workshop-d2d' >> /root/.bashrc
+WORKDIR /data
+CMD ["/entrypoint.sh"]
+
