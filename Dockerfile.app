@@ -18,11 +18,12 @@ EOT
 
 RUN conda init bash
 RUN echo 'conda activate mlops-workshop-d2d' >> /root/.bashrc
-RUN conda activate mlops-workshop-d2d
 
 COPY ./app /python_server
 COPY ./lib /lib
+COPY entrypoint-app.sh /entrypoint.sh
+RUN chmod +x /entrypoint.sh
 
 WORKDIR /python_server
 EXPOSE 5000
-CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]
+CMD [ "/entrypoint.sh" ]
