@@ -46,6 +46,8 @@ services:
       - model_data:/model
     environment:
       MODEL_PATH: ../model/classifier
+    networks:
+      - front-tier
 
   evidently_service:
     build:
