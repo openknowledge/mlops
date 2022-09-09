@@ -535,6 +535,7 @@ Helft bitte euren Nachbarn, falls eure Installation schon läuft
    * `git clone git@github.com:openknowledge/mlops-data2day.git`
 1. Docker images starten
    * Im Projekt-Verzeichnis: `docker compose up`
+   * Wir brauchen die Ports: 8080, 9090, 8085, 8888, 8889, 9090, 3000
    * Das kann (gerade bei überlastetem Netz) lange dauern
    * sobald das Docker-Kommando abgesetzt ist können wir weiter im Stoff
    * Zwingend brauchen wir die Services erst in Hands-On IIb 
@@ -1126,6 +1127,26 @@ https://de.wikipedia.org/wiki/P-Wert
  
 </textarea>
 </section>
+
+	<section data-markdown class="hands-on">
+		<textarea data-template>
+## Hands-On IV - Monitoring und Sinn daraus machen
+
+### Teil III: Einen passenden Grafana Alert erzeugen
+
+1. Leg einen Ordner an, in dem du später deinen Alert speicherst: http://localhost:3000/dashboards/folder/new
+1. Einen Alert kann man in Grafana als Regel oder direkt auf einem Dashboard einrichten
+1. Editiere im Dashboard das Panel für den Anteil driftender Features
+1. Im Alert Tab kannst die Bedingung für den Alarm festlegen
+1. Nach dem Speichern sollte ein farbiges Herz auf dem Panel den Status angeben
+1. Stelle sicher, dass dein Alert ausgelöst wird
+1. Im Alerting Menu können Contact Points zur Benachrichtigung angelegt werden
+
+https://grafana.com/docs/grafana/latest/alerting/
+
+</textarea>
+	</section>
+
 
 <section data-markdown>
 	<textarea data-template>
