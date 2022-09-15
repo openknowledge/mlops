@@ -96,7 +96,7 @@ if __name__ == "__main__":
         "-e",
         "--evidently-host",
         type=str,
-        default='localhost',
+        default='evidently_service',
         help="Metric host",
     )
     args = parser.parse_args()
