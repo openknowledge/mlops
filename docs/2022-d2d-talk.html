@@ -25,38 +25,16 @@
 
 <!-- 
 Data2Day
-https://www.data2day.de/cfp.php
+https://www.data2day.de
 
-Workshop
-https://www.data2day.de/veranstaltung-15183-0-mlops-mit-python.html
-
-9:00 - 16:00
-
-MLOps mit Python
-
-Viele Unternehmen haben die Phase des reinen Experimentierens mit Machine Learning hinter sich gelassen und fragen sich
-nun, wie man ein Machine Learning Modell so betreibt wie ein traditionelles Stück Software. Also wie man es in Produktion bringt und dort
-erfolgreich hält. MLOps ist der Name für diesen Ansatz. 
-
-In diesem Workshop werden wir uns anhand eines durchgängigen Beispiel durch die Phasen eines Machine Learning Projekts bewegen:
-- Exploration: Entwicklung eines Modells mit Jupyter Notebooks und TensorFlow
-- Professionalisierung: Refactoring in Module
-- Produktion und Monitoring: Produktivsetzung mit Flask und Docker, Monitoring mit Prometheus, Evidently und Grafana
-
-Als ML Werkzeug werden wir TensorFlow nutzen, allerdings ist dies nur ein Beispiel und alles gezeigte gilt auch für alle
-anderen Frameworks. Es wird lediglich Erfahrung mit Python und ein Verständnis für ein Machine Learning Projekt
-vorausgesetzt. Alles andere wird - soweit nötig - im Workshop eingeführt.
-
-Lernziel:
-Teilnehmer sollen anhand eines in sich stimmigen Satzes von Werkzeugen die Konzepte und Ansätze im Bereich MLOps kennen lernen und diskutieren können.
-
----
-
-Talk: 45 Minuten
-
+Talk
 https://www.data2day.de/veranstaltung-15048-0-monitoring-von-drift-mit-prometheus-grafana-und-evidently.html
 
+Mi: 10:15 - 11:00
+
 Monitoring von Drift mit Prometheus, Grafana und Evidently
+
+Talk: 45 Minuten
 
 Machine-Learning-Modelle erfordern besondere Maßnahmen beim Monitoring. Die Vorhersagekraft des Modells ist dabei
 besonders wichtig, aber oft nicht direkt beobachtbar.
@@ -69,208 +47,39 @@ er kritisch und was die passende Maßnahme ist.
 
 Die Teilnehmenden bekommen einen Eindruck von einem realistischen Setup für das Monitoring von Drift. Es wird erklärt,
 warum das so wichtig ist und wie man eine passende Maßnahme ableitet
-
----
-
-Aus: https://arxiv.org/abs/2007.06299
-The machine learning lifecycle extends beyond the deployment stage. Monitoring deployed models is crucial for 
-continued provision of high quality machine learning enabled services. 
-Key areas include model performance and data monitoring, detecting outliers and data drift using statistical techniques, 
-and providing explanations of historic predictions. We discuss the challenges to successful implementation of solutions 
-in each of these areas with some recent examples of production ready solutions using open source tools.
-
-
----
-
-OOP
-
-Titel: MLOps - wie bringt man ein Machine Learning Modell in Produktion und hält es dort?
-
-MLOps beschäftigt sich mit dem Thema, ein Machine Learning Modell in Produktion zu bringen und es dort erfolgreich zu betreiben.
-
-Ein Machine Learning Modell läuft fast immer als Teil eines komplexeren Software Systems. 
-Und so ist die die erste Herausforderung ist, das vermeintlich fertige Modell in in ein solches System zu integrieren.
-Für die Produktion müssen Metriken erarbeitet werden, die die Performanz des Modells auch in Zukunft bewerten können.
-Da es häufig (zumindest zeitnah) keine gesicherten Erkenntnisse über die Qualität der Vorhersage gibt, müssen 
-Platzhalter dafür gefunden werden.
-Ebenso muss überlegt werden, wie man die Ursache für die Verschlechterung der Vorhersagequalität eigentlich gemacht werden sollte und wie man 
-
-die für einzelne Beispiele 
-
-Sobald das Modell in Produktion ist, muss es auf eine 
-
-
-
-
-https://en.wikipedia.org/wiki/MLOps
-
-
----
-
-https://qconsf.com/track/oct2022/mlops
-
-
-
-Talk: Drift Detection in MLOps
-
-MLOps deals with the topic of bringing a machine learning model into production and keeping it there.
-
-
-
-problem of detecting and handling drift in machine learning models.
-
-Bringing a machine learning model into production and making it stay there is a complex task.
-
-Once your model is in production you need to monitor it for degrading performance. 
-Since many applications do not provide immediate feedback (or none at all) on the prediction quality, 
-
-you need to provide a way to
-
-you need to monitor it for drift.
-
-In this talk I will look at existing tools and approaches independent of any solution provider from the perspective of a practitioner.
-
-
-In this talk we will look at https://evidentlyai.com/ and https://github.com/SeldonIO/alibi-detect
-
-Once a drift has been detected, we will use the alibi-detect library to provide a detailed explanation of the drift.
-
-Eventually, we will act on the explanation and provide a solution based on serverity and the context of the drift.
-
-
-Oliver Zeigermann is Head Of AI at Open Knowledge, a leading provider of machine learning services. 
-He is an O’Reilly book author and the author of a Manning video course. Oliver has been a speaker at various conferences 
-including ODSC West, TensorFlow world, and MLConf. 
-His main interest is in the intersection between traditional software engineering and machine learning.
-
-What would be the 3-4 main actionable takeaways you would like your audience to remember and to use after your talk?
-1. DevOps for machine learning has special requirements
-2. Drift of various types is a problem not only of machine learning, but all heuristic business code
-3. Detecting, evaluating and acting upon drift is the most critical part of the machine learning lifecycle 
-
-
----
-
-MlOps - concepts, not tools
-
-Artificial intelligence is no magic and machine learning is just an alternative way of developing software. Thus most of what applies to the traditional way of writing software also is valid for machine learning projects.
-
-This is a challenge since data scientists are often not familiar with basic concepts of software engineering
-like refactoring, versioning, continuous integration, and automated testing. On the other hand traditional software developers often lack the
-knowledge of the special requirements of a machine learning project.
-
-In this talk I will argue that tools alone can not solve MLOps,
-since the awareness of the challenges both for data science and software development as a combination need to be addressed first.
-What process should be followed and what tasks need to be performed at each step is the main topic of this talk.
-
-kross@fortiss.org
-
-"Fit a model on a given dataset sampled from a distribution that represents our problem" could be a casual way of describing the classic idea of machine learning.
- 
-This, however, does not reflect the challenges of many modern machine learning projects. Data does not simply exist and the sample people are working on often is not static, but rather gets generated incrementally in smaller batches. Also, the distribution the data is sampled from can change with the domain it comes from.
-
-In this talk we will address the following questions:
-- Workflow: What kind of workflow reflects a more incremental take on machine learning?
-- Training for Production: How can we anticipate if our model works well in production and when to retrain?
-- Explainability: How can we find out how our model works to check for bias and analysis of degradation?
-- Unwanted Bias: Data sampled in the past is used to predict the future. How can we find out if our model has bias that is (no longer) wanted?
-- Testing: What is a proper way of testing a model to find regressions from previous cycles?
-- Monitoring: How do we detect when our model actually degrades in production and how do we react?
-
-
-Oliver Zeigermann is Head Of AI at open knowledge GmbH, a leading provider of software development services. 
-He is an O’Reilly book author and the author of a Manning video course. Oliver has been a speaker at various conferences 
-including ODSC, TensorFlow world, and MLConf. His main interest is in the intersection between traditional software engineering and machine learning.
-
 -->
 
 <section data-markdown class="preparation">
 	<textarea data-template>
 ### Vorbereitung
 
+* Stift einsatzbereit (geladen)
+* Notebook vorbereiten:
+  * conda activate mlops-workshop-d2d
+  * jupyter notebook
 * Installation einmal platt machen: `docker compose down --volumes --rmi all`
 * Und wieder hoch fahren dabei alles neu bauen und alle images neu ziehen: `docker compose up --build`
+
 </textarea>
 </section>
 
-<section data-markdown>
+<section data-markdown class="preparation">
 	<textarea data-template>
-### Bevor es los geht
+### Ablauf
 
-1. WLAN: xxx
-1. Diese Folien: https://bit.ly/d2d-2022-mlops
-1. Installieren (falls noch nicht passiert)
-   1. Git : https://git-scm.com/downloads
-   1. Docker: https://docs.docker.com/get-docker/
-1. Projekt klonen
-   * https://github.com/openknowledge/mlops-data2day
-   * `git clone git@github.com:openknowledge/mlops-data2day.git`
-1. Docker images starten
-   * Im Projekt-Verzeichnis: `docker compose up`
-1. Falls ihr es jetzt nicht hinbekommt, gibt es später noch Zeit für die Installation
+* Phase 0:
+  * Anwendung 
+  * Ablauf: https://miro.com/app/board/uXjVPWwLbm8=/?share_link_id=448518887103
+* Phase I:  
+  * Exploration: http://localhost:8888/notebooks/notebooks/exploration.ipynb
+* Phase II:  
+  * cd scripts
+  * ./train.py -d ../data/reference.csv -m classifier
+  * ./validate.py -d ../data/reference.csv -m classifier
+* Phase III:
 
-_Bei Problemen den Nachbar oder Tobias und Olli fragen_
 </textarea>
 </section>
-  
-<!-- 
-MLOps mit Python
-
-https://www.data2day.de/veranstaltung-15183-0-mlops-mit-python.html
-
-Agenda:
-
-09:00 Uhr: Beginn
-
-Einführung
-- MLOps: Phasen und Workflow in einem ML Projekt
-- Daten entstehen über die Zeit
-- Unser Fallbeispiel und Datenbasis
-
-10:45 - 11:00 Uhr: Kaffeepause
-
-Ein lauffähiges ML System
-- Installation und Start des ML Systems
-  - Docker
-  - Flask
-- wichtige Metriken
-- Was kann man wie testen? 
-
-12:30 - 13:30 Uhr: Mittagspause
-
-Betrieb
-* Benutzung des Modells simulieren
-* Drifts, Monitoring, Alerting
-* Evidently, Prometheus, Grafana
-* Bewertung von Drift
-
-15:00 - 15:15 Uhr: Kaffeepause
-
-Abschluss / Rückblick
-* Ausblick: was passiert nach Produktivsetzung?
-* Offene Fragen
-
-ca. 16:00 Uhr: Ende
-
-
-TECHNISCHE ANFORDERUNGEN
-Falls ihr ein Gerät eurer Firma verwendet, überprüft vorher bitte, ob eines der folgenden, gelegentlich vorkommenden Probleme bei euch auftreten könnte.
-Workshop-Teilnehmer:in hat keine Administrator-Rechte.
-Corporate Laptops mit übermäßig penibler Sicherheitssoftware
-Gesetzte Corporate-Proxies, über die man in der Firma kommunizieren muss, die aber in einer anderen Umgebung entsprechend nicht erreicht werden.
-
-Vorbereitung
-Dieser Workshop geht davon aus, dass du bereits eine Python-Entwicklungsumgebung mit IDE, Python Distribution und Git 
-auf deinem Rechner lauffähig hast.
-Sollte das nicht der Fall sein und du nicht sicher bist, welche Software passt, installiere bitte:
-* Anaconda: https://www.anaconda.com/products/individual
-* Visual Studio Code: https://code.visualstudio.com/
-* Git: https://git-scm.com/downloads
-* Docker: https://docs.docker.com/get-docker/
-
-Wir werden auf einem Beispielprojekt arbeiten. Hab bitte bereits vor dem Workshop
-das Projekt https://github.com/openknowledge/mlops-data2day geklont und wie im Readme beschrieben installiert.
- -->
 
 <!-- <section data-markdown class="hide" style="font-size: xx-small">
 	<textarea data-template>
@@ -330,15 +139,12 @@ Orchestrierung hier händisch, es geht um das Konzept und welches Tool das richt
 
 			<section data-markdown>
 				<textarea data-template>
-# MLOps mit Python
+# Monitoring von Drift mit Prometheus, Grafana und Evidently
 
 data2day 2022, https://www.data2day.de/veranstaltung-15183-0-mlops-mit-python.html
 
-Tobias Kurzydym / tobias.kurzydym@openknowledge.de
-
 Oliver Zeigermann / oliver.zeigermann@openknowledge.de
 
-Folien: https://bit.ly/d2d-2022-mlops
     </textarea>
 			</section>
 
@@ -1060,12 +866,6 @@ https://de.wikipedia.org/wiki/P-Wert
 </textarea>
 	</section>
 
-  <section data-markdown>
-    <textarea data-template>
-### Unsere Zeitreise beginnt
-</textarea>
-</section>
-
 <section data-markdown>
   <textarea data-template>
 ### Produktion simulieren
@@ -1163,17 +963,9 @@ https://grafana.com/docs/grafana/latest/alerting/
 	</section>
 
 
-    <section data-markdown>
-  <textarea data-template>
-### Drift über die Zeit
-
-<img src="img/tw-drift.png">
-  </textarea>
-</section>
-
 <section data-markdown>
 	<textarea data-template>
-### Wir schummeln leicht
+### Wir reisen in in Zukunft
 ## Wir nutzen die Ground Truth von in einem Jahr     
 
 1. `./validate.py -d ../data/month-12.csv -m classifier`
