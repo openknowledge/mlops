@@ -192,7 +192,7 @@ including ODSC, TensorFlow world, and MLConf. His main interest is in the inters
 * Notebook vorbereiten:
   * conda activate mlops-workshop-d2d
   * jupyter notebook
-* Probelauf Drift Detection  
+* Probelauf Drift Detection
 * Installation einmal platt machen: `docker compose down --volumes --rmi all`
 * Und wieder hoch fahren dabei alles neu bauen und alle images neu ziehen: `docker compose up --build`
 * Kopie machen und RW und mit allen teilen auf erster Folie: https://miro.com/app/board/uXjVPWwLbm8=/?share_link_id=448518887103
@@ -200,7 +200,7 @@ including ODSC, TensorFlow world, and MLConf. His main interest is in the inters
 </textarea>
 </section>
 
-<section data-markdown>
+<section data-markdown style="font-size: x-large;">
 	<textarea data-template>
 ### Bevor es los geht
 
@@ -546,12 +546,14 @@ https://www.mihaileric.com/posts/mlops-is-a-mess/
 * "docker compose" lässt uns mehrere Container gleichzeitig starten
 
 <img src='img/docker-vm-vergleich.png'  style="height: 250px;">
+
 https://www.docker.com/resources/what-container/
+
   </textarea>
 
 </section>
 
-<section data-markdown style="font-size: x-large;" class="hands-on">
+<section data-markdown style="font-size: large;" class="hands-on">
 	<textarea data-template>
 ## Hands-On 0 - Docker Installation überprüfen oder herstellen
 
@@ -576,6 +578,17 @@ Helft bitte euren Nachbarn, falls eure Installation schon läuft
 
 </textarea>
 </section>
+
+<section data-markdown>
+	<textarea data-template>
+### Übersicht Container
+
+<img src="img/containers-desktop.png">
+
+Das sollte bei dir laufen
+</textarea>
+</section>
+
 
 <section data-markdown>
 	<textarea data-template>
@@ -675,7 +688,7 @@ funktionsfähiges Modell entwickelt.
 * Neuronales Netzwerk mit TensorFlow
 * 3 Hidden Layers, 100 Neuronen pro Layer
 * 1500 Datensätze insgesamt
-* Training auf allen Features
+* Training auf allen 6 Features
 * Test/Validation auf 300 Datensätzen
 * Training auf 1200 Datensätze
 * Normalisierung auf Trainingsdatensätzen
@@ -788,7 +801,7 @@ https://www.redhat.com/en/topics/devops/what-is-ci-cd
 </textarea>
 </section>
 
-<section data-markdown class="hands-on">
+<section data-markdown class="hands-on" style="font-size: x-large;">
 	<textarea data-template>
 ## Hands-On IIb - Scripte, manuelles CI/CD
 
@@ -802,10 +815,11 @@ _Wir führen unsere Pipeline aus und sehen uns gemeinsam die Scripte an_
    <!-- * Windows: `python validate.py -d ..\data\reference.csv -m classifier` -->
 1. Deploy: Modell in `/model` Ordner schieben
 
-Aufgabe:
+*Aufgabe*
+1. Sieh dir die Script über die IDE oder den Notebook Server an
 1. Welche Validierungen werden verwendet?
 1. Passe ggf. die Werte an, sodass alle Scripte durchlaufen
-1. Ergänzt das Validation Script mit euren Validierungen, wenn sie einfach umzusetzen sind
+1. Ergänz das Validation Script mit euren Validierungen, wenn sie einfach umzusetzen sind
 </textarea>
 </section>
 
@@ -885,8 +899,13 @@ in der dritten Phase wird die Lösung in Betrieb genommen
 
   	<section data-markdown class="hands-on">
 		<textarea data-template>
-## Hands-On IIIb - Server Code verstehen
+## Hands-On IIIb - Grenzen des Modells
 
+*Diskussion*
+* Sollten wir unser Modell für jede Anfrage verwenden?
+* Sollten wir alle gültigen Vorhersagen nutzen?
+
+*Code*
 1. `app/app.py` und `app/model_prediction.py` enthalten den Server Code
 1. Sieh dir an, wie entschieden wird, ob das ML Modell genommen wird
 1. Findest du die Bedingungen sinnvoll?

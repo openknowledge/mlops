@@ -46,7 +46,7 @@ def main(data_path: str, model_path: str) -> None:
     logging.info(f"Model test accuracy of {test_metric} exceeds 85%")
     assert abs(train_metric - test_metric) < .05
     logging.info(
-        f"Accuracy spread of {abs(train_metric - test_metric)} is below 5% (checking or overfitting here)")
+        f"Accuracy spread of {abs(train_metric - test_metric)} is below 5% (checking for overfitting here)")
 
     # output distributions
     model = insurance_model.model
