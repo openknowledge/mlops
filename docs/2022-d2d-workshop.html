@@ -1324,6 +1324,13 @@ https://grafana.com/docs/grafana/latest/alerting/
 
 <section data-markdown>
 	<textarea data-template>
+## Offene Fragen / Themen
+  </textarea>
+</section>
+
+
+<section data-markdown>
+	<textarea data-template>
 ### Zusammenfassung: Arten von Drift
 
 * _Covariate / Input drift_: Verteilung der Eingabe hat sich geändert
@@ -1337,7 +1344,7 @@ https://grafana.com/docs/grafana/latest/alerting/
 </textarea>
 </section>
 
-<!-- <section data-markdown style="font-size: x-large;">
+<section data-markdown style="font-size: x-large;">
 	<textarea data-template>
 ## Drift erfordert Interpretation
 
@@ -1352,8 +1359,8 @@ Wenn die Welt sich ändert, ist Drift zu erwarten und damit ok
 
 </textarea>
 </section>
- -->
-<!-- <section data-markdown>
+ 
+<section data-markdown>
 	<textarea data-template>
 ## Analyse des Drifts für Phase I
 
@@ -1361,7 +1368,7 @@ http://localhost:8888/notebooks/notebooks/analysis.ipynb
 
 Fallback: https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/analysis.ipynb
 </textarea>
-</section> -->
+</section>
 
 <section data-markdown class="fragments">
 ## Ausblick: Was kann man sonst noch monitoren?
@@ -1436,10 +1443,26 @@ https://docs.seldon.io/projects/alibi-detect/en/stable/ad/methods.html
 * *nicht bestimmen*
   * wir müssen Realitäten abwarten
   * bei Zeitreihen wird auf die nahe Zukunft vorhergesagt, sobald diese Eintritt kann überprüft werden
-  * oft sind solche Realitäten erst nach wahrnehmbar und unterliegen statistischen Schwankungen (wie bei uns)
+  * oft sind solche Realitäten erst nach einiger Zeit wahrnehmbar und unterliegen statistischen Schwankungen (wie bei uns)
 </textarea>
 </section>
 
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Ausblick: Unsere Vorhersage selbst erzeugt Drift
+
+* Ein Deployment ändert das unsere Rolle von Beobachter zu Akteur
+* Wir versichern nur Leute mit einer guten Risiko Prognose
+  * Wenn nicht, warum sollten wir dann eine überhaupt eine Prognose machen?
+* Unsere GT wird mehr und mehr gute Fahrer haben
+  * Zumindest ist das unsere Hoffnung (sonst hätte die Prognose nicht geklappt)
+* Falls nicht
+  * haben Menschen gelernt, unser System auszutricksen?
+  * "Dann versichert eben meine Tochter den Wagen"
+
+https://twitter.com/ChristophMolnar/status/1569644089724764160
+</textarea>
+</section>
 
 <section data-markdown class="fragments">
 <textarea data-template>
