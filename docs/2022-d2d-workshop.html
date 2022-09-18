@@ -610,14 +610,6 @@ Das sollte bei dir laufen
 </textarea>
 </section>
 
-<!-- <section data-markdown>
-	<textarea data-template>
-### Kausales Modell
-
-<img src='img/insurance-causal-model.png' style="height: 300px;">
-</textarea>
-</section>
- -->
 <section data-markdown>
 ### Features
 * Fahrer
@@ -1333,8 +1325,8 @@ https://grafana.com/docs/grafana/latest/alerting/
 	<textarea data-template>
 ### Zusammenfassung: Arten von Drift
 
-* _Covariate / Input drift_: Verteilung der Eingabe hat sich geändert
-* _Prior / Label drift_: Verteilung der Vorhersage hat sich geändert
+* _Covariate / Input / Data drift_: Verteilung der Eingabe hat sich geändert
+* _Prior / Label / Prediction drift_: Verteilung der Vorhersage hat sich geändert
 * _Concept / Model drift_: Zusammenhang zwischen Eingabe und Vorhersage hat sich geändert
 
 <img src="https://docs.seldon.io/projects/alibi-detect/en/stable/_images/bg_2d_drift.png" style="height: 100%;">
@@ -1354,12 +1346,13 @@ Wenn die Welt sich ändert, ist Drift zu erwarten und damit ok
 |---|---|---|
 | *Data und Prediction Drift*  | wichtige Features haben sich geändert, Modell kommt klar und extrapoliert gut, z.B.: Höheres Alter, mehr Risiko  |  wichtige Features haben sich geändert, Modell extrapoliert nicht sinnvoll |
 | *Data aber kein Prediction Drift*  | keine wichtigen Features geändert, das Modell ist robust genug für den Drift  | wichtige Features geändert, Modell extrapoliert nicht sinnvoll |
-| *Prediction aber kein Data Drift*  | ???  | wichtige Features geändert, die Metric hat das aber nicht detektiert |
+| *Prediction aber kein Data Drift*  | ???  | wahrscheinlich Concept Drift, neue Analyse der Situation notwendig |
 |   |   |   |
 
 </textarea>
 </section>
- 
+
+
 <section data-markdown>
 	<textarea data-template>
 ## Analyse des Drifts für Phase I
@@ -1369,6 +1362,19 @@ http://localhost:8888/notebooks/notebooks/analysis.ipynb
 Fallback: https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/analysis.ipynb
 </textarea>
 </section>
+
+<section data-markdown>
+	<textarea data-template>
+### Wahres kausales Modell
+
+Einfluss des Fahrzeugs mit den Jahren deutlich wichtiger geworden 
+
+<img src='img/insurance-causal-model.png' style="height: 300px;">
+
+Kann man in der Realität nicht wissen, muss man modellieren
+</textarea>
+</section>
+
 
 <section data-markdown class="fragments">
 ## Ausblick: Was kann man sonst noch monitoren?
@@ -1456,9 +1462,12 @@ https://docs.seldon.io/projects/alibi-detect/en/stable/ad/methods.html
   * Wenn nicht, warum sollten wir dann eine überhaupt eine Prognose machen?
 * Unsere GT wird mehr und mehr gute Fahrer haben
   * Zumindest ist das unsere Hoffnung (sonst hätte die Prognose nicht geklappt)
-* Falls nicht
+* Falls nicht (False Negative, Type II Fehler)
   * haben Menschen gelernt, unser System auszutricksen?
   * "Dann versichert eben meine Tochter den Wagen"
+* Haben wir gute Fahrer aus verstehen nicht versichert (False Positive, Type I Fehler)
+  * Möglichkeit: *epsilon-greedy* meistens der Vorhersage glauben, aber manchmal (epsilon) auch einen Fahrer mit schlechter Prognose versichern 
+  * Vorhersage mit allen Wahrscheinlichkeiten geht in unsere Datenbank ein
 
 https://twitter.com/ChristophMolnar/status/1569644089724764160
 </textarea>
