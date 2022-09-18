@@ -882,15 +882,23 @@ in der dritten Phase wird die Lösung in Betrieb genommen
 </textarea>
 	</section>
 
+  <section data-markdown>
+    <textarea data-template>
+  ### Wie kann man ML in Produktion bringen?
+  
+  <img src="img/mlops/Micro-ML.png">
+  </textarea>
+  </section>
+    
 	<section data-markdown class="hands-on">
 		<textarea data-template>
 ## Hands-On IIIa - Produktionsumgebung
 
-1. Im Ordner `app` ist eine Server-Anwendung vorbereitet
+1. Im Ordner `app` setzen wir den Rating Service komplett mit Adapter um
 1. In `app.py` ist ein einfacher Flask Server implementiert
 1. Der Server wird bereits über Docker compose gestartet
 1. Checken, ob der Service läuft: http://localhost:8080/ping
-1. http://localhost:8000/client.html macht einen einfachen Requests
+1. Über http://localhost:8000/client.html simulieren wir den orchestrierenden/nutzenden Service und machen einfache Requests
 1. in `app/client.html` Werte anpassen
    * auf dich als Fahrer
    * außerhalb des gültigen Bereichs des Models 
@@ -912,6 +920,7 @@ in der dritten Phase wird die Lösung in Betrieb genommen
 1. Passe sie deinen Vorstellungen an und probiere das Modell wieder über den Client aus
 </textarea>
 	</section>
+
 
 <section data-markdown>
     <textarea data-template>
