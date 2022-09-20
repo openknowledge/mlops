@@ -34,6 +34,7 @@ warum das so wichtig ist und wie man eine passende Maßnahme ableitet
 * Notebooks starten und ausführen
   * http://localhost:8888/notebooks/notebooks/exploration.ipynb
   * http://localhost:8888/notebooks/notebooks/analysis.ipynb
+* Terminal/Bash im Notebook Server aufmachen
 
 ## Ablauf
 

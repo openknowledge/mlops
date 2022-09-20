@@ -79,7 +79,8 @@ def main(sleep_timeout: int, host: str = 'localhost') -> None:
 
         print(f"Wait {sleep_timeout} seconds till the next try.")
         time.sleep(sleep_timeout)
-
+        if idx == 5000:
+            input("Soll es weiter gehen?")
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(
