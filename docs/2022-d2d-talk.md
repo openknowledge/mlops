@@ -27,18 +27,18 @@ warum das so wichtig ist und wie man eine passende Maßnahme ableitet
 
 ## Vorbereitung
 
+* https://miro.com/app/board/uXjVPV9IB0U=/
 * Stift einsatzbereit (geladen)
-* Notebook vorbereiten:
-  * conda activate mlops-workshop-d2d
-  * jupyter notebook
-  * analysis notebook ansehen
 * Installation einmal platt machen: `docker compose down --volumes --rmi all`
 * Und wieder hoch fahren dabei alles neu bauen und alle images neu ziehen: `docker compose up --build`
+* Notebooks starten und ausführen
+  * http://localhost:8888/notebooks/notebooks/exploration.ipynb
+  * http://localhost:8888/notebooks/notebooks/analysis.ipynb
 
 ## Ablauf
 
 ### Phase 0
-1. Ablauf: https://miro.com/app/board/uXjVPWwLbm8=/?share_link_id=448518887103
+1. Ablauf: https://miro.com/app/board/uXjVPV9IB0U=/
 1. Problemstellung: innovative Kfz-Versicherungsgesellschaft
 
 ### Phase I  
@@ -80,9 +80,8 @@ warum das so wichtig ist und wie man eine passende Maßnahme ableitet
   1. Wir sollten neu trainieren: zurück zu Phase II 
   1. `(mlops-workshop-d2d) olli@DESKTOP-BEN73DP:~/mlops-data2day/scripts$ ./train.py -d ../data/month-12.csv -m classifier`
   1. Neues Modell erfüllt nicht mehr unsere Anforderungen: zurück zu Phase I
-    1. http://localhost:8888/notebooks/notebooks/analysis.ipynb
-    1. Anforderungen ändern?
-    1. Modell tunen?
-  1. analysis notebook
+     1. http://localhost:8888/notebooks/notebooks/analysis.ipynb
+     1. Anforderungen ändern?
+     1. Modell tunen?
 
 ### Zusammenfassung
