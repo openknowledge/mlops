@@ -37,7 +37,7 @@ What process should be followed and what tasks need to be performed at each step
 ## Ablauf
 
 ### Phase 0
-1. Ablauf: https://miro.com/app/board/uXjVPV9IB0U=/
+1. Ablauf: https://miro.com/app/board/uXjVPU_-X2I=/
 1. Problemstellung: innovative Kfz-Versicherungsgesellschaft
 
 ### Phase I  
