@@ -16,12 +16,6 @@ In this talk I will argue that tools alone can not solve MLOps,
 since the awareness of the challenges both for data science and software development as a combination need to be addressed first.
 What process should be followed and what tasks need to be performed at each step is the main topic of this talk.
 
-## TODO
-* Auf Englisch übersetzen
-* Tools noch weniger
-* Demo und Story wie gehabt
-
-
 ## Vorbereitung
 
 * Nochmal vergägenwärtigen
