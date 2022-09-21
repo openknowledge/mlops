@@ -28,6 +28,8 @@ warum das so wichtig ist und wie man eine passende Maßnahme ableitet
 ## Vorbereitung
 
 * https://miro.com/app/board/uXjVPV9IB0U=/
+* OK Seite auf
+* State of ML Tools: https://twitter.com/adamlaiacano/status/1458124198166122503
 * Stift einsatzbereit (geladen)
 * Installation einmal platt machen: `docker compose down --volumes --rmi all`
 * Und wieder hoch fahren dabei alles neu bauen und alle images neu ziehen: `docker compose up --build`
