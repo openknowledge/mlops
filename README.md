@@ -9,7 +9,7 @@ For this workshop you will need [Docker](https://docs.docker.com/get-docker/) an
 To build the application Docker image and start the application container,  as well as Prometheus and Grafana together, run the following command (from the root of this repo):
 
 ``` sh
-docker-compose up
+docker compose up
 ```
 
 *If you see errors it may be because you still have the previous version of the application running and therefore might be using the same port as you are now trying to access with Docker. Or the ports interfere with local installations. A local Grafana installation probably runs on port 3000 as a service.*
