@@ -24,7 +24,7 @@ COPY entrypoint.sh /entrypoint.sh
 RUN conda init bash
 RUN mkdir /data
 RUN chmod +x /entrypoint.sh
-RUN echo 'conda activate mlops-workshop-d2d' >> /root/.bashrc
+RUN echo 'conda activate mlops-workshop' >> /root/.bashrc
 WORKDIR /data
 CMD ["/entrypoint.sh"]
 

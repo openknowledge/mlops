@@ -33,7 +33,7 @@ $ conda env create -f environment-m1.yml
 Either way you need to activate the environment after installation:
 
 ```
-$ conda activate mlops-workshop-d2d
+$ conda activate mlops-workshop
 ```
 
 ### Monitoring Drift

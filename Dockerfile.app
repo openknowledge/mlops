@@ -17,7 +17,7 @@ conda env create -f environment.yml
 EOT
 
 RUN conda init bash
-RUN echo 'conda activate mlops-workshop-d2d' >> /root/.bashrc
+RUN echo 'conda activate mlops-workshop' >> /root/.bashrc
 
 COPY ./app /python_server
 COPY ./lib /lib

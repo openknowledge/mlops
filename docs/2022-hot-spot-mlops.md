@@ -24,7 +24,7 @@ What process should be followed and what tasks need to be performed at each step
   * 2: low risk
 * Ablauf ausdrucken
 * https://miro.com/app/board/uXjVPU_-X2I=/
-  * Übersetzen auf Deutsch
+  * Übersetzen auf Englisch
 * OK Seite auf
 * Stift einsatzbereit (geladen)
 * Installation einmal platt machen: `docker compose down --volumes --rmi all`
