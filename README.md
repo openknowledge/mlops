@@ -1,4 +1,4 @@
-# ML Ops Data2Day
+# MLOps Workshop / Showcase
 
 ### Docker
 
