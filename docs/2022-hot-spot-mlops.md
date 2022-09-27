@@ -2,6 +2,29 @@
 
 Talk: 45 Minuten
 
+## Hot Spot MLOps - Experiences in engineering AI-enabled systems
+
+https://www.linkedin.com/events/hotspotmlops-experiencesinengin6950049203809079296/about/
+
+fortiss cordially invites you in cooperation with the Technical University of Munich (TUM) and the Software Engineering Research Lab Sweden (SERL) to our first Hot Spot workshop.
+
+We feature invited talks given by our industry partners and focus on discussing contemporary practices and experienced challenges along the development of AI-enabled software systems and on the topic of MLOps.
+
+YouTube link: https://youtu.be/IoRgfrYJpjc
+
+Preliminary program:
+13:00 - 13:15 Welcome by Johannes Kroß (fortiss), Daniel Mendez (BTH & fortiss) and Alexander Pretschner (TUM & fortiss)
+
+13:15 - 14:00 “Operationalizing a responsible approach to AI” by Courtney Bowman (Palantir)
+
+14:00 - 14:45 “MLOps - concepts, not tools” by Oliver Zeigermann (open knowledge GmbH)
+
+15:15 - 16:00 “How much data do we need? Predicting Deep Learning model performance and training data sizes” by Jelena Frtunikj (Argo AI)
+
+16:00 - 16:45 “Contemporary challenges in the engineering of ML-enabled systems - an experience report” by Mustafa K. Isik (Amazon Web Services)
+
+16:45 - 17:00 Closing summary
+
 ## Abstract
 
 MlOps - concepts, not tools
