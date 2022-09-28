@@ -71,7 +71,7 @@ def main(data_path: str, model_path: str) -> None:
     assert y_pred_probas.mean() > 0.7
     assert y_pred_probas.max() > 0.99
     logging.info(
-        f"Certainty distribution of outputs is within expected bounds")
+        f"Certainty distribution of outputs is within expected bounds (0.4, 0.7, 0.99)")
 
 
 if __name__ == "__main__":
