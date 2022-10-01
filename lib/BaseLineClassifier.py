@@ -16,10 +16,10 @@ class ClassifierBase:
 
 class BaseLineClassifier(ClassifierBase):
     def predict_single(self, x):
-        training, age, emergency_breaking, braking_distance, power, miles = x
-        return self.predict_from_values(training, age, emergency_breaking, braking_distance, power, miles)
+        training, age, emergency_braking, braking_distance, power, miles = x
+        return self.predict_from_values(training, age, emergency_braking, braking_distance, power, miles)
 
-    def predict_from_values(self, training, age, emergency_breaking, braking_distance, power, miles):
+    def predict_from_values(self, training, age, emergency_braking, braking_distance, power, miles):
         if training: 
             return LOW_RISK
         if age < 30:
@@ -29,7 +29,7 @@ class BaseLineClassifier(ClassifierBase):
                 return MEDIUM_RISK
         if age > 50:
             return HIGH_RISK
-        if emergency_breaking:
+        if emergency_braking:
             return LOW_RISK
         if miles > 50:
             return HIGH_RISK

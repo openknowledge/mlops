@@ -94,7 +94,7 @@ What process should be followed and what tasks need to be performed at each step
   1. Interpretation
       1. Leute werden immer Älter, das passiert aber langsam (age)
       1. Es wird immer weniger Auto gefahren, Leute steigen um auf die Bahn und öffentliche Verkehrsmittel (miles)
-      1. Die Sicherheit der Autos wird immer besser und der Einfluss der individuellen Fahrleistung wird verringert (emergency_breaking, pred) 
+      1. Die Sicherheit der Autos wird immer besser und der Einfluss der individuellen Fahrleistung wird verringert (emergency_braking, pred) 
   1. Optional, wenn noch genug Zeit: Grafana Alarm dazu bauen    
   1. Letztlich bekommen wir GT rein von Daten, die 2 Jahre alt sind
   1. `(mlops-workshop-d2d) olli@DESKTOP-BEN73DP:~/mlops-data2day/scripts$ ./validate.py -d ../data/month-12.csv -m classifier`

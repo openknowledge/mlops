@@ -97,7 +97,7 @@ datasets:
     column_mapping:
       categorical_features:
         - training
-        - emergency_breaking
+        - emergency_braking
       numerical_features:
         - age
         - braking_distance

@@ -35,14 +35,14 @@ def ping():
 def do_predict():
     training = request.json['training']
     age = request.json['age']
-    emergency_breaking = request.json['emergency_breaking']
+    emergency_braking = request.json['emergency_braking']
     braking_distance = request.json['braking_distance']
     power = request.json['power']
     miles = request.json['miles']
 
     try:
         predicted_category, probabilities, source = predict(
-            training, age, emergency_breaking, braking_distance, power, miles)
+            training, age, emergency_braking, braking_distance, power, miles)
 
         response = {
             'category': predicted_category,
@@ -54,7 +54,7 @@ def do_predict():
             'in': {
                 'training': training,
                 'age': age,
-                'emergency_breaking': emergency_breaking,
+                'emergency_braking': emergency_braking,
                 'braking_distance': braking_distance,
                 'power': power,
                 'miles': miles

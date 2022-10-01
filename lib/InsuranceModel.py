@@ -23,11 +23,11 @@ class InsuranceModel:
             self.model = tf.saved_model.load(model_path)
         return self.model
 
-    def check_range(self, training, age, emergency_breaking, braking_distance, power, miles):
+    def check_range(self, training, age, emergency_braking, braking_distance, power, miles):
         valid = age in self.age_range and power in self.power_range
         return valid
 
-    def predict(self, training, age, emergency_breaking, braking_distance, power, miles):
+    def predict(self, training, age, emergency_braking, braking_distance, power, miles):
         """Predicts probabilities and category
 
         Returns:
@@ -35,6 +35,6 @@ class InsuranceModel:
             int: predicted category
         """
 
-        X = [[training, age, emergency_breaking, braking_distance, power, miles]]
+        X = [[training, age, emergency_braking, braking_distance, power, miles]]
         probas = self.model.predict(X, verbose=0)[0]
         return probas

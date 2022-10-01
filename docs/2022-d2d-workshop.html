@@ -315,7 +315,7 @@ Orchestrierung hier händisch, es geht um das Konzept und welches Tool das richt
 	  1. wir simulieren 3 Jahre Betrieb mit
          1. Leute werden immer Älter, das passiert aber langsam (age)
 	     1. Es wird immer weniger Auto gefahren, Leute steigen um auf die Bahn und öffentliche Verkehrsmittel (miles)
-	     1. Die Sicherheit der Autos wird immer besser und der Einfluss der individuellen Fahrleistung wird verringert (emergency_breaking, pred) 
+	     1. Die Sicherheit der Autos wird immer besser und der Einfluss der individuellen Fahrleistung wird verringert (emergency_braking, pred) 
    1. `(mlops-workshop-d2d) olli@DESKTOP-BEN73DP:~/mlops-data2day$ ./scripts/example_run_request.py` 
    1. `http://localhost:8085/metrics`
    1. `http://localhost:3000/d/U54hsxv7k/evidently-data-drift-dashboard?orgId=1&refresh=5s`
@@ -613,7 +613,7 @@ Das sollte bei dir laufen
   * *training*: 0/1, hat der Fahrer ein Fahrertraining absolviert
   *	*age*: Alter des Fahrers in Jahren
 * Fahrzeug  
-  *	*emergency_breaking* (sic!): 0/1, hat das Fahrzeug ein Notbremssystem 
+  *	*emergency_braking* (sic!): 0/1, hat das Fahrzeug ein Notbremssystem 
   *	*braking_distance*: Bremsweg aus Tempo 100
   * *power*: Leistung in KW
 *	*miles*: Jährliche Fahrleistung in Meilen
@@ -1160,7 +1160,7 @@ https://de.wikipedia.org/wiki/P-Wert
 * als Ersatzmetrik nehmen wir Feature drift
   * miles: extremer Drift
   * age: signifikanter Drift
-  * emergency_breaking: signifikanter Drift
+  * emergency_braking: signifikanter Drift
 
   </textarea>
 </section>
@@ -1188,7 +1188,7 @@ https://de.wikipedia.org/wiki/P-Wert
   
 1. Leute werden immer Älter, das passiert aber langsam (age)
 1. Es wird immer weniger Auto gefahren, Leute steigen um auf die Bahn und öffentliche Verkehrsmittel (miles)
-1. Die Sicherheit der Autos wird immer besser und der Einfluss der individuellen Fahrleistung wird verringert (emergency_breaking, pred) 
+1. Die Sicherheit der Autos wird immer besser und der Einfluss der individuellen Fahrleistung wird verringert (emergency_braking, pred) 
  
 </textarea>
 </section>

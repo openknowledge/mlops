@@ -19,10 +19,10 @@ baseline_model = BaseLineClassifier()
 
 data_logger = logging.getLogger('DataLogger')
 
-def predict(training, age, emergency_breaking, braking_distance, power, miles):
+def predict(training, age, emergency_braking, braking_distance, power, miles):
     probas = None
-    if insurance_model.check_range(training, age, emergency_breaking, braking_distance, power, miles):
-        probas = insurance_model.predict(training, age, emergency_breaking, braking_distance, power, miles)
+    if insurance_model.check_range(training, age, emergency_braking, braking_distance, power, miles):
+        probas = insurance_model.predict(training, age, emergency_braking, braking_distance, power, miles)
         if probas.max() < MIN_PROBA_THRESHOLD:
             probas = None
             data_logger.warning(f'ML model probability {probas.max()} too low - falling back to baseline model')
@@ -35,6 +35,6 @@ def predict(training, age, emergency_breaking, braking_distance, power, miles):
         data_logger.warning('Input out of range for ML model - falling back to baseline model')
         source = 'baseline - out of range'
     if probas is None:
-        result = baseline_model.predict_from_values(training, age, emergency_breaking, braking_distance, power, miles)
+        result = baseline_model.predict_from_values(training, age, emergency_braking, braking_distance, power, miles)
         probas = tf.keras.utils.to_categorical(result, num_classes=3).tolist()
     return int(result), probas, source
