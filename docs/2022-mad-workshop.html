@@ -26,7 +26,15 @@
 <!-- 
 https://mad-summit.de/fundamentals/mlops-wo-machine-learning-auf-softwareentwicklung-trifft/
 
+MLOps – wo Machine Learning auf Softwareentwicklung trifft
 
+Machine Learning kann sowohl mit dem Ziel des Erkenntnisgewinns als auch mit dem Ziel einer Vorhersage betrieben werden.
+Während Erkenntnisgewinne eher im Bereich Data Science oder Statistik angesiedelt sind, kann eine Vorhersage auch wie
+ein klassisches Stück Business-Logik eingesetzt werden. In diesem Bereich der Vorhersagen gibt es viele Überschneidungen
+mit klassischer Softwareentwicklung und der DevOps-Bewegung, allerdings auch einige Besonderheiten.
+
+In diesem Workshop sehen wir uns unabhängig von der Programmiersprache den Bereich des Machine Learnings durch die
+Brille der Softwareentwicklung an.
 -->
 
 <section data-markdown class="todo">
@@ -130,27 +138,27 @@ _Bei Problemen den Nachbar oder Tobias und Olli fragen_
 
 			<section data-markdown>
 				<textarea data-template>
-# MLOps mit Python
+# MLOps – wo Machine Learning auf Softwareentwicklung trifft
 
-data2day 2022, https://www.data2day.de/veranstaltung-15183-0-mlops-mit-python.html
+MAD 2022, https://mad-summit.de/fundamentals/mlops-wo-machine-learning-auf-softwareentwicklung-trifft/
 
-Tobias Kurzydym / tobias.kurzydym@openknowledge.de
+Hanna Lüschow / hanna.lueschow@openknowledge.de
 
 Oliver Zeigermann / oliver.zeigermann@openknowledge.de
 
-Folien: https://bit.ly/d2d-2022-mlops
+Folien: https://bit.ly/mad-2022-mlops
     </textarea>
 			</section>
 
 <section data-markdown>
   <textarea data-template>
-### Wer ist Tobias
+### Wer ist Hanna
 
-<img src='img/tobias_kurzydym.png'>
+<img src='img/Hanna-Lueschow-6.jpg'>
 
 <p>
-<a target="_blank" href="mailto:tobias.kurzydym@openknowledge.de">Tobias Kurzydym</a>:
-Dev
+<a target="_blank" href="mailto:hanna.lueschow@openknowledge.de">Hanna Lüschow</a>:
+Dev@OPEN KNOWLEDGE
 </p>    
 </textarea>
 </section>
@@ -163,7 +171,7 @@ Dev
 
 <p>
 <a target="_blank" href="mailto:oliver.zeigermann@openknowledge.de">Oliver Zeigermann</a>:
-ML@OpenKnowledge
+ML@OPEN KNOWLEDGE
 </p>    
 </textarea>
 </section>
@@ -182,13 +190,44 @@ ML@OpenKnowledge
 		<textarea data-template>
 # Agenda
 
-* Grundlagen MLOps, Unser Beispiel
-* Ein lauffähiges ML System
-* Betrieb
-* Abschluss / Rückblick
+1. Unsere Story aus der Vogelperspektive
 
 </textarea>
 	</section>
+
+	<section data-markdown>
+		<textarea data-template>
+# Story
+
+1. Wir sind CTO einer Kfz-Versicherung und wollen anhand von Risiko versichern
+1. Gute Fahrer sollen bessere Konditionen bekommen
+1. Das erfordert die Vorhersage des Risikos anhand von ausgewählten Kriterien
+1. Wir gehen davon aus, dass wir das tatsächliche Risiko eines Versicherten erst nach einem Jahr realistisch bewerten können
+
+</textarea>
+	</section>
+
+
+  <section data-markdown style="font-size: xx-large;" class="hands-on">
+    <textarea data-template>
+## Hands-On 1 - Exploration gemeinsam durchgehen
+
+* Neuronales Netzwerk mit TensorFlow
+* 3 Hidden Layers, 100 Neuronen pro Layer
+* 1500 Datensätze insgesamt
+* Training auf allen 6 Features
+* Test/Validation auf 300 Datensätzen
+* Training auf 1200 Datensätze
+* Normalisierung auf Trainingsdatensätzen
+* Accuracy Training/Test > 85%
+
+Aus Docker: http://localhost:8888/notebooks/notebooks/exploration.ipynb
+<br>
+Colab Fallback (falls die Installation noch läuft): https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/exploration.ipynb
+
+  </textarea>
+  </section>  
+
 
 	<section data-markdown>
 		<textarea data-template>
