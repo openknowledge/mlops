@@ -37,7 +37,7 @@ In diesem Workshop sehen wir uns unabhängig von der Programmiersprache den Bere
 Brille der Softwareentwicklung an.
 -->
 
-<section data-markdown class="todo">
+<!-- <section data-markdown class="todo">
 	<textarea data-template>
 ### Erkenntnisse nach Fortiss Hotspot MLOps
 
@@ -55,27 +55,9 @@ Brille der Softwareentwicklung an.
   1. Dann Details
   </textarea>
 </section>
+ -->
 
-<section data-markdown class="todo">
-	<textarea data-template>
-### Warum Drift detektieren?
--     
-  </textarea>
-</section>
-
-<section data-markdown class="todo">
-	<textarea data-template>
-### Übung
-
-* Welches Modell bringen wir in Prod
-* 80% ist Minimum
-* Weitere Modelle basteln lassen die dafür die Grundlage bilden
-</textarea>
-</section>
-
-
-
-<section data-markdown class="todo">
+<!-- <section data-markdown class="todo">
 	<textarea data-template>
 ### Bias / Fairness
 
@@ -99,18 +81,7 @@ Brille der Softwareentwicklung an.
 </textarea>
 </section>
 
-<section data-markdown class="todo">
-	<textarea data-template>
-### Range Check
-
-* Limit of Range Check
-  * Triangle
-  * Blob
-* Outlier Detection  
-</textarea>
-</section>
-
-
+ -->
 <section data-markdown class="preparation">
 	<textarea data-template>
 ### Vorbereitung
@@ -124,18 +95,6 @@ Brille der Softwareentwicklung an.
 </textarea>
 </section>
 `
-<section data-markdown style="font-size: x-large;">
-	<textarea data-template>
-### Bevor es los geht
-
-1. WLAN: XXX
-1. Diese Folien: XXX (erste Folie ist aus Versehen leer, einmal vor und zurück)
-1. Miro für gemeinsame Arbeit: https://miro.com/app/board/uXjVPWwLbm8=/?share_link_id=484469168010
-
-_Bei Problemen den Nachbar oder Tobias und Olli fragen_
-</textarea>
-</section>
-
 			<section data-markdown>
 				<textarea data-template>
 # MLOps – wo Machine Learning auf Softwareentwicklung trifft
@@ -150,6 +109,14 @@ Folien: https://bit.ly/mad-2022-mlops
     </textarea>
 			</section>
 
+  <section data-markdown class="todo">
+    <textarea data-template>
+* Übungszettel erstellen
+  * mindestens einen pro Team
+
+    </textarea>
+  </section>
+            
 <section data-markdown>
   <textarea data-template>
 ### Wer ist Hanna
@@ -191,221 +158,48 @@ ML Architekt@OPEN KNOWLEDGE
 # Agenda
 
 1. Unsere Story aus der Vogelperspektive
+1. Unser Fallbeispiel und Datenbasis
+1. Phase I: Exploration
+1. Phase II: Professionalisierung
+1. Phase III: Betrieb
 
 </textarea>
 	</section>
-
-	<section data-markdown>
-		<textarea data-template>
-https://miro.com/app/board/uXjVPPE7mCg=/?share_link_id=578607942
-
-</textarea>
-	</section>
-
-
-  <section data-markdown style="font-size: xx-large;" class="hands-on">
-    <textarea data-template>
-## Hands-On 1 - Exploration gemeinsam durchgehen
-
-* Neuronales Netzwerk mit TensorFlow
-* 3 Hidden Layers, 100 Neuronen pro Layer
-* 1500 Datensätze insgesamt
-* Training auf allen 6 Features
-* Test/Validation auf 300 Datensätzen
-* Training auf 1200 Datensätze
-* Normalisierung auf Trainingsdatensätzen
-* Accuracy Training/Test > 85%
-
-Aus Docker: http://localhost:8888/notebooks/notebooks/exploration.ipynb
-<br>
-Colab Fallback (falls die Installation noch läuft): https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/exploration.ipynb
-
-  </textarea>
-  </section>  
-
 
 	<section data-markdown>
 		<textarea data-template>
 # Agenda
 
-* _Grundlagen MLOps, Unser Beispiel_
-* Ein lauffähiges ML System
-* Betrieb
-* Abschluss / Rückblick
+1. *Unsere Story aus der Vogelperspektive*
+1. Unser Fallbeispiel und Datenbasis
+1. Phase I: Exploration
+1. Phase II: Professionalisierung
+1. Phase III: Betrieb
 
 </textarea>
 	</section>
 
-  <section data-markdown>
-    <textarea data-template>
-  ### MLOps
-  
-  * KI ist keine Magie
-  * KI ist eher "künftig Informatik"
-  * Machine Learning is die zur Zeit wichtigste Technik im Bereich KI
-  * Machine Learning ist eine alternative Art, Software zu entwickeln
-  * Software soll in Produktion gebracht und dort gehalten werden 
-  * Daher sollten wir die bekannten Techniken der Software Entwicklung auf Machine Learning anwenden
-  
-  </textarea>
-  </section>
-  
- <section data-markdown>
-  <textarea data-template>
-### Machine Learning Anwendungen brauchen Wartung
+	<section data-markdown>
+		<textarea data-template>
+### Unsere Story aus der Vogelperspektive
 
-<img src='img/verfall-1.PNG'>
-
-Das gilt nicht nur für ML Anwendungen, aber bei diesen ist es offensichtlicher
-</textarea>
-</section>
-
-<section data-markdown>
-  <textarea data-template>
-### Machine Learning Anwendungen brauchen Wartung
-
-<img src='img/verfall-2.PNG'>
-
-Das gilt nicht nur für ML Anwendungen, aber bei diesen ist es offensichtlicher
-</textarea>
-</section>
-
-<section data-markdown>
-	<textarea data-template>
-### Realistischer als mir lieb ist
-
-By far, the most accurate representation of machine learning pipelines in the real world 🍿 😀
-
-https://twitter.com/bindureddy/status/1552073812157403136
-</textarea>
-</section>
-
-<section data-markdown>
-	<textarea data-template>
-
-Honestly: sometimes I feel defeated because ML observability is so hard. All facets are hard -- detecting, diagnosing, reacting to bugs. We don't have realtime ground truth labels (except recsys) so we don't know asap when performance goes down. Lots of $$ left on the table (1/6)
-
-https://twitter.com/sh_reya/status/1539420163480489984? 
-</textarea>
-</section>
-
-
-<section data-markdown>
-	<textarea data-template>
-### Typische Werkzeuge für Workflows und Orchestrierung
-
-* Java, allgemein: https://www.jenkins.io/
-* TensorFlow, Tfx: https://www.tensorflow.org/tfx
-  * https://www.tensorflow.org/tfx/guide/beam_orchestrator
-  * https://www.tensorflow.org/tfx/guide/airflow
-  * https://www.tensorflow.org/tfx/guide/kubeflow
-* Schießen wie Pilze aus dem Boden
-
-	</textarea>
-</section>
-
-<section data-markdown>
-	<textarea data-template>
-### Große Dateien versionieren
-
-Sinnvoll für Trainingsdaten und Modell 
-
-* git lfs: https://git-lfs.github.com/
-* DVC: https://dvc.org/
-	</textarea>
-</section>
-
-<section data-markdown>
-### MLOps Is a Mess But That's to be Expected
-
-* MLOps today is in a very messy state with regards to tooling, practices, and standards. 
-* However, this is to be expected given that we are still in the early phases of broader enterprise machine learning adoption. 
-* As this transformation continues over the coming years, expect the dust to settle while ML-driven value becomes more widespread.
-
-https://www.mihaileric.com/posts/mlops-is-a-mess/
-</section>
-		
-	
-<section data-markdown>
-    <textarea data-template>
-## Die Tool-Landschaft ist divers und meist (noch) Inhouse
-
-<img src='img/mlops/mltools-ih.jpg' style="height: 400px;">
-
-<small>
-
-* https://towardsdatascience.com/lessons-on-ml-platforms-from-netflix-doordash-spotify-and-more-f455400115c7
-* Diskussion: 
-  * https://twitter.com/adamlaiacano/status/1458124198166122503
-  * https://twitter.com/rahulj51/status/1455431014671699971
-
-</small>
+https://miro.com/app/board/uXjVPPE7mCg=/?share_link_id=578607942
 
 </textarea>
-    </section>
+	</section>
 
-<section data-markdown class="fragments">
-### Ansatz des Workshops
+	<section data-markdown>
+		<textarea data-template>
+# Agenda
 
-* Der Bereich MLOps ist bisher weder im Bereich Framework noch konzeptionell standardisiert
-* Wir spezialisieren uns nicht auf eine Art der Workflow Ausführung
-* Für diesen Workshop sind wir selbst der Orchestrator und führen die einzelnen Schritte händisch aus
-
-</section>
-
-<section data-markdown>
-  <textarea data-template>
-### Was ist Docker?
-
-* Einheitliche, leichtgewichtige Form der Virtualisierung
-* Es werden Images gebaut, die die benötigte Software beinhalten und diese werden in einem Container ausgeführt
-* Container isolieren die Software von der Umgebung und sind unabhängig von der Infrastruktur
-* "docker compose" lässt uns mehrere Container gleichzeitig starten
-
-<img src='img/docker-vm-vergleich.png'  style="height: 250px;">
-
-https://www.docker.com/resources/what-container/
-
-  </textarea>
-
-</section>
-
-<section data-markdown style="font-size: large;" class="hands-on">
-	<textarea data-template>
-## Hands-On 0 - Docker Installation überprüfen oder herstellen
-
-Helft bitte euren Nachbarn, falls eure Installation schon läuft
-
-1. Wir empfehlen: arbeitet zusammen mit euren direkten Nachbarn
-1. Stellt sicher, dass zumindest einer eurer Rechner eine lauffähige Installation hat 
-1. Sagt kurz Hallo
-1. Installieren (falls noch nicht passiert)
-   1. Git : https://git-scm.com/downloads
-   1. Docker: https://docs.docker.com/get-docker/
-1. Projekt klonen
-   * https://github.com/openknowledge/mlops-data2day
-   * `git clone git@github.com:openknowledge/mlops-data2day.git`
-1. Docker images starten
-   * Im Projekt-Verzeichnis: `docker compose up`
-   * Wir brauchen die Ports: 8000, 8080, 9090, 8085, 8888, 8889, 9090, 3000
-   * Das kann (gerade bei überlastetem Netz) lange dauern
-   * sobald das Docker-Kommando abgesetzt ist können wir weiter im Stoff
-   * Zwingend brauchen wir die Services erst in Hands-On IIb 
-1. Nachdem Docker alle Container gestartet hat überprüfen, dass Jupyter erreichbar ist: http://localhost:8888/   
+1. Unsere Story aus der Vogelperspektive
+1. *Unser Fallbeispiel und Datenbasis*
+1. Phase I: Exploration
+1. Phase II: Professionalisierung
+1. Phase III: Betrieb
 
 </textarea>
-</section>
-
-<section data-markdown>
-	<textarea data-template>
-### Übersicht Container
-
-<img src="img/containers-desktop.png">
-
-Das sollte bei dir laufen
-</textarea>
-</section>
-
+	</section>
 
 <section data-markdown>
 	<textarea data-template>
@@ -419,8 +213,8 @@ Das sollte bei dir laufen
 	<textarea data-template>
 ### Unser Beispiel: Vorhersage von Risiken
 
-* Wir sind CTO einer hochinnovativen Kfz-Versicherungsgesellschaft
-* Anders als andere Versicherungsgesellschaften bestimmen wir den Tarif anhand der geschätzen Anzahl von Unfällen pro Kunde
+* Wir sind CTO einer hoch innovativen Kfz-Versicherungsgesellschaft
+* Anders als andere Versicherungsgesellschaften bestimmen wir den Tarif anhand der geschätzten Anzahl von Unfällen pro Kunde
 * Zielsetzung: Wie viele Unfälle werden die potenziellen Kunden haben?
 
 <img src='img/pixabay/accident-151668_1280.png' style="height: 230px">
@@ -433,22 +227,13 @@ Das sollte bei dir laufen
   * *training*: 0/1, hat der Fahrer ein Fahrertraining absolviert
   *	*age*: Alter des Fahrers in Jahren
 * Fahrzeug  
-  *	*emergency_braking* (sic!): 0/1, hat das Fahrzeug ein Notbremssystem 
+  *	*emergency_braking*: 0/1, hat das Fahrzeug ein Notbremssystem 
   *	*braking_distance*: Bremsweg aus Tempo 100
   * *power*: Leistung in KW
 *	*miles*: Jährliche Fahrleistung in Meilen
 * Das wollen wir vorhersagen
   *	*risk*: Unfallrisiko, nach unten und nach oben offen, kann negativ sein
   *	*group* / *group_name*:	Einteilung in Gruppe anhand des Risikos
-</section>
-
-<section data-markdown>
-	<textarea data-template>
-## Daten entstehen über die Zeit
-
-Die Ground Truth (GT) kommt verzögert und kann sich über die Zeit noch verändern
-
-</textarea>
 </section>
 
 <section data-markdown>
@@ -464,13 +249,14 @@ Die Ground Truth (GT) kommt verzögert und kann sich über die Zeit noch veränd
 
 
 <section data-markdown>
-	<textarea data-template>
+  <textarea data-template>
 # Agenda
 
-* Grundlagen MLOps, Unser Beispiel
-* _Ein lauffähiges ML System_
-* Betrieb
-* Abschluss / Rückblick
+1. Unsere Story aus der Vogelperspektive
+1. Unser Fallbeispiel und Datenbasis
+1. *Phase I: Exploration*
+1. Phase II: Professionalisierung
+1. Phase III: Betrieb
 
 </textarea>
 </section>
@@ -499,22 +285,41 @@ funktionsfähiges Modell entwickelt.
 
 	</section>
 
-  <section data-markdown style="font-size: xx-large;" class="hands-on">
+  <section data-markdown class="todo">
     <textarea data-template>
-## Hands-On 1 - Exploration gemeinsam durchgehen
+### Rahmenbedingungen und Anforderungen aufzählen wie im Überblick
 
-* Neuronales Netzwerk mit TensorFlow
-* 3 Hidden Layers, 100 Neuronen pro Layer
-* 1500 Datensätze insgesamt
-* Training auf allen 6 Features
-* Test/Validation auf 300 Datensätzen
-* Training auf 1200 Datensätze
-* Normalisierung auf Trainingsdatensätzen
-* Accuracy Training/Test > 85%
 
-Aus Docker: http://localhost:8888/notebooks/notebooks/exploration.ipynb
-<br>
-Colab Fallback (falls die Installation noch läuft): https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/exploration.ipynb
+  </textarea>
+  </section>  
+
+  <section data-markdown class="todo">
+    <textarea data-template>
+### Mögliche ML Modelle wie in Issue 6 aufzählen
+
+  </textarea>
+  </section>  
+
+  <section data-markdown class="todo">
+    <textarea data-template>
+  ### Übung
+  
+  * Welches Modell bringen wir in Prod
+  * 80% ist Minimum
+  * Weitere Modelle basteln lassen die dafür die Grundlage bilden
+  </textarea>
+  </section>
+  
+  
+  
+  <section data-markdown class="hands-on todo">
+    <textarea data-template>
+## Übung I - Welches Modell bringen wir in Produktion?
+
+* Wir haben unterschiedliche Modelle mit unterschiedlichen Eigenschaften
+* Welcher Ansatz passt am ehesten?
+* Welche Kompromisse gehst du ein?
+
 
   </textarea>
   </section>  
@@ -541,6 +346,19 @@ Colab Fallback (falls die Installation noch läuft): https://colab.research.goog
   * Wir kopieren alles, auch die Teile, die die beiden Notebooks größtenteils unverändert teilen
   * Solange wir aber nicht wissen was die relevant gemeinsamen Teile sind müssen wir damit weiter machen
 * welcher Ansatz mehr Liebe verdient wird erst am Ende dieser Phase klar
+</textarea>
+	</section>
+
+  <section data-markdown>
+		<textarea data-template>
+# Agenda
+
+1. Unsere Story aus der Vogelperspektive
+1. Unser Fallbeispiel und Datenbasis
+1. Phase I: Exploration
+1. *Phase II: Professionalisierung*
+1. Phase III: Betrieb
+
 </textarea>
 	</section>
 
@@ -608,9 +426,9 @@ https://www.redhat.com/en/topics/devops/what-is-ci-cd
 </textarea>
 </section>
  -->
-<section data-markdown class="hands-on">
+<section data-markdown class="hands-on todo">
 	<textarea data-template>
-## Hands-On IIa - wie wollen wir das Modell validieren?
+## Übung II - wie wollen wir das Modell validieren?
 
 * bei automatisiertem Training können wir ein erfolgreiches Training nicht mehr manuell überwachen
 * wie könnten automatisierte Tests auf dem Modell aussehen?
@@ -620,37 +438,16 @@ https://www.redhat.com/en/topics/devops/what-is-ci-cd
 </textarea>
 </section>
 
-<section data-markdown class="hands-on" style="font-size: x-large;">
-	<textarea data-template>
-## Hands-On IIb - Scripte, manuelles CI/CD
-
-_Wir führen unsere Pipeline aus und sehen uns gemeinsam die Scripte an_
-
-1. Öffne ein Terminal aus deinem Notebook Server heraus (New->Terminal)
-1. `cd scripts`
-1. Modell trainieren: `./train.py -d ../data/reference.csv -m classifier`
-   <!-- * Windows: `python train.py -d ..\data\reference.csv -m classifier` -->
-1. Modell validieren: `./validate.py -d ../data/reference.csv -m classifier`
-   <!-- * Windows: `python validate.py -d ..\data\reference.csv -m classifier` -->
-1. Deploy: Modell in `/model` Ordner schieben
-
-*Aufgabe*
-1. Sieh dir die Scripte über die IDE oder den Notebook Server an
-1. Welche Validierungen werden verwendet?
-1. Passe ggf. die Werte an, sodass alle Scripte durchlaufen
-1. Ergänz das Validation Script mit euren Validierungen, wenn sie einfach umzusetzen sind
-</textarea>
-</section>
-
-
 <section data-markdown>
-	<textarea data-template>
+  <textarea data-template>
 # Agenda
 
-* Grundlagen MLOps, Unser Beispiel
-* Ein lauffähiges ML System
-* _Betrieb / Monitoring_
-* Abschluss / Rückblick
+1. Unsere Story aus der Vogelperspektive
+1. Unser Fallbeispiel und Datenbasis
+1. Phase I: Exploration
+1. Phase II: Professionalisierung
+1. *Phase III: Betrieb*
+1. Abschluss / Rückblick
 
 </textarea>
 </section>
@@ -666,7 +463,6 @@ https://twitter.com/karpathy/status/1486215976559398915
 
 </textarea>
 </section>
-
 
 	<section data-markdown class="fragments">
 ### Phase III: Produktion / Betrieb
@@ -705,40 +501,52 @@ in der dritten Phase wird die Lösung in Betrieb genommen
     <textarea data-template>
   ### Wie kann man ML in Produktion bringen?
   
-  <img src="img/mlops/Micro-ML.png">
+  <img src="img/Typical_Deployment_of_a_Machine_Learning_Service.jpg">
   </textarea>
   </section>
     
-	<section data-markdown class="hands-on">
+	<section data-markdown class="hands-on todo">
 		<textarea data-template>
-## Hands-On IIIa - Produktionsumgebung
-
-1. Im Ordner `app` setzen wir den Rating Service komplett mit Adapter um
-1. In `app.py` ist ein einfacher Flask Server implementiert
-1. Der Server wird bereits über Docker compose gestartet
-1. Checken, ob der Service läuft: http://localhost:8080/ping
-1. Über http://localhost:8000/client.html simulieren wir den orchestrierenden/nutzenden Service und machen einfache Requests
-1. in `app/client.html` Werte anpassen
-   * auf dich als Fahrer
-   * außerhalb des gültigen Bereichs des Models 
-</textarea>
-	</section>
-
-  	<section data-markdown class="hands-on">
-		<textarea data-template>
-## Hands-On IIIb - Grenzen des Modells
+## Übung III - Die Grenzen des Modells
 
 *Diskussion*
 * Sollten wir unser Modell für jede Anfrage verwenden?
 * Sollten wir alle gültigen Vorhersagen nutzen?
 
-*Code*
-1. `app/app.py` und `app/model_prediction.py` enthalten den Server Code
-1. Sieh dir an, wie entschieden wird, ob das ML Modell genommen wird
-1. Findest du die Bedingungen sinnvoll?
-1. Passe sie deinen Vorstellungen an und probiere das Modell wieder über den Client aus
+* was würdest du im Adapter tun?
+* welche Anfragen würdest du nicht zum Modell weiterleiten?
+* was würdest du stattdessen tun?
+* beantworte dieselben Fragen für die Antwort des Modells
+* Welche Gefahren siehst du im Allgemeinen?
+
 </textarea>
 	</section>
+
+  <section data-markdown class="todo">
+    <textarea data-template>
+  ### Range Check
+  
+  * Limit of Range Check
+    * Triangle
+    * Blob
+  * Outlier Detection  
+  </textarea>
+  </section>
+  
+  <section data-markdown>
+  <textarea data-template>
+# Agenda
+
+1. Unsere Story aus der Vogelperspektive
+1. Unser Fallbeispiel und Datenbasis
+1. Phase I: Exploration
+1. Phase II: Professionalisierung
+1. Phase III: Betrieb
+1. *Phase III: Monitoring*
+1. Abschluss / Rückblick
+
+</textarea>
+</section>
 
 
 <section data-markdown>
@@ -782,43 +590,6 @@ https://docs.evidentlyai.com/integrations/evidently-and-grafana
 </section>
 
 <section data-markdown>
-### Wir setzen einen eigenen Monitoring-Server auf
-
-* Basiert auf Prometheus, Grafana und Evidently
-* Code basiert auf https://github.com/evidentlyai/evidently/tree/main/examples/integrations/grafana_monitoring_service
-* Nicht direkt Teil des eigentlichen Prod-Servers
-* Zusätzliche Requests werden gegen den Monitoring-Server gemacht
-* Requests über die Zeit verteilt werden simuliert
-</section>
-	
-<section data-markdown>
-### Prometheus
-
-Metric Server
-
-* https://prometheus.io/
-* https://prometheus.io/docs/prometheus/latest/getting_started/
-  * https://prometheus.io/download/
-
-</section>
-
-<section data-markdown>
-### Grafana
-
-Visualisierung mit Dashboards
-	
-https://play.grafana.org/
-</section>
-
-<section data-markdown>
-### Evidently
-
-ML Performance Monitoring
-	
-https://evidentlyai.com/
-</section>
-
-<section data-markdown>
 	<textarea data-template>
 ### Drift-Erkennung mit Prometheus, Evidently und Grafana
 
@@ -833,13 +604,8 @@ https://docs.evidentlyai.com/reports/data-drift
 ### Wie erkennen wir Drift?
 
 * Es wird ein Statistischer Test auf den Eingabe-Daten ausgeführt
-* Unsere Features sind numerisch und kategorisch
-  * in `metrics_app/config.yaml` festgelegt
 * Die Anfragen in Production werden verglichen mit Referenz-Datensatz, den wir zum Training benutzt haben (`datasets/insurance`)
 * Evidently sucht als Default eine passende Metrik aus, es muss also nicht unser Problem sein
-* Man kann aber auch von Hand konfigurieren, sowohl Test als auch Parameter
-  * https://docs.evidentlyai.com/user-guide/customization/options-for-statistical-tests
-  * https://docs.evidentlyai.com/user-guide/customization/options-for-data-target-drift
 
 https://docs.evidentlyai.com/reports/data-drift
 
@@ -917,19 +683,6 @@ https://de.wikipedia.org/wiki/P-Wert
 </textarea>
 </section> -->
 
-	<section data-markdown class="hands-on">
-		<textarea data-template>
-## Hands-On IV - Monitoring und Sinn daraus machen
-
-### Teil I: Services checken 
-
-* Monitoring App, Metrics aus Evidently: http://localhost:8085/metrics
-* Prometheus: http://localhost:9090
-* Grafana: http://localhost:3000
-
-</textarea>
-	</section>
-
   <section data-markdown>
     <textarea data-template>
 ### Unsere Zeitreise beginnt
@@ -945,24 +698,6 @@ https://de.wikipedia.org/wiki/P-Wert
 * insgesamt 36 Monate, 54.000 Datensätze
   </textarea>
 </section>
-
-	<section data-markdown class="hands-on">
-		<textarea data-template>
-## Hands-On IV - Monitoring und Sinn daraus machen
-
-### Teil II: Request simulieren
-
-1. Einloggen in Grafana: http://localhost:3000
-   1. admin/admin
-1. Öffne ein Terminal aus deinem Notebook Server heraus (New->Terminal) oder nutze dein bestehendes
-1. Mit `./scripts/example_run_request.py -e evidently_service` Anfragen simulieren
-1. Das Dashboard `Evidently Data Drift Dashboard` aufrufen
-1. Darin den Datensatz `insurance` auswählen (dies kann eine Minute dauern)
-1. Stelle sicher, dass sich das Dashboard aktualisiert
-1. Was beobachtest du? Welche Features driften? Wie kann man das erklären?
-
-</textarea>
-	</section>
 
   <section data-markdown>
   <textarea data-template>
@@ -1005,6 +740,30 @@ https://de.wikipedia.org/wiki/P-Wert
 </section>
 
 <section data-markdown>
+	<textarea data-template>
+## Analyse des Drifts
+
+https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/analysis.ipynb
+</textarea>
+</section>
+
+
+<section data-markdown class="hands-on todo">
+  <textarea data-template>
+## Übung IV - Was sagt uns der Drift
+
+Wir wissen nun, dass entscheidende Features gedriftet sind, aber was ist die Interpretation
+
+* Die Welt scheint sich weiter entwickelt zu haben
+* welche Szenarien machen für dich Sinn?
+* Was deckt sich mit dem gemessenen Drift?
+* Gibt es mehr als eine plausible Interpretation?
+
+</textarea>
+</section>  
+
+
+<section data-markdown>
 ### Drift braucht Interpretation
   
 1. Leute werden immer Älter, das passiert aber langsam (age)
@@ -1014,26 +773,6 @@ https://de.wikipedia.org/wiki/P-Wert
 </textarea>
 </section>
 
-	<section data-markdown class="hands-on">
-		<textarea data-template>
-## Hands-On IV - Monitoring und Sinn daraus machen
-
-### Teil III: Einen passenden Grafana Alert erzeugen
-
-1. Leg einen Ordner an, in dem du später deinen Alert speicherst: http://localhost:3000/dashboards/folder/new
-1. Einen Alert kann man in Grafana als Regel oder direkt auf einem Dashboard einrichten
-1. Editiere im Dashboard das Panel für den Anteil driftender Features
-1. Im Alert Tab kannst die Bedingung für den Alarm festlegen
-1. Nach dem Speichern sollte ein farbiges Herz auf dem Panel den Status angeben
-1. Stelle sicher, dass dein Alert ausgelöst wird
-1. Im Alerting Menu können Contact Points zur Benachrichtigung angelegt werden
-
-https://grafana.com/docs/grafana/latest/alerting/
-
-</textarea>
-	</section>
-
-
     <section data-markdown>
   <textarea data-template>
 ### Drift über die Zeit
@@ -1041,19 +780,6 @@ https://grafana.com/docs/grafana/latest/alerting/
 <img src="img/tw-drift-3.png">
   </textarea>
 </section>
-
-<section data-markdown>
-	<textarea data-template>
-### Erster Test: Müssen wir auf den Drift reagieren?
-
-*Es könnte sein, dass unser Modell flexibel genug ist*  
-
-1. `./validate.py -d ../data/month-12.csv -m classifier`
-1. Performance des Modells ist tatsächlich stark zurück gegangen
-1. Unsere Interpretation des Drifts war eine gute Ersatzmetrik
-</textarea>
-</section>
-
 
 <section data-markdown>
 ## Maßnahmen bei Drift
@@ -1130,16 +856,19 @@ https://grafana.com/docs/grafana/latest/alerting/
 </section>
 
 <section data-markdown>
-	<textarea data-template>
+  <textarea data-template>
 # Agenda
 
-* Grundlagen MLOps, Unser Beispiel
-* Ein lauffähiges ML System
-* Betrieb
-* _Abschluss / Rückblick_
+1. Unsere Story aus der Vogelperspektive
+1. Unser Fallbeispiel und Datenbasis
+1. Phase I: Exploration
+1. Phase II: Professionalisierung
+1. Phase III: Betrieb
+1. *Abschluss / Rückblick*
 
 </textarea>
 </section>
+
 
 <section data-markdown>
 	<textarea data-template>
@@ -1179,16 +908,6 @@ Wenn die Welt sich ändert, ist Drift zu erwarten und damit ok
 </textarea>
 </section>
 
-
-<section data-markdown>
-	<textarea data-template>
-## Analyse des Drifts für Phase I
-
-http://localhost:8888/notebooks/notebooks/analysis.ipynb
-
-Fallback: https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/analysis.ipynb
-</textarea>
-</section>
 
 <section data-markdown>
 	<textarea data-template>
@@ -1317,16 +1036,16 @@ https://twitter.com/ChristophMolnar/status/1569644089724764160
 			<textarea data-template>
 # Vielen Dank
 
-MLOps mit Python
+MLOps – wo Machine Learning auf Softwareentwicklung trifft
 
 Bleibt gern im Kontakt
+
+Hanna Lüschow / hanna.lueschow@openknowledge.de
 
 Oliver Zeigermann / oliver.zeigermann@openknowledge.de
 https://www.linkedin.com/in/oliver-zeigermann-34989773/
 https://twitter.com/DJCordhose
 
-Tobias Kurzydym / tobias.kurzydym@openknowledge.de
-https://twitter.com/tkurzydym
 </textarea>
 		</section>
 
