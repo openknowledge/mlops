@@ -603,38 +603,226 @@ https://docs.evidentlyai.com/reports/data-drift
 	<textarea data-template>
 ### Wie erkennen wir Drift?
 
-* Es wird ein Statistischer Test auf den Eingabe-Daten ausgeführt
+* Es wird ein statistischer Test auf den Eingabe-Daten ausgeführt
 * Die Anfragen in Production werden verglichen mit Referenz-Datensatz, den wir zum Training benutzt haben (`datasets/insurance`)
+* Drift size vs. Drift ratio
 * Evidently sucht als Default eine passende Metrik aus, es muss also nicht unser Problem sein
 
 https://docs.evidentlyai.com/reports/data-drift
+
+... aber ein bisschen Hintergrundwissen kann nicht schaden
+
+
 
 </textarea>
 </section>
 
 <section data-markdown>
 	<textarea data-template>
-## Welcher Statistischer Test / welche Metrik?
+## Was sollte man alles über Statistik wissen?
+
+* Daten können kategorisch und numerisch sein (theoretisch gibt es auch noch ordinal)
+* Mean/Median/Standardabweichung
+* was zu Verteilungen
+* Histogramme (Binning)
+* Konfidenzintervalle
+* Ausreißer
+
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### P-Werte
+
+* die statistische Verteilung der jeweiligen Features
+* weicht diese im Prod signifikant von der Verteilung im Training ab? (Nullhypothese: nein)
+* diese Abweichung wird über eine Metrik berechnet
+* es kommt eine Konfidenz heraus, ob die Nullhypothese stimmt
+* unter 5% Konfidenz geht man von einer Abweichung aus <span style="font-size: 0.95rem">(1% oder 0.1% auch möglich)</span>
+* das bedeutet, dass es eine 5% Wahrscheinlichkeit gibt, dass die Verteilungen eigentlich doch gleich sind, man es aber nur gerade schlechte Beispiele sieht
+
+https://de.wikipedia.org/wiki/P-Wert
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Welcher statistischer Test / welche Metrik?
 
 es gibt leider nicht den einen passenden Test
 
 * manche passen nur gut für kleine (< 1000) Datenmengen
   * unsere Datenmengen sind größer als 1000
-* manche können nicht nur auf numerischen sondern kategorischen Daten arbeiten
+* manche können nicht nur auf numerischen, sondern kategorischen Daten arbeiten
   * wir brauchen beides
 * manche sind zwischen 0 und 1 normiert
   * das ist uns eher egal
-* unsere Metriken
-  * Wasserstein Metrik für numerische Daten
-  * Jensen-Shannon Distanz für kategorische Daten  
+</textarea>
+</section>
 
+<section data-markdown>
+	<textarea data-template>
+### Speziell für Drift-Erkennung in Frage kommende Tests
+
+* Kolmogorov-Smirnov-Test
+* Population Stability Index
+* Kullback-Leibler-Divergenz
+* Jensen-Shannon-Distanz  
+* Wasserstein-Distanz
+  
 https://evidentlyai.com/blog/data-drift-detection-large-datasets
 </textarea>
 </section>
 
 <section data-markdown>
 	<textarea data-template>
-### Die Wasserstein-Metrik
+### Kolmogorov-Smirnov-Test
+
+* numerisch
+* wird gerne als Default gewählt, kann bei großen Datenmengen aber zu empfindlich sein
+* Vorteil: keine Normalverteilung vorausgesetzt
+* ein 'typischer' statistischer Test mit p als Rückgabewert
+* Nullhypothese: die beiden Verteilungen sind gleich
+* Drift bei p-Wert unter 0.05
+
+*Wann nutzen?* Wenn Drift schnell entdeckt werden muss oder die Datenmengen kleiner ausfallen
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Population Stability Index
+
+* numerisch und kategorisch
+* je höher der Wert, desto stärker der Drift
+  * PSI < 0.1: nicht signifikanter Drift
+  * 0.1 ≤ PSI < 0.3: moderater Drift
+  * PSI ≥ 0.2: signifikanter Drift
+* weniger empfindlich als der KS-Test
+* arbeitet mit Bins, daher unabhängig von der sample size
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mi>P</mi>
+  <mi>S</mi>
+  <mi>I</mi>
+  <mo>=</mo>
+  <mo>&#x2211;<!-- ∑ --></mo>
+  <mrow class="MJX-TeXAtom-ORD">
+
+  </mrow>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.623em" minsize="1.623em">(</mo>
+  </mrow>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.2em" minsize="1.2em">(</mo>
+  </mrow>
+  <mi>A</mi>
+  <mi>c</mi>
+  <mi>t</mi>
+  <mi>u</mi>
+  <mi>a</mi>
+  <mi>l</mi>
+  <mi mathvariant="normal">&#x0025;<!-- % --></mi>
+  <mo>&#x2212;<!-- − --></mo>
+  <mi>E</mi>
+  <mi>x</mi>
+  <mi>p</mi>
+  <mi>e</mi>
+  <mi>c</mi>
+  <mi>t</mi>
+  <mi>e</mi>
+  <mi>d</mi>
+  <mi mathvariant="normal">&#x0025;<!-- % --></mi>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.2em" minsize="1.2em">)</mo>
+  </mrow>
+  <mo>&#x00D7;<!-- × --></mo>
+  <mi>l</mi>
+  <mi>n</mi>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.2em" minsize="1.2em">(</mo>
+  </mrow>
+  <mstyle displaystyle="true" scriptlevel="0">
+    <mfrac>
+      <mrow>
+        <mi>A</mi>
+        <mi>c</mi>
+        <mi>t</mi>
+        <mi>u</mi>
+        <mi>a</mi>
+        <mi>l</mi>
+        <mi mathvariant="normal">&#x0025;<!-- % --></mi>
+      </mrow>
+      <mrow>
+        <mi>E</mi>
+        <mi>x</mi>
+        <mi>p</mi>
+        <mi>e</mi>
+        <mi>c</mi>
+        <mi>t</mi>
+        <mi>e</mi>
+        <mi>d</mi>
+        <mi mathvariant="normal">&#x0025;<!-- % --></mi>
+      </mrow>
+    </mfrac>
+  </mstyle>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.2em" minsize="1.2em">)</mo>
+  </mrow>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.623em" minsize="1.623em">)</mo>
+  </mrow>
+</math>
+
+*Wann nutzen?* Wenn man im Finanzbereich unterwegs ist und/oder 
+wenn bei größeren Datenmengen nur stärkere Veränderungen erkannt werden sollen
+
+https://mwburke.github.io/data%20science/2018/04/29/population-stability-index.html
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Kullback-Leibler-Divergenz
+
+* auch bekannt als relative Entropie
+* numerisch und kategorisch
+* Werte von 0 bis &infin;
+    * je höher der Wert, desto unterschiedlicher die Verteilungen
+* auch hier: Bins &rarr; unabhängig von sample size
+* nicht symmetrisch
+
+*Wann nutzen?* ähnlich zu PSI: bei großen Datensets, wenn nur stärkere Veränderungen entdeckt werden sollen
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Jensen-Shannon-Distanz
+
+* Jensen-Shannon-Distanz ist die Wurzel aus der Divergenz
+* zwischen 0 und 1
+* ab 0.1 gehen wir von einem Drift aus
+* funktioniert auch für kategorische Daten
+* basiert auf KL-Divergenz
+* Histogramme werden verglichen, Größe des Samples daher egal
+* Binning für kategorische Daten offensichtlich
+* Intuition: wie viel Information/Entropie/Überraschung steckt im Unterschied der beiden Verteilungen?
+
+*Wann nutzen?* Auf größeren Datensets (wenn die KL-Divergenz/PSI nicht empfindlich genug sind)
+
+https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence
+https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Wasserstein-Distanz
 
 _Wenn jede Verteilung als ein Haufen von „Erde“ angehäuft auf dem metrischen Raum betrachtet wird, dann beschreibt diese
 Metrik die minimalen „Kosten“ der Umwandlung eines Haufens in den anderen._
@@ -645,43 +833,19 @@ Metrik die minimalen „Kosten“ der Umwandlung eines Haufens in den anderen._
 * ab 0.1 gehen wir von einem Drift aus
 * funktioniert nur für numerische Daten
 
+*Wann nutzen?* Als Kompromiss zwischen KS (zu empfindlich) und PSI/JS (nicht empfindlich genug)
+
 https://de.wikipedia.org/wiki/Wasserstein-Metrik
 </textarea>
 </section>
 
 <section data-markdown>
 	<textarea data-template>
-### Jensen-Shannon Distanz
+## Was gibt es jetzt noch zu bedenken?
 
-* Jensen-Shannon Distanz ist wie Wurzel aus der Divergenz
-* zwischen 0 und 1
-* ab 0.1 gehen wir von einem Drift aus
-* funktioniert auch für kategorische Daten
-* basiert auf Kullback–Leibler Divergenz, relative Entropie
-* Histogramme werden verglichen, Größe des Samples daher egal
-* Binning für kategorische Daten offensichtlich
-* Intuition: wie viel Information/Entropie/Überraschung steckt im Unterschied der beiden Verteilungen?
-
-
-https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence
-https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence
+* Multivariate Feature Drift
 </textarea>
 </section>
-
-<!-- <section data-markdown class="fragments">
-	<textarea data-template>
-### P-Werte
-
-* die statistische Verteilung der jeweiligen Features
-* weicht diese im Prod signifikant von der Verteilung im Training ab?
-* diese Abweichung wird über eine Metrik berechnet
-* es kommt eine Konfidenz heraus, ob die Verteilungen unterschiedlich sind
-* ab (default) 95% Konfidenz geht man von einer Abweichung aus 
-* das bedeutet, dass es eine 5% Wahrscheinlichkeit gibt, dass die Verteilungen eigentlich doch gleich sind, man es aber nur gerade schlechte Beispiele sieht
-
-https://de.wikipedia.org/wiki/P-Wert
-</textarea>
-</section> -->
 
   <section data-markdown>
     <textarea data-template>
