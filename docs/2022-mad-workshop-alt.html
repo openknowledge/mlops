@@ -1,0 +1,1274 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=yes">
+
+	<title>Workshop: MLOps MAD 2022</title>
+
+	<link rel="stylesheet" href="revealjs/reveal.js/dist/reset.css" />
+    <link rel="stylesheet" href="revealjs/reveal.js/dist/reveal.css" />
+    <link rel="stylesheet" href="revealjs/reveal.js/dist/theme/white.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+	<!-- <link rel="stylesheet" href="revealjs/reveal.js/plugin/highlight/monokai.css"> -->
+	<!-- <link rel="stylesheet" href="revealjs/reveal.js/plugin/highlight/zenburn.css"> -->
+    <link rel="stylesheet" href="revealjs/highlight-js-github-theme.css" />
+    <link rel="stylesheet" href="revealjs/styles.css" />
+
+</head>
+
+<body style="background-color: whitesmoke;">
+	<div class="reveal">
+		<div class="slides">
+
+<!-- 
+https://mad-summit.de/fundamentals/mlops-wo-machine-learning-auf-softwareentwicklung-trifft/
+
+MLOps – wo Machine Learning auf Softwareentwicklung trifft
+
+Machine Learning kann sowohl mit dem Ziel des Erkenntnisgewinns als auch mit dem Ziel einer Vorhersage betrieben werden.
+Während Erkenntnisgewinne eher im Bereich Data Science oder Statistik angesiedelt sind, kann eine Vorhersage auch wie
+ein klassisches Stück Business-Logik eingesetzt werden. In diesem Bereich der Vorhersagen gibt es viele Überschneidungen
+mit klassischer Softwareentwicklung und der DevOps-Bewegung, allerdings auch einige Besonderheiten.
+
+In diesem Workshop sehen wir uns unabhängig von der Programmiersprache den Bereich des Machine Learnings durch die
+Brille der Softwareentwicklung an.
+-->
+
+<!-- <section data-markdown class="todo">
+	<textarea data-template>
+### Erkenntnisse nach Fortiss Hotspot MLOps
+
+1. Story klarer kriegen
+  * Drift detektieren bevor man ground truth hat
+  * ODER
+  * Detektieren wann man neue Ground Truth sammeln und neu trainieren sollte
+
+2. Deployment Strategien klären
+  1. Deploy Permanently VS
+  2. Deploy when you need to
+  
+3. In Iterationen vorgehen
+  1. Erst einmal die Story komplett durchgehen
+  1. Dann Details
+  </textarea>
+</section>
+ -->
+
+<!-- <section data-markdown class="todo">
+	<textarea data-template>
+### Bias / Fairness
+
+* Über der Oberfläche
+  * Widersprüchliche Metriken
+  * Accuracy-Fairness-Tradeoff
+  * Bias bereits in Trainingsdaten
+  * Wer entscheidet was Fair ist?
+  * Gruppenbasierte vs individuelle Fairness
+* Unter der Oberfläche
+  * Proxy Variablen (nicht Einkommen oder Alter, sondern PLZ)
+  * Data- oder Concept-Drift
+  * Ist eine algorithmische Lösung möglich und angemessen
+  * Einspruch gegen algorithmische Entscheidung möglich?
+  * Keine Ground-Truth in Production
+  * Datenschutz vs Fairness
+  * Nützt Fairness dem Geschäft?
+  * Beim manuellem Labelling können Labels Weltanschauung in Bias der Annotierenden enthalten
+  * Zementierung bestehender Machtstrukturen
+  * Unmöglichkeit eindeutiger Kategorisierung (z.B. Geschlecht, sexuelle Orientierung)
+</textarea>
+</section>
+
+ -->
+<section data-markdown class="preparation">
+	<textarea data-template>
+### Vorbereitung
+
+* Stift einsatzbereit (geladen)
+* Probelauf Drift Detection
+* Installation einmal platt machen: `docker compose down --volumes --rmi all`
+* Und wieder hoch fahren dabei alles neu bauen und alle images neu ziehen: `docker compose up --build`
+</textarea>
+</section>
+`
+			<section data-markdown>
+				<textarea data-template>
+# MLOps – wo Machine Learning auf Softwareentwicklung trifft
+
+MAD 2022, https://mad-summit.de/fundamentals/mlops-wo-machine-learning-auf-softwareentwicklung-trifft/
+
+Hanna Lüschow / hanna.lueschow@openknowledge.de
+
+Oliver Zeigermann / oliver.zeigermann@openknowledge.de
+
+Folien: https://bit.ly/mad-2022-mlops
+    </textarea>
+			</section>
+
+  <section data-markdown class="todo">
+    <textarea data-template>
+* Übungszettel erstellen
+  * mindestens einen pro Team
+
+    </textarea>
+  </section>
+            
+<section data-markdown>
+  <textarea data-template>
+### Wer ist Hanna
+
+<img src='img/Hanna-Lueschow-6.jpg'>
+
+<p>
+<a target="_blank" href="mailto:hanna.lueschow@openknowledge.de">Hanna Lüschow</a>:
+Dev@OPEN KNOWLEDGE
+</p>    
+</textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+### Wer ist Olli
+
+<img src='img/olli-opa.jpeg'>
+
+<p>
+<a target="_blank" href="mailto:oliver.zeigermann@openknowledge.de">Oliver Zeigermann</a>:
+ML Architekt@OPEN KNOWLEDGE
+</p>    
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Wer seid ihr?
+
+* Was macht ihr?
+* Was wisst ihr schon?
+* Warum seid ihr hier?
+</textarea>
+</section>
+
+
+<section data-markdown>
+  <textarea data-template>
+# Ablauf
+
+1. Unsere Story aus der Vogelperspektive: https://miro.com/app/board/uXjVPPE7mCg=/?share_link_id=578607942
+1. Unser Fallbeispiel und Datenbasis
+1. Phase I: Exploration
+1. Phase II: Professionalisierung
+1. Phase III: Betrieb
+
+</textarea>
+</section>
+
+
+	<section data-markdown>
+		<textarea data-template>
+# Agenda
+
+1. Unsere Story aus der Vogelperspektive
+1. Unser Fallbeispiel und Datenbasis
+1. Phase I: Exploration
+1. Phase II: Professionalisierung
+1. Phase III: Betrieb
+
+</textarea>
+	</section>
+
+	<section data-markdown>
+		<textarea data-template>
+# Agenda
+
+1. *Unsere Story aus der Vogelperspektive*
+1. Unser Fallbeispiel und Datenbasis
+1. Phase I: Exploration
+1. Phase II: Professionalisierung
+1. Phase III: Betrieb
+
+</textarea>
+	</section>
+
+	<section data-markdown>
+		<textarea data-template>
+### Unsere Story aus der Vogelperspektive
+
+https://miro.com/app/board/uXjVPPE7mCg=/?share_link_id=578607942
+
+</textarea>
+	</section>
+
+	<section data-markdown>
+		<textarea data-template>
+# Agenda
+
+1. Unsere Story aus der Vogelperspektive
+1. *Unser Fallbeispiel und Datenbasis*
+1. Phase I: Exploration
+1. Phase II: Professionalisierung
+1. Phase III: Betrieb
+
+</textarea>
+	</section>
+
+<section data-markdown>
+	<textarea data-template>
+
+## Unser Fallbeispiel und Datenbasis
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Unser Beispiel: Vorhersage von Risiken
+
+* Wir sind CTO einer hoch innovativen Kfz-Versicherungsgesellschaft
+* Anders als andere Versicherungsgesellschaften bestimmen wir den Tarif anhand der geschätzten Anzahl von Unfällen pro Kunde
+* Zielsetzung: Wie viele Unfälle werden die potenziellen Kunden haben?
+
+<img src='img/pixabay/accident-151668_1280.png' style="height: 230px">
+</textarea>
+</section>
+
+<section data-markdown>
+### Features
+* Fahrer
+  * *training*: 0/1, hat der Fahrer ein Fahrertraining absolviert
+  *	*age*: Alter des Fahrers in Jahren
+* Fahrzeug  
+  *	*emergency_braking*: 0/1, hat das Fahrzeug ein Notbremssystem 
+  *	*braking_distance*: Bremsweg aus Tempo 100
+  * *power*: Leistung in KW
+*	*miles*: Jährliche Fahrleistung in Meilen
+* Das wollen wir vorhersagen
+  *	*risk*: Unfallrisiko, nach unten und nach oben offen, kann negativ sein
+  *	*group* / *group_name*:	Einteilung in Gruppe anhand des Risikos
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+### Pairplot und Lineare Korrelation
+
+<div class="container">
+  <div class="col">
+    <img src="img/causal-insurance/features.png">
+  </div>
+  <div class="col">
+    <img src="img/causal-insurance/corr.png">
+  </div>
+</div>
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Kausales Modell
+
+<img src='img/causal-insurance/insurance-causal-model.png' style="height: 300px;">
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Daten entstehen über die Zeit
+1. Am Anfang haben wir keine empirischen Daten
+1. Wir bewerten Kunden anhand eines einfachen Regelsystems
+1. Ground Truth kommt verzögert und kann sich über die Zeit noch verändern
+1. Wir sprechen eher von Jahren als Monaten 
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Daten entstehen über die Zeit
+
+Die Ground Truth (GT) kommt verzögert und kann sich über die Zeit noch verändern
+
+<img src="img/drift-v2.png">    
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+  <textarea data-template>
+# Agenda
+
+1. Unsere Story aus der Vogelperspektive
+1. Unser Fallbeispiel und Datenbasis
+1. *Phase I: Exploration*
+1. Phase II: Professionalisierung
+1. Phase III: Betrieb
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Phasen eines ML Projekts
+
+<img src="img/ml-workflow/6.PNG" class="fragment">
+
+</textarea>
+</section>
+
+	<section data-markdown class="fragments">
+### Phase I: Exploration
+
+* in der ersten Phase eines Machine Learning Projekts wird die Anwendungsidee validiert und ein
+funktionsfähiges Modell entwickelt.
+* dabei ist ein schnelles iterieren und ausprobieren von Ideen zentral
+* das Ziel ist *nicht* ein sinnvolles Stück Software
+* Scripting passt hier besser als Programmieren als Ausdruck für die Tätigkeit
+* das Ziel ist eine schnelle Entwicklung
+* Phase 1 endet entweder mit
+  * einem funktionsfähigen Modell mit dem man in Phase II übergeht oder
+  * dem Verwerfen des Ansatzes
+
+	</section>
+
+  <section data-markdown class="todo">
+    <textarea data-template>
+### Rahmenbedingungen und Anforderungen aufzählen wie im Überblick
+
+
+  </textarea>
+  </section>  
+
+  <section data-markdown class="todo">
+    <textarea data-template>
+### Mögliche ML Modelle wie in Issue 6 aufzählen
+
+  </textarea>
+  </section>  
+
+  <section data-markdown class="todo">
+    <textarea data-template>
+  ### Übung
+  
+  * Welches Modell bringen wir in Prod
+  * 80% ist Minimum
+  * Weitere Modelle basteln lassen die dafür die Grundlage bilden
+  </textarea>
+  </section>
+  
+  
+  
+  <section data-markdown class="hands-on todo">
+    <textarea data-template>
+## Übung I - Welches Modell bringen wir in Produktion?
+
+* Wir haben unterschiedliche Modelle mit unterschiedlichen Eigenschaften
+* Welcher Ansatz passt am ehesten?
+* Welche Kompromisse gehst du ein?
+
+
+  </textarea>
+  </section>  
+
+<section data-markdown>
+	<textarea data-template>
+### Exploration hinterlässt gern einen Wust an Notebooks
+
+<img src='img/sketch/notebook-explosion-no-title.png'  style="height: 600px;">
+
+</textarea>
+</section>
+
+	<section data-markdown class="fragments">
+		<textarea data-template>
+### Ist ein Wust an Notebooks ein Problem?
+
+* das ist kein Zeichen von einem unprofessionellen Vorgehen
+* ergibt sich aus der Arbeitsweise und Zielsetzung
+* jeder Experimentator, erprobte ML Ansatz und jede Iteration kann eine neue, komplett entkoppelte Kopie eines Notebooks rechtfertigen
+  * "Das Wichtigste in dieser Phase ist die schnelle Iteration" https://twitter.com/marktenenholtz/status/1488134981985583105
+  * "Machen Sie ein einfaches Experiment nach dem anderen" https://karpathy.github.io/2019/04/25/recipe/
+* natürlich wird dabei teilweise falsch entkoppelt
+  * Wir kopieren alles, auch die Teile, die die beiden Notebooks größtenteils unverändert teilen
+  * Solange wir aber nicht wissen was die relevant gemeinsamen Teile sind müssen wir damit weiter machen
+* welcher Ansatz mehr Liebe verdient wird erst am Ende dieser Phase klar
+</textarea>
+	</section>
+
+  <section data-markdown>
+		<textarea data-template>
+# Agenda
+
+1. Unsere Story aus der Vogelperspektive
+1. Unser Fallbeispiel und Datenbasis
+1. Phase I: Exploration
+1. *Phase II: Professionalisierung*
+1. Phase III: Betrieb
+
+</textarea>
+	</section>
+
+	<section data-markdown class="fragments">
+### Phase II: Professionalisierung
+
+* in der zweiten Phase wird die skizzierte Lösung in ein langlebiges Projekt umgewandelt
+* alle Regeln einer guten Software-Entwicklung gelten von nun an
+* Stabilität und Funktionalität wird gewährleistet
+* Die Rahmenbedingungen der Produktionsumgebung müssen erfüllt werden
+  * Art des Deployments, Sprache, Latenz, Speicher, Bandbreite, etc.
+  * Explainability, Bias / Fairness
+  * Phase II endet entweder mit
+  * reifem Code und Modell mit dem man in Phase III übergeht oder
+  * dem Iterieren zurück in Phase I mit neu gewonnenen Erkenntnissen oder falls Rahmenbedingungen nicht erfüllt werden
+
+	</section>
+
+
+	<section data-markdown>
+		<textarea data-template>
+<img src='img/sketch/ml-dev-prozess.png' style="height: 650px;">
+</textarea>
+	</section>
+
+	<section data-markdown class="fragments">
+		<textarea data-template>
+### Was gehört in Bibliotheken ausgelagert?
+
+* Wir können nicht mit einem Notebook in Produktion gehen
+  * also muss alles was wir in Produktion brauchen aus den Notebooks herausgezogen werden
+* Bestimmte Teile eines Notebooks haben sich als stabil herausgestellt und sollten nicht bei jeder Kopie entkoppelt werden
+* Alles was sich nach Software anfühlt (Klassen, Funktionen, etc.) ist auch Software
+  * diese Teile sollten auch wie solche behandelt werden  
+* Professionalisierung muss oft gut abhängen
+  * Es stellt sich erst langsam heraus, was in ein Modul gehört
+  * erste Version der extrahierten Module ist mit Sicherheit nicht endgültig
+</textarea>
+	</section>
+
+<section data-markdown>
+### Scripte	
+
+* Manche Notebooks werden in Phase II zu Skripten, die eine dünne API um die Module sind. 
+* Können auch in CI/CD eingebaut werden.
+
+</section>
+
+<!-- <section data-markdown>
+	<textarea data-template>
+### CI/CD bei klassischem DevOps
+
+<img src="img/ci-cd-flow-desktop.png" style="height: 100%">
+
+https://www.redhat.com/en/topics/devops/what-is-ci-cd
+
+	</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### DevOps vs MLOps
+
+<img src="img/devops-vs-mlops.png" style="height: 600px">
+</textarea>
+</section>
+ -->
+<section data-markdown class="hands-on todo">
+	<textarea data-template>
+## Übung II - wie wollen wir das Modell validieren?
+
+* bei automatisiertem Training können wir ein erfolgreiches Training nicht mehr manuell überwachen
+* wie könnten automatisierte Tests auf dem Modell aussehen?
+* Diskutiert mit euren Nachbarn und schreibt eure Vorschläge auf
+* Inspiration: https://storage.googleapis.com/pub-tools-public-publication-data/pdf/45742.pdf
+
+</textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+# Agenda
+
+1. Unsere Story aus der Vogelperspektive
+1. Unser Fallbeispiel und Datenbasis
+1. Phase I: Exploration
+1. Phase II: Professionalisierung
+1. *Phase III: Betrieb*
+1. Abschluss / Rückblick
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+<img src='img/everybody-gansta.png' style="height: 600px">
+
+<small>
+
+https://twitter.com/karpathy/status/1486215976559398915
+</small>
+
+</textarea>
+</section>
+
+	<section data-markdown class="fragments">
+### Phase III: Produktion / Betrieb
+
+in der dritten Phase wird die Lösung in Betrieb genommen
+
+* alle Regeln des produktiven Einsatzes von Software gelten auch hier
+* Monitoring hat zusätzliche Herausforderungen
+  * Natur und Verteilung der Anfragen und auch Vorhersagen muss permanent überwacht werden
+* Phase III endet entweder mit
+  * der Abschaltung 
+    * entweder bald weil nutzlos oder
+    * später weil durch neues System ersetzt
+  * dem Iterieren zurück in Phase II mit neu gewonnenen Erkenntnissen
+  * dem Iterieren zurück in Phase I mit neu gewonnenen Erkenntnissen oder einem Neuansatz (häufig ebenfalls ein Zeichen für einen Fehlschlag)
+
+			</section>
+
+	<section data-markdown>
+		<textarea data-template>
+### Nicht aller Code ist für Produktion gedacht		
+
+* Was geht in Produktion
+  * Vorhersage
+  * Monitoring
+
+* Was geht nicht in Produktion
+  * Training
+  * Validierungen
+  * Analytics
+  * Visualisierung
+</textarea>
+	</section>
+
+  <section data-markdown>
+    <textarea data-template>
+  ### Wie kann man ML in Produktion bringen?
+  
+  <img src="img/Typical_Deployment_of_a_Machine_Learning_Service.PNG">
+  </textarea>
+  </section>
+    
+	<section data-markdown class="hands-on todo">
+		<textarea data-template>
+## Übung III - Die Grenzen des Modells
+
+*Diskussion*
+* Sollten wir unser Modell für jede Anfrage verwenden?
+* Sollten wir alle gültigen Vorhersagen nutzen?
+
+* was würdest du im Adapter tun?
+* welche Anfragen würdest du nicht zum Modell weiterleiten?
+* was würdest du stattdessen tun?
+* beantworte dieselben Fragen für die Antwort des Modells
+* Welche Gefahren siehst du im Allgemeinen?
+
+</textarea>
+	</section>
+
+  <section data-markdown class="todo">
+    <textarea data-template>
+  ### Range Check
+  
+  * Limit of Range Check
+    * Triangle
+    * Blob
+  * Outlier Detection  
+  </textarea>
+  </section>
+  
+  <section data-markdown>
+  <textarea data-template>
+# Agenda
+
+1. Unsere Story aus der Vogelperspektive
+1. Unser Fallbeispiel und Datenbasis
+1. Phase I: Exploration
+1. Phase II: Professionalisierung
+1. Phase III: Betrieb
+1. *Phase III: Monitoring*
+1. Abschluss / Rückblick
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+    <textarea data-template>
+### Wir erinnern uns: ML Modelle brauchen permanentes Monitoring und Wartung
+
+<img src='img/verfall-2.PNG'>
+
+</textarea>
+</section>
+
+
+	<section data-markdown class="fragments">
+		<textarea data-template>
+### Woher weiß man, dass man ein neues Modell in Produktion braucht?
+
+1. Schon in der Explorationsphase prüfen wie sich das Modell auf neueren Daten verhält
+   * wie schnell degradiert die Performance?
+   * Mindestens einmal im Jahr, damit man überhaupt noch weiß wie es geht
+1. Wenn die Metrik des Modells nachlässt in Produktion
+   * Dafür braucht man die Ground Truth der Daten aus Produktion
+   * Manchmal bekommt man diese unmittelbar nach der Vorhersage durch die Reaktion eines menschlichen Benutzers
+   * Oft aber auch erst nach nennenswerter Verzögerung 
+1. *Wenn sich die Verteilung der Daten der Anfragen oder Vorhersagen deutlich von denen des Trainings unterscheiden* 
+
+</textarea>
+	</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Monitoring mit Evidently, Prometheus und Grafana
+
+<img src="img/mlops/evidently_grafana_service.png">
+
+<small>https://evidentlyai.com/blog/evidently-and-grafana-ml-monitoring-live-dashboards
+<br>
+https://docs.evidentlyai.com/integrations/evidently-and-grafana
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Drift-Erkennung mit Prometheus, Evidently und Grafana
+
+<img src="img/mlops/grafana-evidently-drift.png">
+
+https://docs.evidentlyai.com/reports/data-drift
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Wie erkennen wir Drift?
+
+* Es wird ein statistischer Test auf den Eingabe-Daten ausgeführt
+* Die Anfragen in Production werden verglichen mit Referenz-Datensatz, den wir zum Training benutzt haben (`datasets/insurance`)
+* Drift size vs. Drift ratio
+* Evidently sucht als Default eine passende Metrik aus, es muss also nicht unser Problem sein
+
+https://docs.evidentlyai.com/reports/data-drift
+
+... aber ein bisschen Hintergrundwissen kann nicht schaden
+
+
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Was sollte man alles über Statistik wissen?
+
+* Daten können kategorisch und numerisch sein (theoretisch gibt es auch noch ordinal)
+* Mean/Median/Standardabweichung
+* was zu Verteilungen
+* Histogramme (Binning)
+* Konfidenzintervalle
+* Ausreißer
+
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### P-Werte
+
+* die statistische Verteilung der jeweiligen Features
+* weicht diese im Prod signifikant von der Verteilung im Training ab? (Nullhypothese: nein)
+* diese Abweichung wird über eine Metrik berechnet
+* es kommt eine Konfidenz heraus, ob die Nullhypothese stimmt
+* unter 5% Konfidenz geht man von einer Abweichung aus <span style="font-size: 0.95rem">(1% oder 0.1% auch möglich)</span>
+* das bedeutet, dass es eine 5% Wahrscheinlichkeit gibt, dass die Verteilungen eigentlich doch gleich sind, man es aber nur gerade schlechte Beispiele sieht
+
+https://de.wikipedia.org/wiki/P-Wert
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Welcher statistischer Test / welche Metrik?
+
+es gibt leider nicht den einen passenden Test
+
+* manche passen nur gut für kleine (< 1000) Datenmengen
+  * unsere Datenmengen sind größer als 1000
+* manche können nicht nur auf numerischen, sondern kategorischen Daten arbeiten
+  * wir brauchen beides
+* manche sind zwischen 0 und 1 normiert
+  * das ist uns eher egal
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Speziell für Drift-Erkennung in Frage kommende Tests
+
+* Kolmogorov-Smirnov-Test
+* Population Stability Index
+* Kullback-Leibler-Divergenz
+* Jensen-Shannon-Distanz  
+* Wasserstein-Distanz
+  
+https://evidentlyai.com/blog/data-drift-detection-large-datasets
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Kolmogorov-Smirnov-Test
+
+* numerisch
+* wird gerne als Default gewählt, kann bei großen Datenmengen aber zu empfindlich sein
+* Vorteil: keine Normalverteilung vorausgesetzt
+* ein 'typischer' statistischer Test mit p als Rückgabewert
+* Nullhypothese: die beiden Verteilungen sind gleich
+* Drift bei p-Wert unter 0.05
+
+*Wann nutzen?* Wenn Drift schnell entdeckt werden muss oder die Datenmengen kleiner ausfallen
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Population Stability Index
+
+* numerisch und kategorisch
+* je höher der Wert, desto stärker der Drift
+  * PSI < 0.1: nicht signifikanter Drift
+  * 0.1 ≤ PSI < 0.3: moderater Drift
+  * PSI ≥ 0.2: signifikanter Drift
+* weniger empfindlich als der KS-Test
+* arbeitet mit Bins, daher unabhängig von der sample size
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mi>P</mi>
+  <mi>S</mi>
+  <mi>I</mi>
+  <mo>=</mo>
+  <mo>&#x2211;<!-- ∑ --></mo>
+  <mrow class="MJX-TeXAtom-ORD">
+
+  </mrow>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.623em" minsize="1.623em">(</mo>
+  </mrow>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.2em" minsize="1.2em">(</mo>
+  </mrow>
+  <mi>A</mi>
+  <mi>c</mi>
+  <mi>t</mi>
+  <mi>u</mi>
+  <mi>a</mi>
+  <mi>l</mi>
+  <mi mathvariant="normal">&#x0025;<!-- % --></mi>
+  <mo>&#x2212;<!-- − --></mo>
+  <mi>E</mi>
+  <mi>x</mi>
+  <mi>p</mi>
+  <mi>e</mi>
+  <mi>c</mi>
+  <mi>t</mi>
+  <mi>e</mi>
+  <mi>d</mi>
+  <mi mathvariant="normal">&#x0025;<!-- % --></mi>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.2em" minsize="1.2em">)</mo>
+  </mrow>
+  <mo>&#x00D7;<!-- × --></mo>
+  <mi>l</mi>
+  <mi>n</mi>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.2em" minsize="1.2em">(</mo>
+  </mrow>
+  <mstyle displaystyle="true" scriptlevel="0">
+    <mfrac>
+      <mrow>
+        <mi>A</mi>
+        <mi>c</mi>
+        <mi>t</mi>
+        <mi>u</mi>
+        <mi>a</mi>
+        <mi>l</mi>
+        <mi mathvariant="normal">&#x0025;<!-- % --></mi>
+      </mrow>
+      <mrow>
+        <mi>E</mi>
+        <mi>x</mi>
+        <mi>p</mi>
+        <mi>e</mi>
+        <mi>c</mi>
+        <mi>t</mi>
+        <mi>e</mi>
+        <mi>d</mi>
+        <mi mathvariant="normal">&#x0025;<!-- % --></mi>
+      </mrow>
+    </mfrac>
+  </mstyle>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.2em" minsize="1.2em">)</mo>
+  </mrow>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.623em" minsize="1.623em">)</mo>
+  </mrow>
+</math>
+
+*Wann nutzen?* Wenn man im Finanzbereich unterwegs ist und/oder 
+wenn bei größeren Datenmengen nur stärkere Veränderungen erkannt werden sollen
+
+https://mwburke.github.io/data%20science/2018/04/29/population-stability-index.html
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Kullback-Leibler-Divergenz
+
+* auch bekannt als relative Entropie
+* numerisch und kategorisch
+* Werte von 0 bis &infin;
+    * je höher der Wert, desto unterschiedlicher die Verteilungen
+* auch hier: Bins &rarr; unabhängig von sample size
+* nicht symmetrisch
+
+*Wann nutzen?* ähnlich zu PSI: bei großen Datensets, wenn nur stärkere Veränderungen entdeckt werden sollen
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Jensen-Shannon-Distanz
+
+* Jensen-Shannon-Distanz ist die Wurzel aus der Divergenz
+* zwischen 0 und 1
+* ab 0.1 gehen wir von einem Drift aus
+* funktioniert auch für kategorische Daten
+* basiert auf KL-Divergenz
+* Histogramme werden verglichen, Größe des Samples daher egal
+* Binning für kategorische Daten offensichtlich
+* Intuition: wie viel Information/Entropie/Überraschung steckt im Unterschied der beiden Verteilungen?
+
+*Wann nutzen?* Auf größeren Datensets (wenn die KL-Divergenz/PSI nicht empfindlich genug sind)
+
+https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence
+https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Wasserstein-Distanz
+
+_Wenn jede Verteilung als ein Haufen von „Erde“ angehäuft auf dem metrischen Raum betrachtet wird, dann beschreibt diese
+Metrik die minimalen „Kosten“ der Umwandlung eines Haufens in den anderen._
+
+* nicht zu sensitiv, zeigt nur größere Veränderungen an
+* normiert in Veränderungen in Standardabweichungen
+* kann (offensichtlich) über 1 gehen
+* ab 0.1 gehen wir von einem Drift aus
+* funktioniert nur für numerische Daten
+
+*Wann nutzen?* Als Kompromiss zwischen KS (zu empfindlich) und PSI/JS (nicht empfindlich genug)
+
+https://de.wikipedia.org/wiki/Wasserstein-Metrik
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Was gibt es jetzt noch zu bedenken?
+
+* Multivariate Feature Drift
+</textarea>
+</section>
+
+  <section data-markdown>
+    <textarea data-template>
+### Unsere Zeitreise beginnt
+</textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+### Produktion simulieren
+
+* wir simulieren 3 Jahre Betrieb
+* jeder Monat hat 1500 Datensätze
+* insgesamt 36 Monate, 54.000 Datensätze
+  </textarea>
+</section>
+
+  <section data-markdown>
+  <textarea data-template>
+### Manche Features driften
+
+<img src="img/feature-drift.png">
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+### Was ist passiert?
+
+* die Performance des Modells degradiert wahrscheinlich
+* aber wir haben erst nach Jahren eine Ground Truth, die uns das anhand der Metrik zeigt
+* als Ersatzmetrik nehmen wir Feature drift
+  * miles: extremer Drift
+  * age: signifikanter Drift
+  * emergency_braking: signifikanter Drift
+
+  </textarea>
+</section>
+
+<section data-markdown>
+## Alarm bei Data Drift
+
+* Verändert sich die Art der Eingabedaten?
+  * Oft ausgedrückt durch die Verteilung der einzelnen Features
+
+* Muss nicht notwendig schlimm sein
+  * Wenn entscheidende Features betroffen sind, kann es ein Problem sein 
+* Alarm anhand von
+  * Wichtigkeit der driftenden Features
+  * Anzahl der driftenden Features
+  * Ausmaß des Drifts
+<!-- * Dafür wichtig
+  * Vernünftige Tests anhand der Metriken
+  * Vernünftige Konfidenzintervalle -->
+
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Analyse des Drifts
+
+https://colab.research.google.com/github/openknowledge/mlops-data2day/blob/main/notebooks/analysis.ipynb
+</textarea>
+</section>
+
+
+<section data-markdown class="hands-on todo">
+  <textarea data-template>
+## Übung IV - Was sagt uns der Drift
+
+Wir wissen nun, dass entscheidende Features gedriftet sind, aber was ist die Interpretation
+
+* Die Welt scheint sich weiter entwickelt zu haben
+* welche Szenarien machen für dich Sinn?
+* Was deckt sich mit dem gemessenen Drift?
+* Gibt es mehr als eine plausible Interpretation?
+
+</textarea>
+</section>  
+
+
+<section data-markdown>
+### Drift braucht Interpretation
+  
+1. Leute werden immer Älter, das passiert aber langsam (age)
+1. Es wird immer weniger Auto gefahren, Leute steigen um auf die Bahn und öffentliche Verkehrsmittel (miles)
+1. Die Sicherheit der Autos wird immer besser und der Einfluss der individuellen Fahrleistung wird verringert (emergency_braking, pred) 
+ 
+</textarea>
+</section>
+
+    <section data-markdown>
+  <textarea data-template>
+### Drift über die Zeit
+
+<img src="img/tw-drift-3.png">
+  </textarea>
+</section>
+
+<section data-markdown>
+## Maßnahmen bei Drift
+
+* *Neue Version des Modells trainieren*
+  * Neue Daten aufnehmen (und labeln)
+  * Neue Features erzeugen
+* Schnelle Maßnahme
+  * Pre-/Post-Processing des Modells neu kalibrieren
+  * Schwellwerte für Anwendung anpassen
+  * Bestimmte Bereiche ausklammern 
+  * Modell Architektur ändern (oder fixen) und neu trainieren
+* Sehr schnelle Maßnahme: Fallback
+  * Manuell
+  * Heuristik / Baseline
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Wir gehen zurück in die Phasen I und II
+
+* hier wird wieder in Notebooks gearbeitet
+* die Bibliotheken werden inkludiert und bei jeder Änderung neu geladen
+* Jupyter Lab bietet eine gemeine Oberfläche für Notebooks und Bibliotheken
+* Eine Kombination von Visual Studio Code und Jupyer Notebooks ist ebenso möglich
+* Rückkehr in Phase I muss nicht radikal sein
+  * wenn Ansatz vergleichbar kann Phase II so erhalten bleiben
+  * neue Ergebnisse fliesen dann iterativ in die Professionalisierung ein
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Rückkehr in Phase II: Wie trainiert man neu/nach/weiter?
+
+<img src="img/mlops/stateful-vs-stateless-v2.png">
+
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Stateful vs Stateless
+
+* Stateless (aka offline)
+  * trainiert das Modell periodisch komplett neu
+  * verhindert "catastrophic forgetting" (https://en.wikipedia.org/wiki/Catastrophic_interference)
+* Stateful (aka online)
+  * trainiert permanent weiter mit kleinen Batches
+  * eine Art des Transfer Learnings
+  * folgt Drifts schnell
+  * erfordert zeitnah neue Datenpaare 
+  * Online Learning for Recommendations at Grubhub: https://arxiv.org/abs/2107.07106
+    * angeblich 45x mal weniger aufwändig als offline
+    * 20% bessere Metric als offline
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Beispiel für Stateless / Offline Training    
+
+1. Wir trainieren weiterhin mit einem einzelnen Monat
+1. Wir könnten auch ältere Daten nehmen, aber durch den Drift scheint der neueste Datensatz am erfolgversprechendsten
+1. `./train.py -d ../data/month-12.csv -m classifier`
+1. Das Training erfüllt unsere Anforderungen nicht mehr
+1. Entweder
+   1. Anforderungen anpassen oder
+   1. Zurück an den Zeichentisch (Phase I), z.B.
+      1. Model tunen
+      1. Andere Features nehmen?
+</textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+# Agenda
+
+1. Unsere Story aus der Vogelperspektive
+1. Unser Fallbeispiel und Datenbasis
+1. Phase I: Exploration
+1. Phase II: Professionalisierung
+1. Phase III: Betrieb
+1. *Abschluss / Rückblick*
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+	<textarea data-template>
+## Offene Fragen / Themen
+  </textarea>
+</section>
+
+
+<section data-markdown>
+	<textarea data-template>
+### Zusammenfassung: Arten von Drift
+
+* _Covariate / Input / Data drift_: Verteilung der Eingabe hat sich geändert
+* _Prior / Label / Prediction drift_: Verteilung der Vorhersage hat sich geändert
+* _Concept / Model drift_: Zusammenhang zwischen Eingabe und Vorhersage hat sich geändert
+
+<img src="https://docs.seldon.io/projects/alibi-detect/en/stable/_images/bg_2d_drift.png" style="height: 100%;">
+
+<small>https://docs.seldon.io/projects/alibi-detect/en/stable/cd/background.html#what-is-drift
+</small>
+</textarea>
+</section>
+
+<section data-markdown style="font-size: x-large;">
+	<textarea data-template>
+## Drift erfordert Interpretation
+
+Wenn die Welt sich ändert, ist Drift zu erwarten und damit ok
+
+|   | Positive Interpretation, keine Maßnahme erforderlich  | Negative Interpretation, Maßnahme erforderlich  |
+|---|---|---|
+| *Data und Prediction Drift*  | wichtige Features haben sich geändert, Modell kommt klar und extrapoliert gut, z.B.: Höheres Alter, mehr Risiko  |  wichtige Features haben sich geändert, Modell extrapoliert nicht sinnvoll |
+| *Data aber kein Prediction Drift*  | keine wichtigen Features geändert, das Modell ist robust genug für den Drift  | wichtige Features geändert, Modell extrapoliert nicht sinnvoll |
+| *Prediction aber kein Data Drift*  | ???  | wahrscheinlich Concept Drift, neue Analyse der Situation notwendig |
+|   |   |   |
+
+</textarea>
+</section>
+
+
+<section data-markdown>
+	<textarea data-template>
+### Wahres kausales Modell
+
+Einfluss des Fahrzeugs mit den Jahren deutlich wichtiger geworden 
+
+<img src='img/insurance-causal-model.png' style="height: 300px;">
+
+Kann man in der Realität nicht wissen, muss man modellieren
+</textarea>
+</section>
+
+
+<section data-markdown class="fragments">
+## Ausblick: Was kann man sonst noch monitoren?
+
+* Qualität der Daten
+  * wie verändern sich fehlende oder falsche Felder
+  * Plausibilität
+* Daten Drift
+  * Verteilung der Eingabedaten
+* Prediction Drift   
+  * Was gibt das Modell aus?
+</section>
+
+<section data-markdown>
+## Datenqualität
+
+* Felder
+  * fehlen
+  * ungültig
+  * falsch / unplausibel / Wertebereich verlassen
+* Features 
+  * konstante (die (meisten) Eingaben haben (fast) denselben Wert)
+  * leere
+  * fast leer
+  * Korrelationen zwischen Features
+</section>
+	
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Ausblick: Was kann man sonst noch machen
+
+* Outlier-Detection
+  * Unser Modell wird nicht extrapolieren können
+  * Werte außerhalb des Trainings-Bereichs werden wahrscheinlich unrealistisch sicher vorhergesagt
+  * Ausreißer müssen ohne Ground Truth entdeckt werden 
+* Adversarial Detection
+  * Bestimmte Eingaben können absichtlich eine grob falsche Vorhersage herbei führen 
+  * Solche Eingaben können erkannt und korrigiert werden
+  * Dazu kann z.B. ein Autoencoder benutzt werden, der die Eingabe korrigiert
+
+
+<small>https://docs.seldon.io/projects/alibi-detect/en/stable/od/methods.html
+<br>
+https://docs.seldon.io/projects/alibi-detect/en/stable/ad/methods.html
+</small>
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Ausblick: Drift Detection für Bilder
+
+* Input Drift mit Histogrammen von Low-Level-Features (HSV): https://towardsdatascience.com/detecting-semantic-drift-within-image-data-6a59a0e768c6
+* Input Drift mit Dimensions-Reduktion: https://docs.seldon.io/projects/alibi-detect/en/stable/examples/cd_ks_cifar10.html 
+* Model Drift durch Vergleich mit destilliertem Modell: https://docs.seldon.io/projects/alibi-detect/en/stable/examples/cd_distillation_cifar10.html 
+* Ein komplettes Beispiel mit Alibi-Detect: https://docs.seldon.io/projects/alibi-detect/en/stable/examples/alibi_detect_deploy.html#4.-Drift-detection-with-Kolmogorov-Smirnov
+* Anomalien in Bildern: https://29a.ch/photo-forensics
+* Drift kann auch auf Text festgestellt werden: https://docs.seldon.io/projects/alibi-detect/en/stable/examples/cd_text_imdb.html
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Ausblick: Wann liegt Ground Truth vor?
+
+*Menschliche Experten können die Ground Truth*
+* *bestimmen* 
+  * sobald ein Mensch die Entscheidungen nachprüft / revidiert
+  * bei einem Proposal-System kann das sehr schnell sein
+  * bei Dunkelverarbeitung sollte dies in regelmäßigen Abständen passieren
+* *nicht bestimmen*
+  * wir müssen Realitäten abwarten
+  * bei Zeitreihen wird auf die nahe Zukunft vorhergesagt, sobald diese Eintritt kann überprüft werden
+  * oft sind solche Realitäten erst nach einiger Zeit wahrnehmbar und unterliegen statistischen Schwankungen (wie bei uns)
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Ausblick: Unsere Vorhersage selbst erzeugt Drift
+
+* Ein Deployment ändert das unsere Rolle von Beobachter zu Akteur
+* Wir versichern nur Leute mit einer guten Risiko Prognose
+  * Wenn nicht, warum sollten wir dann eine überhaupt eine Prognose machen?
+* Unsere GT wird mehr und mehr gute Fahrer haben
+  * Zumindest ist das unsere Hoffnung (sonst hätte die Prognose nicht geklappt)
+* Falls nicht (False Negative, Type II Fehler)
+  * haben Menschen gelernt, unser System auszutricksen?
+  * "Dann versichert eben meine Tochter den Wagen"
+* Haben wir gute Fahrer aus verstehen nicht versichert (False Positive, Type I Fehler)
+  * Möglichkeit: *epsilon-greedy* meistens der Vorhersage glauben, aber manchmal (epsilon) auch einen Fahrer mit schlechter Prognose versichern 
+  * Vorhersage mit allen Wahrscheinlichkeiten geht in unsere Datenbank ein
+
+https://twitter.com/ChristophMolnar/status/1569644089724764160
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+<textarea data-template>
+### Zusammenfassung
+
+1. Machine Learning Projekte können in Phasen gedacht werden
+1. In der ersten Phase macht man möglichst schnelle Experimente
+1. Sollte sich eine Idee als tragfähig erweisen, professionalisiert man die Idee
+1. Dies ist Voraussetzung und Grundlage für Produktion
+1. In Produktion ergeben sich besondere Herausforderung im Bereich Monitoring
+1. Typischerweise müssen Machine Learning Systeme regelmäßig nachtrainiert und gepflegt werden
+</textarea>
+</section>
+
+		<section data-markdown>
+			<textarea data-template>
+# Vielen Dank
+
+MLOps – wo Machine Learning auf Softwareentwicklung trifft
+
+Bleibt gern im Kontakt
+
+Hanna Lüschow / hanna.lueschow@openknowledge.de
+
+Oliver Zeigermann / oliver.zeigermann@openknowledge.de
+https://www.linkedin.com/in/oliver-zeigermann-34989773/
+https://twitter.com/DJCordhose
+
+</textarea>
+		</section>
+
+		</div>
+	</div>
+	<script src="revealjs/reveal.js/dist/reveal.js"></script>
+	<script src="revealjs/reveal.js/plugin/notes/notes.js"></script>
+	<script src="revealjs/reveal.js/plugin/markdown/markdown.js"></script>
+	<script src="revealjs/reveal.js/plugin/highlight/highlight.js"></script>
+	<script src="revealjs/config.js"></script>
+
+
+</body>
+
+</html>

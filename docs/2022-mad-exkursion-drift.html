@@ -1,0 +1,402 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=yes">
+
+	<title>MLOps</title>
+
+	<link rel="stylesheet" href="revealjs/reveal.js/dist/reset.css" />
+    <link rel="stylesheet" href="revealjs/reveal.js/dist/reveal.css" />
+    <link rel="stylesheet" href="revealjs/reveal.js/dist/theme/white.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+	<!-- <link rel="stylesheet" href="revealjs/reveal.js/plugin/highlight/monokai.css"> -->
+	<!-- <link rel="stylesheet" href="revealjs/reveal.js/plugin/highlight/zenburn.css"> -->
+    <link rel="stylesheet" href="revealjs/highlight-js-github-theme.css" />
+    <link rel="stylesheet" href="revealjs/styles.css" />
+
+</head>
+
+<body style="background-color: whitesmoke;">
+	<div class="reveal">
+		<div class="slides">
+
+<section data-markdown>
+    <textarea data-template>
+# Exkursion: Drift
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Wir erinnern uns: ML Modelle brauchen permanentes Monitoring und Wartung
+
+<img src='img/verfall-2.PNG'>
+
+</textarea>
+</section>
+
+
+	<section data-markdown class="fragments">
+		<textarea data-template>
+### Woher weiß man, dass man ein neues Modell in Produktion braucht?
+
+1. Schon in der Explorationsphase prüfen wie sich das Modell auf neueren Daten verhält
+   * wie schnell degradiert die Performance?
+   * Mindestens einmal im Jahr, damit man überhaupt noch weiß wie es geht
+1. Wenn die Metrik des Modells nachlässt in Produktion
+   * Dafür braucht man die Ground Truth der Daten aus Produktion
+   * Manchmal bekommt man diese unmittelbar nach der Vorhersage durch die Reaktion eines menschlichen Benutzers
+   * Oft aber auch erst nach nennenswerter Verzögerung 
+1. *Wenn sich die Verteilung der Daten der Anfragen oder Vorhersagen deutlich von denen des Trainings unterscheiden* 
+
+</textarea>
+	</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Monitoring mit Evidently, Prometheus und Grafana
+
+<img src="img/mlops/evidently_grafana_service.png">
+
+<small>https://evidentlyai.com/blog/evidently-and-grafana-ml-monitoring-live-dashboards
+<br>
+https://docs.evidentlyai.com/integrations/evidently-and-grafana
+</small>
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Drift-Erkennung mit Prometheus, Evidently und Grafana
+
+<img src="img/mlops/grafana-evidently-drift.png">
+
+https://docs.evidentlyai.com/reports/data-drift
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Wie erkennen wir Drift?
+
+* Es wird ein statistischer Test auf den Eingabe-Daten ausgeführt
+* Die Anfragen in Production werden verglichen mit Referenz-Datensatz, den wir zum Training benutzt haben (`datasets/insurance`)
+* Drift size vs. Drift ratio
+* Evidently sucht als Default eine passende Metrik aus, es muss also nicht unser Problem sein
+
+https://docs.evidentlyai.com/reports/data-drift
+
+... aber ein bisschen Hintergrundwissen kann nicht schaden
+
+
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Was sollte man alles über Statistik wissen?
+
+* Daten können kategorisch und numerisch sein (theoretisch gibt es auch noch ordinal)
+* Mean/Median/Standardabweichung
+* was zu Verteilungen
+* Histogramme (Binning)
+* Konfidenzintervalle
+* Ausreißer
+
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### P-Werte
+
+* die statistische Verteilung der jeweiligen Features
+* weicht diese im Prod signifikant von der Verteilung im Training ab? (Nullhypothese: nein)
+* diese Abweichung wird über eine Metrik berechnet
+* es kommt eine Konfidenz heraus, ob die Nullhypothese stimmt
+* unter 5% Konfidenz geht man von einer Abweichung aus <span style="font-size: 0.95rem">(1% oder 0.1% auch möglich)</span>
+* das bedeutet, dass es eine 5% Wahrscheinlichkeit gibt, dass die Verteilungen eigentlich doch gleich sind, man es aber nur gerade schlechte Beispiele sieht
+
+https://de.wikipedia.org/wiki/P-Wert
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Welcher statistischer Test / welche Metrik?
+
+es gibt leider nicht den einen passenden Test
+
+* manche passen nur gut für kleine (< 1000) Datenmengen
+  * unsere Datenmengen sind größer als 1000
+* manche können nicht nur auf numerischen, sondern kategorischen Daten arbeiten
+  * wir brauchen beides
+* manche sind zwischen 0 und 1 normiert
+  * das ist uns eher egal
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Speziell für Drift-Erkennung in Frage kommende Tests
+
+* Kolmogorov-Smirnov-Test
+* Population Stability Index
+* Kullback-Leibler-Divergenz
+* Jensen-Shannon-Distanz  
+* Wasserstein-Distanz
+  
+https://evidentlyai.com/blog/data-drift-detection-large-datasets
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Kolmogorov-Smirnov-Test
+
+* numerisch
+* wird gerne als Default gewählt, kann bei großen Datenmengen aber zu empfindlich sein
+* Vorteil: keine Normalverteilung vorausgesetzt
+* ein 'typischer' statistischer Test mit p als Rückgabewert
+* Nullhypothese: die beiden Verteilungen sind gleich
+* Drift bei p-Wert unter 0.05
+
+*Wann nutzen?* Wenn Drift schnell entdeckt werden muss oder die Datenmengen kleiner ausfallen
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Population Stability Index
+
+* numerisch und kategorisch
+* je höher der Wert, desto stärker der Drift
+  * PSI < 0.1: nicht signifikanter Drift
+  * 0.1 ≤ PSI < 0.3: moderater Drift
+  * PSI ≥ 0.2: signifikanter Drift
+* weniger empfindlich als der KS-Test
+* arbeitet mit Bins, daher unabhängig von der sample size
+
+<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
+  <mi>P</mi>
+  <mi>S</mi>
+  <mi>I</mi>
+  <mo>=</mo>
+  <mo>&#x2211;<!-- ∑ --></mo>
+  <mrow class="MJX-TeXAtom-ORD">
+
+  </mrow>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.623em" minsize="1.623em">(</mo>
+  </mrow>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.2em" minsize="1.2em">(</mo>
+  </mrow>
+  <mi>A</mi>
+  <mi>c</mi>
+  <mi>t</mi>
+  <mi>u</mi>
+  <mi>a</mi>
+  <mi>l</mi>
+  <mi mathvariant="normal">&#x0025;<!-- % --></mi>
+  <mo>&#x2212;<!-- − --></mo>
+  <mi>E</mi>
+  <mi>x</mi>
+  <mi>p</mi>
+  <mi>e</mi>
+  <mi>c</mi>
+  <mi>t</mi>
+  <mi>e</mi>
+  <mi>d</mi>
+  <mi mathvariant="normal">&#x0025;<!-- % --></mi>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.2em" minsize="1.2em">)</mo>
+  </mrow>
+  <mo>&#x00D7;<!-- × --></mo>
+  <mi>l</mi>
+  <mi>n</mi>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.2em" minsize="1.2em">(</mo>
+  </mrow>
+  <mstyle displaystyle="true" scriptlevel="0">
+    <mfrac>
+      <mrow>
+        <mi>A</mi>
+        <mi>c</mi>
+        <mi>t</mi>
+        <mi>u</mi>
+        <mi>a</mi>
+        <mi>l</mi>
+        <mi mathvariant="normal">&#x0025;<!-- % --></mi>
+      </mrow>
+      <mrow>
+        <mi>E</mi>
+        <mi>x</mi>
+        <mi>p</mi>
+        <mi>e</mi>
+        <mi>c</mi>
+        <mi>t</mi>
+        <mi>e</mi>
+        <mi>d</mi>
+        <mi mathvariant="normal">&#x0025;<!-- % --></mi>
+      </mrow>
+    </mfrac>
+  </mstyle>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.2em" minsize="1.2em">)</mo>
+  </mrow>
+  <mrow class="MJX-TeXAtom-ORD">
+    <mo maxsize="1.623em" minsize="1.623em">)</mo>
+  </mrow>
+</math>
+
+*Wann nutzen?* Wenn man im Finanzbereich unterwegs ist und/oder 
+wenn bei größeren Datenmengen nur stärkere Veränderungen erkannt werden sollen
+
+https://mwburke.github.io/data%20science/2018/04/29/population-stability-index.html
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Kullback-Leibler-Divergenz
+
+* auch bekannt als relative Entropie
+* numerisch und kategorisch
+* Werte von 0 bis &infin;
+    * je höher der Wert, desto unterschiedlicher die Verteilungen
+* auch hier: Bins &rarr; unabhängig von sample size
+* nicht symmetrisch
+
+*Wann nutzen?* ähnlich zu PSI: bei großen Datensets, wenn nur stärkere Veränderungen entdeckt werden sollen
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Jensen-Shannon-Distanz
+
+* Jensen-Shannon-Distanz ist die Wurzel aus der Divergenz
+* zwischen 0 und 1
+* ab 0.1 gehen wir von einem Drift aus
+* funktioniert auch für kategorische Daten
+* basiert auf KL-Divergenz
+* Histogramme werden verglichen, Größe des Samples daher egal
+* Binning für kategorische Daten offensichtlich
+* Intuition: wie viel Information/Entropie/Überraschung steckt im Unterschied der beiden Verteilungen?
+
+*Wann nutzen?* Auf größeren Datensets (wenn die KL-Divergenz/PSI nicht empfindlich genug sind)
+
+https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence
+https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Wasserstein-Distanz
+
+_Wenn jede Verteilung als ein Haufen von „Erde“ angehäuft auf dem metrischen Raum betrachtet wird, dann beschreibt diese
+Metrik die minimalen „Kosten“ der Umwandlung eines Haufens in den anderen._
+
+* nicht zu sensitiv, zeigt nur größere Veränderungen an
+* normiert in Veränderungen in Standardabweichungen
+* kann (offensichtlich) über 1 gehen
+* ab 0.1 gehen wir von einem Drift aus
+* funktioniert nur für numerische Daten
+
+*Wann nutzen?* Als Kompromiss zwischen KS (zu empfindlich) und PSI/JS (nicht empfindlich genug)
+
+https://de.wikipedia.org/wiki/Wasserstein-Metrik
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Was gibt es jetzt noch zu bedenken?
+
+* Multivariate Feature Drift
+</textarea>
+</section>
+
+  <section data-markdown>
+  <textarea data-template>
+### Manche Features driften
+
+<img src="img/feature-drift.png">
+  </textarea>
+</section>
+
+<section data-markdown>
+## Maßnahmen bei Drift
+
+* *Neue Version des Modells trainieren*
+  * Neue Daten aufnehmen (und labeln)
+  * Neue Features erzeugen
+  * Modell Architektur ändern (oder fixen) und neu trainieren
+* Schnelle Maßnahme
+  * Pre-/Post-Processing des Modells neu kalibrieren
+  * Schwellwerte für Anwendung anpassen
+  * Bestimmte Bereiche ausklammern 
+* Sehr schnelle Maßnahme: Fallback
+  * Manuell
+  * Heuristik / Baseline
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Zusammenfassung: Arten von Drift
+
+* _Covariate / Input / Data drift_: Verteilung der Eingabe hat sich geändert
+* _Prior / Label / Prediction drift_: Verteilung der Vorhersage hat sich geändert
+* _Concept / Model drift_: Zusammenhang zwischen Eingabe und Vorhersage hat sich geändert
+
+<img src="https://docs.seldon.io/projects/alibi-detect/en/stable/_images/bg_2d_drift.png" style="height: 100%;">
+
+<small>https://docs.seldon.io/projects/alibi-detect/en/stable/cd/background.html#what-is-drift
+</small>
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Ausblick: Was kann man sonst noch machen
+
+* Outlier-Detection
+  * Unser Modell wird nicht extrapolieren können
+  * Werte außerhalb des Trainings-Bereichs werden wahrscheinlich unrealistisch sicher vorhergesagt
+  * Ausreißer müssen ohne Ground Truth entdeckt werden 
+* Adversarial Detection
+  * Bestimmte Eingaben können absichtlich eine grob falsche Vorhersage herbei führen 
+  * Solche Eingaben können erkannt und korrigiert werden
+  * Dazu kann z.B. ein Autoencoder benutzt werden, der die Eingabe korrigiert
+
+
+<small>https://docs.seldon.io/projects/alibi-detect/en/stable/od/methods.html
+<br>
+https://docs.seldon.io/projects/alibi-detect/en/stable/ad/methods.html
+</small>
+</textarea>
+</section>
+
+		</div>
+	</div>
+	<script src="revealjs/reveal.js/dist/reveal.js"></script>
+	<script src="revealjs/reveal.js/plugin/notes/notes.js"></script>
+	<script src="revealjs/reveal.js/plugin/markdown/markdown.js"></script>
+	<script src="revealjs/reveal.js/plugin/highlight/highlight.js"></script>
+	<script src="revealjs/config.js"></script>
+
+
+</body>
+
+</html>

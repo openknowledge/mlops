@@ -1,0 +1,124 @@
+<!doctype html>
+<html>
+
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=10.0, user-scalable=yes">
+
+	<title>ML Ansätze</title>
+
+	<link rel="stylesheet" href="revealjs/reveal.js/dist/reset.css" />
+    <link rel="stylesheet" href="revealjs/reveal.js/dist/reveal.css" />
+    <link rel="stylesheet" href="revealjs/reveal.js/dist/theme/white.css" />
+
+    <!-- Theme used for syntax highlighted code -->
+	<!-- <link rel="stylesheet" href="revealjs/reveal.js/plugin/highlight/monokai.css"> -->
+	<!-- <link rel="stylesheet" href="revealjs/reveal.js/plugin/highlight/zenburn.css"> -->
+    <link rel="stylesheet" href="revealjs/highlight-js-github-theme.css" />
+    <link rel="stylesheet" href="revealjs/styles.css" />
+
+</head>
+
+<body style="background-color: whitesmoke;">
+	<div class="reveal">
+		<div class="slides">
+
+<section data-markdown>
+	<textarea data-template>
+
+# Exkursion: ML Ansätze
+
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+	<textarea data-template>
+### Die Standard-Intro Folien wie bei SAA
+
+* Roboter, Kreise, Wann ML
+* Alle Folien aus KI Konzepte
+  </textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Phasen eines ML Projekts
+
+<img src="img/ml-workflow/6.PNG" class="fragment">
+
+</textarea>
+</section>
+
+	<section data-markdown class="fragments">
+### Phase I: Exploration
+
+* in der ersten Phase eines Machine Learning Projekts wird die Anwendungsidee validiert und ein
+funktionsfähiges Modell entwickelt.
+* dabei ist ein schnelles iterieren und ausprobieren von Ideen zentral
+* das Ziel ist *nicht* ein sinnvolles Stück Software
+* Scripting passt hier besser als Programmieren als Ausdruck für die Tätigkeit
+* das Ziel ist eine schnelle Entwicklung
+* Phase 1 endet entweder mit
+  * einem funktionsfähigen Modell mit dem man in Phase II übergeht oder
+  * dem Verwerfen des Ansatzes
+
+	</section>
+
+
+  <section data-markdown>
+    <textarea data-template>
+### Typische Rahmenbedindungen / Architektur-Entscheidungen
+
+* Datenschutz
+* Erklärbarkeit
+* Performance / Latenz
+  * Prediction
+  * Training
+* Welche Genauigkeit brauchen wir für unseren Anwendungsfall?
+  * Welche Metrik: Accuracy vs False Negatives vs False Positives
+  * Fallbacks
+* Unerwünschte Biases
+* Stabilität: wenn mit neuen, aber ähnlichen Daten trainiert wird, sollte sich das Modell vergleichbar verhalten 
+
+</textarea>
+</section>  
+
+<section data-markdown class="todo">
+  <textarea data-template>
+### Modelle
+
+1. Deep Learning: 3 Dense-Schichten mit jeweils 100 Neuronen, auf allen 6 Features 
+  * > 85% Accuracy auf Test-Daten, kaum Overfitting
+  * Stabilität bei neuem Training
+  * Blackbox: Introspektion nicht möglich, Erklärbarkeit fragwürdig
+  * Ressourcen bei Laufzeit mittel bis hoch 
+1. KNN: Nächste Nachbarn auf den Features Alter und Leistung
+  * 70% Accuracy auf Test-Daten, klares Overfitting
+  * Erklärbarkeit sehr intuitiv, wie wir es auch machen würden
+  * Stabilität, neue Daten können jederzeit hinzugenommen werden
+  * Vorhersage günstig bei kleinem k
+1. Decision Tree: auf allen 6 Features
+  * 75% Accuracy auf Test-Daten, klares Overfitting
+  * Instabilität: jeder neue Datensatz gibt eine ganz neue Struktur des Baums
+  * Erklärbarkeit gegeben wenn Baum nicht zu tief, dann anhand der Population in den Blättern und dem Entscheidungsweg
+1. Regelsystem: auf allen 6 Features
+  * 60% Accuracy auf Test-Daten, kein Overfitting
+  * jeder neue Datensatz gibt eine ganz neue Struktur des Baums
+  * Erklärbarkeit unmittelbar
+  * sehr geringer Ressourcen Bedarf
+  * Stabilität gegeben
+</textarea>
+</section>
+
+		</div>
+	</div>
+	<script src="revealjs/reveal.js/dist/reveal.js"></script>
+	<script src="revealjs/reveal.js/plugin/notes/notes.js"></script>
+	<script src="revealjs/reveal.js/plugin/markdown/markdown.js"></script>
+	<script src="revealjs/reveal.js/plugin/highlight/highlight.js"></script>
+	<script src="revealjs/config.js"></script>
+
+
+</body>
+
+</html>
