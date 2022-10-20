@@ -270,27 +270,87 @@ Betrieb
   <textarea data-template>
 ### 5 Runden spielen
 
-* Gewinn
-  1. DL: 10 Geld pro Runde
-  1. DT: 8 Geld pro Runde
-  1. KNN: 7 Geld pro Runde
-  1. Regelsystem: 5 Geld pro Runde
+* Gewinn: Accuracy minus Baseline mal 15 pro Runde aufgerundet (z.B. (0,85 - 0,3) * 15 = 9, (0,6 - 0,3) * 15 = 4)
 
 * Kosten: Ressourcen
   1. DL: 2 Geld pro Runde
   1. DT: 1 Geld pro Runde
   1. KNN: 2 Geld pro Runde
   1. Regelsystem: 1 Geld pro Runde
-
+  
 * Kosten: Aktionen
   * Daten beschaffen
     * initial: 10 Geld
     * später: 5 Geld
   * Passenden ML Ansatz designen: 5 Geld
   * Extrakosten Deep Learning Ansatz designen (jede Iteration braucht länger und bessere Hardware): 5 Geld 
-  * Modell trainieren: 2 Geld
+  * Modell nachtrainieren: 2 Geld
   </textarea>
 </section>
+
+<section data-markdown class="todo">
+  <textarea data-template>
+### Kasse
+
+* Hanna: 25
+  * - 10 Geld, Daten beschaffen
+  * Start:
+    * Geld 15
+    * Gewinn / Runde: 4
+    * Kosten: 1 
+  * Runde 1: Drift
+    * Geld: 13
+    * Gewinn / Runde: 4
+    * Kosten: 1
+  * Runde 2: Drift
+    * Geld: 13 + 4 - 1 - 5 = 11
+    * Gewinn / Runde: 4
+    * Kosten: 1
+  * Runde 3: Nix
+    * Geld: 11 + 4 - 1 = 14
+    * Gewinn / Runde: 4
+    * Kosten: 1
+  * Runde 4: Last steigt
+    * Geld: 14 + 4 - 1 = 17
+    * Gewinn / Runde: 4
+    * Kosten: 2
+  * Runde 5: Nix
+    * Geld: 17 + 4 - 2 = 19
+    * Gewinn / Runde: 4
+    * Kosten: 2
+
+* Olli: 25
+  * - 10 Geld, Daten beschaffen
+  * - 5 Geld, ML Ansatz
+  * - 5 Geld, DL Ansatz
+  * Start:
+    * Geld 5
+    * Gewinn / Runde: 9
+    * Kosten: 2
+  * Runde 1: Last sinkt
+    * Geld: 12
+    * Gewinn / Runde: 9
+    * Kosten: 1
+  * Runde 2: Drift
+    * 12 + 9 - 1 - 7 = 13
+    * Gewinn / Runde: 9
+    * Kosten: 1
+  * Runde 3: Last steigt
+    * Geld: 13 + 9 - 1 = 21
+    * Gewinn / Runde: 9
+    * Kosten: 2
+  * Runde 4: Last sinkt
+    * Geld: 21 + 9 - 2 = 28
+    * Gewinn / Runde: 9
+    * Kosten: 1
+  * Runde 5: Nix
+    * Geld: 28 + 9 - 1 = 36
+    * Gewinn / Runde: 9
+    * Kosten: 1
+
+</textarea>
+</section>
+
 
   <section data-markdown class="todo">
     <textarea data-template>
@@ -298,26 +358,27 @@ Betrieb
 
 Normaler Würfel, 6 Seiten
 
-1. Last Verändert sich
-  1. (1-3) Last sinkt: Ressourcen werden billiger, durch 2, min 1
-  1. (4-6) Last steigt: Ressourcen werden teuer, mal 2, max 10
-1. Übles Ereignis
+1. (1) Last Verändert sich
+  1. (1-3) Last steigt: Ressourcen werden teuer, mal 2, max 10
+  1. (4-6) Last sinkt: Ressourcen werden billiger, durch 2, min 1
+1. (2-3) Übles Ereignis
   * Nochmal würfeln
-  1. Kunden fordert Erklärung
+  1. (1-2) Kunden fordert Erklärung
      * Notabschaltung und Fallback auf Regelsystem wenn Erklärbarkeit nicht gegeben ist
-  1. Investigativer Journalismus: Bias / Alterdiskriminierung
-     * Notabschaltung und Fallback auf Regelsystem wenn Alter für Vorhersage zwingend notwendig ist
-  1. Hackerangriff, Ransomware
+  1. (3-4) Investigativer Journalismus: Bias / Alterdiskriminierung
+     * Notabschaltung und Fallback auf (Not-)Regelsystem wenn Alter für Vorhersage zwingend notwendig ist
+  1. (5-6) Hackerangriff, Ransomware
      * Du bist aus dem Geschäft wenn du Kundendaten in Produktion hast
-1. Die Welt ändert sich, Drift setzt ein
-  * Du musst neue Daten beschaffen: x Kosten  
+1. (4-5) Die Welt ändert sich, Drift setzt ein
+  * Du musst neue Daten beschaffen: x Kosten
   * Falls Regelsystem, keine weiteren Kosten, da direkte Anpassung
   * Nochmal würfeln
-    1. Das Modell performant auf den neuen Daten immer noch super, keine weiteren Aktionen und Kosten erforderlich
-    1. Es muss mit neuen Daten trainiert werden, das lang aber: etwas mehr Kosten wenn Modell stabil, hohe Kosten wenn Modell nicht stabil
-    1. Dramatischer Absturz der Performance: Notabschaltung und zurück zu Regelsystem, Accuracy dementsprechend dauerhaft runter
-    1. Neue Modell-Architektur mit vertretbarem Aufwand stellt ursprüngliche Performance wieder her: Kosten etwas als normales Training
-1. Es läuft alles rund    
+    1. (1-2) Das Modell performant auf den neuen Daten immer noch super, keine weiteren Aktionen und Kosten erforderlich
+    1. (3-4) Es muss mit neuen Daten trainiert werden, das langt aber: 
+       * doppelte Kosten wenn Modell nicht stabil
+    1. (5) Dramatischer Absturz der Performance: Notabschaltung und zurück zu Regelsystem, Accuracy dementsprechend dauerhaft runter
+    1. (6) Neue Modell-Architektur mit vertretbarem Aufwand stellt ursprüngliche Performance wieder her: Kosten für Passenden ML Ansatz designen (auch bei DL nur einfach)
+1. (6) Es läuft alles rund
   </textarea>
   </section>
   
