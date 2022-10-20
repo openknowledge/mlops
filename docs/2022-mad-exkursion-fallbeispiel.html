@@ -121,18 +121,69 @@ return LOW_RISK
 
 <section data-markdown>
 	<textarea data-template>
-## Daten entstehen über die Zeit
+### Rahmenbedindungen
 
-Die Ground Truth (GT) kommt verzögert und kann sich über die Zeit noch verändern
+* Wir sind CTO einer Kfz-Versicherung und wollen anhand von Risiko versichern
+* Unfalldaten von Fahrern werden regelmäßig erhoben durch Schadensmeldungen
+* Das Aufarbeiten von Daten ist ein manueller, aufwändiger und fehleranfälliger Prozess
+* Gute Fahrer sollen bessere Konditionen bekommen
+  * Alternative: schlechte Fahrer werden gar nicht versichert
+* Automatische Vorhersage des Risikos anhand von ausgewählten Kriterien
+* Die Vorhersage ist geschäftskritisch
+  * Je besser die Genauigkeit des Modells, desto besser funktioniert unser Geschäft
+  * Wenn wir schlechte Vorhersagen machen, ist unser Geschäft in Gefahr
+</textarea>
+</section>
 
-<img src="img/drift-v2.png">    
+<section data-markdown>
+	<textarea data-template>
+### Entscheidungen, Beschlüsse
+
+* wir sehen jedes Deployment als heikel an und bringen nur dann ein neues Modell in Produktion wenn es wirklich notwendig ist
+  * Alternative: wir arbeiten Daten regelmäßig auf und bringen das Modell ebenso regelmäßig in Produktion 
+* Wir gehen davon aus, dass wir das tatsächliche Risiko eines Versicherten erst nach einem Jahr realistisch bewerten können
+* Wir erstellen unseren eigenen Datensatz, indem wir ein Jahr lang mit einem Regelsystem und über menschliche Experten versichern
+  * Alternative: wir fangen direkt mit einem "besorgten" Datensatz an
+* wir erstellen eine Heuristik aus einer Hand voll Regeln für die initiale Phase und als Fallback für unser trainiertes Modell  
+* nach einem Jahr haben wir zum ersten Mal einen vollständigen Datensatz  
+* danach liegen monatlich neue Daten vor, die allerdings von uns aufgearbeitet werden müssten
 
 </textarea>
 </section>
 
-<section data-markdown class="todo">
+<section data-markdown>
 	<textarea data-template>
-### Rahmenbedindungen und Entscheidungen aus dem Miro nehmen    
+## Daten entstehen über die Zeit
+
+Die Ground Truth (GT) kommt verzögert und kann sich über die Zeit noch verändern
+
+<img src="img/drift-v2.png">
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Wann ist neues Deployment notwendig?
+
+1. mindestens einmal im Jahr, damit man überhaupt noch weiß wie das geht und sich noch traut
+1. wenn die Genauigkeit des Modells abnimmt
+   * das kann man aber nicht wissen, außer man hat einen neuen, kompletten Datensatz
+   * Ein Datensatz besteht aus zwei Teilen
+     * Eingabe: Eigenschaften des versicherten Fahrzeugs und Fahrers
+     * Ausgabe: verursachter Schaden
+   * und selbst der ist um ein Jahr verzögert
+   * stattdessen nehmen wir Ersatzmetriken, den Drift der Eingaben und der Ausgaben  
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Was tun bei Drift
+
+<img src="img/was-tun-bei-drift.jpg">
+
 </textarea>
 </section>
 
