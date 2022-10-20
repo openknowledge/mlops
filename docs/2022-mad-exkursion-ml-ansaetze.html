@@ -102,7 +102,7 @@ funktionsfähiges Modell entwickelt.
 
   <section data-markdown>
     <textarea data-template>
-### Typische Rahmenbedindungen / Architektur-Entscheidungen
+### Typische Rahmenbedindungen
 
 * Datenschutz
 * Erklärbarkeit
@@ -134,33 +134,83 @@ https://ml-playground.com
 https://www.freecodecamp.org/news/a-no-code-intro-to-the-9-most-important-machine-learning-algorithms-today/
 </section>
 
-
-
-<section data-markdown class="todo">
+<section data-markdown>
   <textarea data-template>
-### Modelle
+### Architektur
+
+_Die Summe der wichtigen Entscheidungen_
+
+Was bedeutet dabei wichtig?
+- nur schwer änderbar, aber mit einer gewissen Unsicherheit verbunden
+- haben das Potential das Projekt zum scheitern zu bringen
+- so gewichtig, dass sie Einfluss haben auf das was man sinnvoll bauen kann  
+- nur weil man eine Entscheidung nicht bewusst trifft, heißt nicht, dass sie nicht wichtig ist
+    </textarea>
+</section>
+
+
+<section data-markdown>
+  <textarea data-template>
+### ML Ansätze
+
+_die wichtigste Architektur-Entscheidung_
 
 1. Deep Learning: 3 Dense-Schichten mit jeweils 100 Neuronen, auf allen 6 Features 
-  * > 85% Accuracy auf Test-Daten, kaum Overfitting
-  * Stabilität bei neuem Training
-  * Blackbox: Introspektion nicht möglich, Erklärbarkeit fragwürdig
-  * Ressourcen bei Laufzeit mittel bis hoch 
 1. KNN: Nächste Nachbarn auf den Features Alter und Leistung
-  * funktioniert nicht gut in hohen Dimensionen, daher machen wir nur 2d
-  * 70% Accuracy auf Test-Daten, klares Overfitting
-  * Erklärbarkeit sehr intuitiv, wie wir es auch machen würden
-    * zumindest in 2d
-  * Stabilität, neue Daten können jederzeit hinzugenommen werden
-  * Vorhersagezeit hoch, vor allem bei großem k
 1. Decision Tree: auf allen 6 Features
-  * 75% Accuracy auf Test-Daten, klares Overfitting
-  * Instabilität: jeder neue Datensatz gibt eine ganz neue Struktur des Baums
-  * Erklärbarkeit gegeben wenn Baum nicht zu tief, dann anhand der Population in den Blättern und dem Entscheidungsweg
 1. Regelsystem: auf allen 6 Features
-  * 60% Accuracy auf Test-Daten, kein Overfitting
-  * Erklärbarkeit unmittelbar, wenn nicht zu komplex 
-  * sehr geringer Ressourcen Bedarf
-  * Stabilität gegeben
+</textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+### Deep Learning
+
+* 3 Dense-Schichten mit jeweils 100 Neuronen, auf allen 6 Features 
+* \> 85% Accuracy auf Test-Daten, kaum Overfitting
+* beliebig komplexe Decision Boundaries in hohen Dimensionen
+* Stabilität bei neuem Training
+* Blackbox: Introspektion nicht möglich, Erklärbarkeit fragwürdig
+* Ressourcen bei Laufzeit mittel bis hoch
+
+</textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+### KNN - k nearest neighbor
+
+* Nächste Nachbarn auf den Features Alter und Leistung
+* funktioniert nicht gut in hohen Dimensionen, daher machen wir nur 2d
+* 70% Accuracy auf Test-Daten, klares Overfitting
+* komplexe Decision Boundaries, auch in niedrigen Dimensionen
+* Erklärbarkeit sehr intuitiv, wie wir es auch machen würden
+  * zumindest in 2d
+* Stabilität, neue Daten können jederzeit hinzugenommen werden
+* Vorhersagezeit hoch, vor allem bei großem k
+</textarea>
+</section>
+<section data-markdown>
+  <textarea data-template>
+### Decision Tree
+
+* auf allen 6 Features
+* 75% Accuracy auf Test-Daten, klares Overfitting
+* Decision Boundaries sind Geraden
+* Instabilität: jeder neue Datensatz gibt eine ganz neue Struktur des Baums
+* Erklärbarkeit gegeben wenn Baum nicht zu tief, dann anhand der Population in den Blättern und dem Entscheidungsweg
+</textarea>
+</section>
+<section data-markdown>
+  <textarea data-template>
+### Regelsystem
+
+* auf allen 6 Features
+* &lt; 60% Accuracy auf Test-Daten, kein Overfitting
+* Decision Boundaries sind Geraden
+* Erklärbarkeit unmittelbar, wenn nicht zu komplex 
+* sehr geringer Ressourcen Bedarf
+* Stabilität gegeben
 </textarea>
 </section>
 
