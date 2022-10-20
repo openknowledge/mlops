@@ -92,6 +92,33 @@
 </textarea>
 </section>
 
+
+<section data-markdown>
+	<textarea data-template>
+## Basis-Satz von Regeln
+
+```
+if training: 
+    return LOW_RISK
+if age < 30:
+    if power > 130:
+        return HIGH_RISK
+    else:
+        return MEDIUM_RISK
+if age > 50:
+    return HIGH_RISK
+if emergency_braking:
+    return LOW_RISK
+if miles > 50:
+    return HIGH_RISK
+if miles > 30:
+    return MEDIUM_RISK
+# default
+return LOW_RISK
+```
+</textarea>
+</section>
+
 <section data-markdown>
 	<textarea data-template>
 ## Daten entstehen über die Zeit

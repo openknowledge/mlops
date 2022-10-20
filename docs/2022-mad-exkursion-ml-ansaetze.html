@@ -31,14 +31,39 @@
 </textarea>
 </section>
 
-<section data-markdown class="todo">
+<section data-markdown>
 	<textarea data-template>
-### Die Standard-Intro Folien wie bei SAA
-
-* Roboter, Kreise, Wann ML
-* Alle Folien aus KI Konzepte
-  </textarea>
+<img src="img/ml-vs-dev-1.png">		
+	</textarea>
 </section>
+
+<section data-markdown>
+	<textarea data-template>
+<img src="img/ml-vs-dev-2.png">		
+	</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### KI vs Machine Learning vs Deep Learning
+
+<img src="img/KI.png">		
+	</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Wann ist KI/ML sinnvoll?
+
+* Die Lösung des vorliegenden Problems ist unbekannt oder _schwer zu spezifizieren_
+* Es liegen _Daten_ mit einer klaren, einfachen Eingabe und bestenfalls auch passender Ausgabe vor
+* Es gibt _Muster_ in der Eingabe, die zur Vorhersage verwendet werden können
+* Die Lösung des Problems kann Fehler oder _Unsicherheiten_ tolerieren
+  * _80% Genauigkeit_ werden selten übertroffen
+* Wir sind bereit und in der Lage, in einer initialen Phase _Experimente mit offenem Ausgang_ durchzuführen
+</textarea>
+</section>
+
 
 <section data-markdown>
 	<textarea data-template>
@@ -64,6 +89,16 @@ funktionsfähiges Modell entwickelt.
 
 	</section>
 
+	<section data-markdown class="fragments">
+###  Was brauchen wir für eine Überprüfung eines Anwendungsfalls?
+
+1. Erhoffter *Geschäftsnutzen*
+1. eine *Metrik* als Maß des Erfolgs
+1. Verfügbare *Daten*
+1. (Machine Learning-)*Ansatz*
+1. *Rahmenbedingungen*
+
+</section>
 
   <section data-markdown>
     <textarea data-template>
@@ -83,6 +118,24 @@ funktionsfähiges Modell entwickelt.
 </textarea>
 </section>  
 
+  <section data-markdown>
+    <textarea data-template>
+### Supervised Learning mit unterschiedlichen Lern-Algorithmen
+
+<a href='https://ml-playground.com'><img src='img/ml-playground.png' style="height: 400px"></a>
+
+https://ml-playground.com
+    </textarea>
+</section>
+
+<section data-markdown>
+### ML-Algorithmen verständlich erklärt
+
+https://www.freecodecamp.org/news/a-no-code-intro-to-the-9-most-important-machine-learning-algorithms-today/
+</section>
+
+
+
 <section data-markdown class="todo">
   <textarea data-template>
 ### Modelle
@@ -93,10 +146,12 @@ funktionsfähiges Modell entwickelt.
   * Blackbox: Introspektion nicht möglich, Erklärbarkeit fragwürdig
   * Ressourcen bei Laufzeit mittel bis hoch 
 1. KNN: Nächste Nachbarn auf den Features Alter und Leistung
+  * funktioniert nicht gut in hohen Dimensionen, daher machen wir nur 2d
   * 70% Accuracy auf Test-Daten, klares Overfitting
   * Erklärbarkeit sehr intuitiv, wie wir es auch machen würden
+    * zumindest in 2d
   * Stabilität, neue Daten können jederzeit hinzugenommen werden
-  * Vorhersage günstig bei kleinem k
+  * Vorhersagezeit hoch, vor allem bei großem k
 1. Decision Tree: auf allen 6 Features
   * 75% Accuracy auf Test-Daten, klares Overfitting
   * Instabilität: jeder neue Datensatz gibt eine ganz neue Struktur des Baums
