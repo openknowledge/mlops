@@ -9,3 +9,4 @@ datasets/bike_random_forest
 datasets/kdd_k_neighbors_classifier
 *.h5
 !model/*
+*.DS_Store

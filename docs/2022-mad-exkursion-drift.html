@@ -44,10 +44,10 @@
 		<textarea data-template>
 ### Woher weiß man, dass man ein neues Modell in Produktion braucht?
 
-1. Schon in der Explorationsphase prüfen wie sich das Modell auf neueren Daten verhält
-   * wie schnell degradiert die Performance?
-   * Mindestens einmal im Jahr, damit man überhaupt noch weiß wie es geht
-1. Wenn die Metrik des Modells nachlässt in Produktion
+1. Schon in der Explorationsphase prüfen, wie sich das Modell auf neueren Daten verhält
+   * Wie schnell degradiert die Performance?
+   * Mindestens einmal im Jahr, damit man überhaupt noch weiß, wie es geht
+1. Wenn die Metrik des Modells in Produktion nachlässt
    * Dafür braucht man die Ground Truth der Daten aus Produktion
    * Manchmal bekommt man diese unmittelbar nach der Vorhersage durch die Reaktion eines menschlichen Benutzers
    * Oft aber auch erst nach nennenswerter Verzögerung 
@@ -82,11 +82,32 @@ https://docs.evidentlyai.com/reports/data-drift
 
 <section data-markdown class="fragments">
 	<textarea data-template>
+### Wie kann Drift aussehen?
+
+
+* Drift size vs. Drift ratio
+  * _Drift ratio_ beziffert den Anteil der Daten, der sich verändert
+  * _Drift size_ beziffert die Stärke des Drifts: wie weit die Daten sich verändern, die sich tatsächlich auch verändern
+* Man sollte beide Perspektiven im Blick haben
+
+</textarea>
+
+</section>
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Wie kann Drift aussehen?
+
+<img src="img/drift_size_ratio.png">
+
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
 ### Wie erkennen wir Drift?
 
 * Es wird ein statistischer Test auf den Eingabe-Daten ausgeführt
-* Die Anfragen in Production werden verglichen mit Referenz-Datensatz, den wir zum Training benutzt haben (`datasets/insurance`)
-* Drift size vs. Drift ratio
+* Die Anfragen in Produktion werden verglichen mit Referenz-Datensatz, den wir zum Training benutzt haben (`datasets/insurance`)
 * Evidently sucht als Default eine passende Metrik aus, es muss also nicht unser Problem sein
 
 https://docs.evidentlyai.com/reports/data-drift
@@ -102,12 +123,68 @@ https://docs.evidentlyai.com/reports/data-drift
 	<textarea data-template>
 ## Was sollte man alles über Statistik wissen?
 
-* Daten können kategorisch und numerisch sein (theoretisch gibt es auch noch ordinal)
-* Mean/Median/Standardabweichung
-* was zu Verteilungen
+* Daten können kategorial und numerisch sein
+* Die 'Klassiker' der Datenbeschreibung
+  * Mittelwert
+  * Median
+  * Varianz
+  * Standardabweichung:   
+  <math xmlns="http://www.w3.org/1998/Math/MathML">
+    <mstyle displaystyle="true" scriptlevel="0">
+      <msqrt>
+        <mfrac>
+          <mrow>
+            <mo data-mjx-texclass="OP">&#x2211;</mo>
+            <mo stretchy="false">(</mo>
+            <msub>
+              <mi>x</mi>
+              <mrow data-mjx-texclass="ORD">
+                <mi>i</mi>
+              </mrow>
+            </msub>
+            <mo>&#x2212;</mo>
+            <mrow data-mjx-texclass="ORD">
+              <mover>
+                <mi>x</mi>
+                <mo stretchy="false">-</mo>
+              </mover>
+            </mrow>
+            <msup>
+              <mo stretchy="false">)</mo>
+              <mn>2</mn>
+            </msup>
+          </mrow>
+          <mrow>
+            <mi>n</mi>
+            <mo>&#x2212;</mo>
+            <mn>1</mn>
+          </mrow>
+        </mfrac>
+      </msqrt>
+    </mstyle>
+  </math>
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Was sollte man alles über Statistik wissen?
+
+* Verteilungen
+  * die wichtigste: Normalverteilung (Mittelwert 0, Standardabweichung 1)
 * Histogramme (Binning)
-* Konfidenzintervalle
-* Ausreißer
+
+<img src="img/nobel.svg">
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+### Was sollte man alles über Statistik wissen?
+
+<img src="img/boxplot.png">
 
 </textarea>
 </section>
@@ -321,14 +398,6 @@ https://de.wikipedia.org/wiki/Wasserstein-Metrik
 </section>
 
 <section data-markdown>
-	<textarea data-template>
-## Was gibt es jetzt noch zu bedenken?
-
-* Multivariate Feature Drift
-</textarea>
-</section>
-
-  <section data-markdown>
   <textarea data-template>
 ### Manche Features driften
 
