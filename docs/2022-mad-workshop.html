@@ -102,14 +102,92 @@ https://www.m3-konferenz.de/cfp.php
 
 Resilientes Machine Learning
 
-Resilienz ist die Fähigkeit der Anpassung an schwierige oder unerwartete Situationen. 
-So eine Widerstandskraft kann es bei Menschen geben oder auch in Software-Systemen. 
+Resilienz ist die Fähigkeit der Anpassung an schwierige oder unerwartete Situationen.
+Eine solche Widerstandskraft kann es bei Menschen geben oder eben auch in Softwaresystemen.
+Bei klassischen Softwaresystemen betrifft Resilienz häufig nur die Ausfallsicherheit.
+Mit der Nutzung von Machine Learning innerhalb der Systeme kommen viele weitere Aspekte hinzu. Eine Besonderheit ist
+hier eine komplexe Geschäftslogik, die als ein abstraktes Artefakt vorliegt. Diese unterliegt nicht mehr vollständig der
+Kontrolle der Entwickler.
+Als Konsequenz müssen wir uns mit Phänomenen wie Adversarial Attacks, Out-of-Distribution Robustness und Drift
+auseinandersetzen.
+Die Stabilität des Modells muss hier bei Neutraining und Nachtraining gewährleistet werden.
+Maßnahmen umfassen das Monitoring von Machine Learning-Modellen, die Erkennung von Ausreißern und den Betrieb mit
+Fallbacks und/oder mehreren Modellen als Ensemble.
+Auch eine geschickte Auswahl des Modells für die Produktion kann schon viel bewirken.
+In diesem Talk erläutere ich die genannten Phänomene und gehe auf die jeweils passenden Maßnahmen ein.
 
-Während Resilienz bei klassischen Software-Systemen häufig nur die Ausfallsicherheit betrifft, 
-kommen bei Machine Learning basierten Systemen viele weitere Aspekte hinzu. Die Besonderheit ist hier,
+Kurze Version
 
 
- -->
+Resilienz ist die Fähigkeit der Anpassung an schwierige oder unerwartete Situationen.
+
+Im Bereich des Machine Learnings müssen wir uns dabei mit Phänomenen wie Adversarial Attacks, Out-of-Distribution Robustness und Drift auseinandersetzen.
+Die Stabilität des Modells muss hier bei Neutraining und Nachtraining gewährleistet werden.
+Maßnahmen umfassen das Monitoring von Machine Learning-Modellen, die Erkennung von Ausreißern und den Betrieb mit Fallbacks und/oder mehreren Modellen als Ensemble.
+Auch eine geschickte Auswahl des Modells für die Produktion kann schon viel bewirken.
+In diesem Talk erläutere ich die genannten Phänomene und gehe auf die jeweils passenden Maßnahmen ein.
+
+Vorkenntnisse
+
+Grundverständnis vom Training von Machine Learning Modellen
+
+Lernziele
+
+Ein Einblick in die Welt des Machine Learnings in Produktion und was man beachten muss, Nachts gut schlafen zu können.
+
+
+---
+Booster mit Hanna
+
+Gamifying MLOps - Experiencing Machine Learning Operations
+
+Getting machine learning into production and keeping it there is the topic of Machine Learning Operations (MLOps). In
+order to get a feeling for this, we will let you play through the phases of a machine learning project that you have to
+get into production and keep there for as long as possible to profit from it.
+Along the way, events occur that influence the setting and show whether you made the right choices or not. This way you
+can experience what it feels like to have a machine learning model in production instead of only talking about it.
+We will bring a couple of game sets, so even though the number of participants will be limited, there will be a good
+amount of people who can join in.
+You will need no prior knowledge of machine learning and you don't even have to be a technical person to participate.
+
+
+Bio Hanna: 
+
+Hanna started her career as a researcher in linguistics but then decided to pursue another Master's degree in
+Computer Science and to work as a developer. She sees Machine Learning as a great way to combine the thinking part of
+her first career choice with the acting part of her second career choice.
+
+Bio Olli:
+
+Oliver is a software developer and architect from Hamburg, Germany. He has been developing software with different
+approaches and programming languages for more than 3 decades. Lately, he has been focusing on Machine Learning and its
+interactions with humans.
+
+Any equipment needed?
+
+We will bring the game sets, but we need 5 tables and 5 chairs around each table. 
+
+---
+
+ODSC Europe / Pydata Berlin
+
+Mischung als Resilient ML wie bei M3 und dem was ich mit Hanna erfolglos bei der MLConference eingereicht habe
+
+
+"Fit a model on a given dataset sampled from a distribution that represents our problem" could be a casual way of describing the classic idea of machine learning.
+ 
+This, however, does not reflect the challenges of many modern machine learning projects. Data does not simply exist and the sample people are working on often is not static, but rather gets generated incrementally in smaller batches. Also, the distribution the data is sampled from can change with the domain it comes from.
+
+In this talk we will address the following questions:
+- Workflow: What kind of workflow reflects a more incremental take on machine learning?
+- Training for Production: How can we anticipate if our model works well in production and when to retrain?
+- Explainability: How can we find out how our model works to check for bias and analysis of degradation?
+- Unwanted Bias: Data sampled in the past is used to predict the future. How can we find out if our model has bias that is (no longer) wanted?
+- Testing: What is a proper way of testing a model to find regressions from previous cycles?
+- Monitoring: How do we detect when our model actually degrades in production and how do we react?
+
+-->
+
 <section data-markdown class="preparation">
 	<textarea data-template>
 ### Vorbereitung
