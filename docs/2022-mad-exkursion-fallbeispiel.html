@@ -135,13 +135,28 @@ return LOW_RISK
 </textarea>
 </section>
 
-<section data-markdown>
+<section data-markdown class="fragments">
 	<textarea data-template>
-### Entscheidungen, Beschlüsse
+### Wir deployen selten in Production
 
-* wir sehen jedes Deployment als heikel an und bringen nur dann ein neues Modell in Produktion wenn es wirklich notwendig ist
-  * Alternative: wir arbeiten Daten regelmäßig auf und bringen das Modell ebenso regelmäßig in Produktion 
-* Wir gehen davon aus, dass wir das tatsächliche Risiko eines Versicherten erst nach einem Jahr realistisch bewerten können
+*wir sehen jedes Deployment als heikel an und bringen nur dann ein neues Modell in Produktion wenn es wirklich notwendig ist*
+
+* jedes Modell hat andere Eigenschaften, an die sich die Benutzer gewöhnen müssen
+  * Stabilität des Verhaltens ist wichtig und nicht immer leicht zu gewährleisten
+* bei komplexen Vorhersagen reicht häufig eine Metrik nicht für die Bewertung des Modells aus
+  * manuelle Tests/Bewertungen der Ergebnisse sind typischerweise vor jedem Deployment notwendig
+  * noch deutlicher bei Bildern und Texten
+  * wer jetzt aufschreit: viele Systeme mit komplexer UI brauchen ebenfalls manuellen Test
+* Alternative: wir arbeiten Daten regelmäßig auf und bringen das Modell ebenso regelmäßig in Produktion 
+
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+	<textarea data-template>
+### Weitere Entscheidungen, Beschlüsse
+
+* Wir gehen davon aus, dass wir das tatsächliche Risiko eines Versicherten frühestens nach einem Jahr realistisch bewerten können
 * Wir erstellen unseren eigenen Datensatz, indem wir ein Jahr lang mit einem Regelsystem und über menschliche Experten versichern
   * Alternative: wir fangen direkt mit einem "besorgten" Datensatz an
 * wir erstellen eine Heuristik aus einer Hand voll Regeln für die initiale Phase und als Fallback für unser trainiertes Modell  
