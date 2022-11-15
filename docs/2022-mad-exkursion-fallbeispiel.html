@@ -52,7 +52,7 @@
   *	*emergency_braking*: 0/1, hat das Fahrzeug ein Notbremssystem 
   *	*braking_distance*: Bremsweg aus Tempo 100
   * *power*: Leistung in KW
-*	*miles*: Jährliche Fahrleistung in Meilen
+*	*milage*: Jährliche Fahrleistung in Meilen
 * Das wollen wir vorhersagen
   *	*risk*: Unfallrisiko, nach unten und nach oben offen, kann negativ sein
   *	*group* / *group_name*:	Einteilung in Gruppe anhand des Risikos
@@ -109,9 +109,9 @@ if age > 50:
     return HIGH_RISK
 if emergency_braking:
     return LOW_RISK
-if miles > 50:
+if milage > 50:
     return HIGH_RISK
-if miles > 30:
+if milage > 30:
     return MEDIUM_RISK
 # default
 return LOW_RISK
