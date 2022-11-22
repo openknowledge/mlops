@@ -291,7 +291,33 @@ http://www.gatsby.ucl.ac.uk/~balaji/balaji-siam-uq-2022-invited-talk.pdf
   - https://www.youtube.com/watch?v=fQdAHqOrM2w
 - Intro: Was ist MLOps und was ist das Ziel das Workshops
 - Hacking the system: https://www.instagram.com/reel/CkQUhLov9_u/?igshid=MDJmNzVkMjY=
+- Ouf Papier link und QR Code auf das hier, hier Slides und Links haben
+- Exkursionen glatt machen
   </textarea>
+</section>
+
+<section data-markdown class="todo">
+  <textarea data-template>
+
+Despite the growing recognition of AI/ML as a crucial pillar of digital transformation, successful deployments and
+effective operations are a bottleneck for getting value from AI. Only one in two organizations has moved beyond pilots
+and proofs of concept.
+
+https://services.google.com/fh/files/misc/practitioners_guide_to_mlops_whitepaper.pdf
+https://cloud.google.com/blog/topics/developers-practitioners/using-vertex-ai-rapid-model-prototyping-and-deployment
+</textarea>
+</section>
+
+<section data-markdown class="todo">
+  <textarea data-template>
+### Abstract für das Spiel (auch als morgendlicher Teaser geeignet)
+    
+Wir haben ein kleines Spiel für euch vorbereitet in dem ihr euch einen Machine Learning Ansatz auswählt. Wir stellen
+euch vorher diese Ansätze in einer Einführung vor.
+
+Im Spiel simulieren wir den produktiven Einsatz und ihr könnt nun sehen, wie sich die unterschiedlichen Ansätze
+schlagen.
+</textarea>
 </section>
 
 <section data-markdown style="font-size: x-large;">
@@ -329,64 +355,64 @@ http://www.gatsby.ucl.ac.uk/~balaji/balaji-siam-uq-2022-invited-talk.pdf
   </textarea>
 </section>
 
-<!-- <section data-markdown class="todo">
+<section data-markdown class="fragments">
   <textarea data-template>
-### 5 Runden spielen
-
-* Gewinn: Accuracy minus Baseline (raten) mal 15 pro Runde aufgerundet, z.B.
-  * (0,85 - 0,3) * 15 = _9_
-  * (0,6 - 0,3) * 15 = _4_
-
-* Kosten: Ressourcen
-  1. DL: 4 Geld pro Runde
-  1. DT: 2 Geld pro Runde
-  1. KNN: 4 Geld pro Runde
-  1. Regelsystem: 2 Geld pro Runde
+  ### Bericht der Gruppen
   
-* Kosten: Aktionen
-  * Daten beschaffen  
-    * initial: 10 Geld
-    * später: 5 Geld
-  * Passenden ML Ansatz designen: 5 Geld
-  * Extrakosten Deep Learning Ansatz designen (jede Iteration braucht länger und bessere Hardware): 5 Geld 
-  * Modell nachtrainieren: 2 Geld
-  </textarea>
-</section>
-
-
-  <section data-markdown class="todo">
-    <textarea data-template>
-### Ereignisse
-
-Normaler Würfel, 6 Seiten
-
-1. (1) Last Verändert sich
-  1. (1-3) Last steigt: Ressourcen werden teuer, mal 2, max 10
-  1. (4-6) Last sinkt: Ressourcen werden billiger, durch 2, min 1
-1. (2-3) Übles Ereignis
-  * Noch einmal würfeln
-  * Je nach Ergebnis einen der 4 Buzzer abfeuern
-  1. (1-2) Kunden fordern Erklärung
-     * Notabschaltung und Fallback auf Regelsystem wenn Erklärbarkeit nicht gegeben ist
-  1. (3-4) Investigativer Journalismus: Bias / Alterdiskriminierung
-     * Notabschaltung und Fallback auf (Not-)Regelsystem wenn Alter für Vorhersage zwingend notwendig ist
-  1. (5) Adversarial Attack: Angreifer versuchen die Vorhersage zu manipulieren
-     * Verständlichkeit / Erklärbarkeit macht den Angriff leichter, aber du bemerkst den Schaden erst spät, da kein Drift vorliegt, in diesem Fall gehst du pleite
-  1. (6) Hackerangriff
-     * Du bist aus dem Geschäft wenn du Kundendaten in Produktion hast
-1. (4-5) Die Welt ändert sich, Drift setzt ein
-  * Du musst neue Daten beschaffen: x Kosten
-  * Falls Regelsystem, keine weiteren Kosten, da direkte Anpassung
-  * Nochmal würfeln
-    1. (1-2) Das Modell performant auf den neuen Daten immer noch super, keine weiteren Aktionen und Kosten erforderlich
-    1. (3-4) Es muss mit neuen Daten trainiert werden, das langt aber: 
-       * doppelte Kosten wenn Modell nicht stabil
-    1. (5) Dramatischer Absturz der Performance: Notabschaltung und zurück zu Regelsystem, Accuracy dementsprechend dauerhaft runter
-    1. (6) Neue Modell-Architektur mit vertretbarem Aufwand stellt ursprüngliche Performance wieder her: Kosten für Passenden ML Ansatz designen (auch bei DL nur einfach)
-1. (6) Es läuft alles rund
+  1. Wer hat mit welchem Modell gewonnen?
+  1. Welche üblen Ergebnisse sind eingetreten?
+  1. Wart ihr zufrieden mit der Auswahl des Modells?
+  1. Habt ihr Gewinn gemacht?
   </textarea>
   </section>
-   -->
+  
+   <section data-markdown>
+    <textarea data-template>
+### Links      
+
+MLOps
+- https://services.google.com/fh/files/misc/practitioners_guide_to_mlops_whitepaper.pdf
+    </textarea>
+  </section>
+
+  <!-- <section data-markdown>
+    <textarea data-template>
+### Arbeitsblätter      
+
+1. Entscheidung welcher ML Ansatz: <a href='arbeitsblaetter/ML_Steckbriefe_v1.pdf'>arbeitsblaetter/ML_Steckbriefe_v1.pdf</a>,
+<a href='arbeitsblaetter/ML_Steckbriefe_v1.docx'>arbeitsblaetter/ML_Steckbriefe_v1.docx</a>
+1. Spielregeln / Kosten / Gewinn / Ereignisse: <a href='arbeitsblaetter/Spielregeln_v1.pdf'>arbeitsblaetter/Spielregeln_v1.pdf</a>,
+<a href='arbeitsblaetter/Spielregeln_v1.docx'>arbeitsblaetter/Spielregeln_v1.docx</a>
+1. Spiel-Tabelle: <a href='arbeitsblaetter/Kalkulationsblatt_v1.pdf'>arbeitsblaetter/Kalkulationsblatt_v1.pdf</a>,
+<a href='arbeitsblaetter/Kalkulationsblatt_v1.docx'>arbeitsblaetter/Kalkulationsblatt_v1.docx</a>
+
+    </textarea>
+  </section> -->
+
+  <section data-markdown>
+    <textarea data-template>
+### Folien für Exkursionen
+
+* <a href="./2022-mad-exkursion-fallbeispiel.html">Anwendung und Daten</a>
+* <a href="./2022-mad-exkursion-ml-ansaetze.html">Exkursion: ML Ansätze</a>
+* <a href="./2022-mad-exkursion-drift.html">Exkursion: Produktion, Drift, Statistik</a>
+
+    </textarea>
+  </section>
+
+  <section data-markdown>
+    <textarea data-template>
+### Kontakt 
+
+Hanna Lüschow / hanna.lueschow@openknowledge.de
+
+Oliver Zeigermann / oliver.zeigermann@openknowledge.de
+https://www.linkedin.com/in/oliver-zeigermann-34989773/
+https://twitter.com/DJCordhose
+
+    </textarea>
+  </section>
+
 			<section data-markdown>
 				<textarea data-template>
 # MLOps – wo Machine Learning auf Softwareentwicklung trifft
@@ -547,114 +573,6 @@ Betrieb
 </textarea>
 </section>
 
-<section data-markdown style="font-size: large;">
-  <textarea data-template>
-### Exemplarischer Spielverlauf
-
-<div class="container">
-  <div class="col">
-
-#### Hanna: Regelsystem
-
-* Start: _25 Geld_
-  * Kosten: 10 Geld, Daten beschaffen
-  * Gewinn / Runde: 4
-  * Betriebs-Kosten / Runde: 1 
-* Runde 1: _15 Geld_
-  * Ereignis: Drift, neue Daten beschaffen, einmalig 5 Geld
-  * Gewinn / Runde: 4
-  * Betriebs-Kosten / Runde: 1
-* Runde 2: 15 - 5 + 4 - 1 = _13 Geld_
-  * Ereignis: alles läuft rund
-  * Gewinn / Runde: 4
-  * Betriebs-Kosten / Runde: 1
-* Runde 3: 13 + 4 - 1 = _16 Geld_
-
-  </div>
-  <div class="col">
-
-#### Olli: Deep Learning
-
-* Start: _25 Geld_
-  * Kosten: 10 Geld Daten beschaffen, 5 Geld ML Ansatz, 5 Geld DL Ansatz
-  * Gewinn / Runde: 9
-  * Betriebs-Kosten / Runde: 2 
-* Runde 1: _5 Geld_
-  * Ereignis: Last sinkt, Kosten sinken
-  * Gewinn / Runde: 9
-  * Betriebs-Kosten / Runde: 1
-* Runde 2: 5 + 9 - 1 = _13 Geld_
-  * Ereignis: Drift, neue Daten beschaffen und trainieren, einmalig 7 Geld
-  * Gewinn / Runde: 9
-  * Betriebs-Kosten / Runde: 1
-* Runde 3: 13 + 9 - 1 - 7 = _14 Geld_
-
-
-
-
-  </div>
-
-</div>
-<!-- * Hanna: 25
-  * - 10 Geld, Daten beschaffen
-  * Start:
-    * Geld 15
-    * Gewinn / Runde: 4
-    * Kosten: 1 
-  * Runde 1: Drift
-    * Geld: 13
-    * Gewinn / Runde: 4
-    * Kosten: 1
-  * Runde 2: Drift
-    * Geld: 13 + 4 - 1 - 5 = 11
-    * Gewinn / Runde: 4
-    * Kosten: 1
-  * Runde 3: Nix
-    * Geld: 11 + 4 - 1 = 14
-    * Gewinn / Runde: 4
-    * Kosten: 1
-  * Runde 4: Last steigt
-    * Geld: 14 + 4 - 1 = 17
-    * Gewinn / Runde: 4
-    * Kosten: 2
-  * Runde 5: Nix
-    * Geld: 17 + 4 - 2 = 19
-    * Gewinn / Runde: 4
-    * Kosten: 2
-
-* Olli: 25
-  * - 10 Geld, Daten beschaffen
-  * - 5 Geld, ML Ansatz
-  * - 5 Geld, DL Ansatz
-  * Start:
-    * Geld 5
-    * Gewinn / Runde: 9
-    * Kosten: 2
-  * Runde 1: Last sinkt
-    * Geld: 12
-    * Gewinn / Runde: 9
-    * Kosten: 1
-  * Runde 2: Drift
-    * 12 + 9 - 1 - 7 = 13
-    * Gewinn / Runde: 9
-    * Kosten: 1
-  * Runde 3: Last steigt
-    * Geld: 13 + 9 - 1 = 21
-    * Gewinn / Runde: 9
-    * Kosten: 2
-  * Runde 4: Last sinkt
-    * Geld: 21 + 9 - 2 = 28
-    * Gewinn / Runde: 9
-    * Kosten: 1
-  * Runde 5: Nix
-    * Geld: 28 + 9 - 1 = 36
-    * Gewinn / Runde: 9
-    * Kosten: 1
- -->
-</textarea>
-</section>
-
-
 <section data-markdown>
   <textarea data-template>
 ### 5 Runden spielen
@@ -662,17 +580,6 @@ Betrieb
 ### <a href='arbeitsblaetter/Kalkulationsblatt_v1.pdf'>Blatt IV: Spiel-Tabelle</a>
 
 Würfel, auch online möglich: https://onlinewuerfel.de/
-</textarea>
-</section>
-
-<section data-markdown class="fragments">
-<textarea data-template>
-### Bericht der Gruppen
-
-1. Wer hat mit welchem Modell gewonnen?
-1. Welche üblen Ergebnisse sind eingetreten?
-1. Wart ihr zufrieden mit der Auswahl des Modells?
-1. Habt ihr Gewinn gemacht?
 </textarea>
 </section>
 
