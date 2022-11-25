@@ -57,47 +57,62 @@
 	</section>
 
 <section data-markdown>
-	<textarea data-template>
-### Monitoring mit Evidently, Prometheus und Grafana
+  <textarea data-template>
+### Verteilung?
 
-<img src="img/mlops/evidently_grafana_service.png">
+* Verteilungen
+  * die wichtigste: Normalverteilung aka Gauß-Verteilung
+* Histogramme (Binning)
 
-<small>https://evidentlyai.com/blog/evidently-and-grafana-ml-monitoring-live-dashboards
-<br>
-https://docs.evidentlyai.com/integrations/evidently-and-grafana
-</small>
+<img src="img/nobel.svg">
+
+</textarea>
+</section>
+  
+  
+  <section data-markdown class="fragments">
+    <textarea data-template>
+  ### Verteilungen
+  
+  <img src="img/causal-insurance/age-reference.png">
+  
+  Anhand des Alters der Versicherten zum Zeitpunkt des Trainings
+  </textarea>
+  </section>
+  
+
+<section data-markdown class="fragments">
+  <textarea data-template>
+### Zum Zeitpunkt des Trainings?
+
+<img src="img/drift_entschlackt.png" style="height: 100%;">
 
 </textarea>
 </section>
 
-<section data-markdown>
+<!-- <section data-markdown class="fragments">
+  <textarea data-template>
+### So sieht die Verteilung jetzt aus
+
+<img src="img/causal-insurance/age-current.png">
+
+</textarea>
+</section>
+ -->
+<section data-markdown class="fragments">
 	<textarea data-template>
-### Drift-Erkennung mit Prometheus, Evidently und Grafana
+### Driftet das?
 
-<img src="img/mlops/grafana-evidently-drift.png">
+<img src="img/causal-insurance/age_no_drift_p75.png">
 
-https://docs.evidentlyai.com/reports/data-drift
 </textarea>
 </section>
 
 <section data-markdown class="fragments">
 	<textarea data-template>
-### Wie kann Drift aussehen?
+### Und das?
 
-
-* Drift size vs. Drift ratio
-  * _Drift ratio_ beziffert den Anteil der Daten, der sich verändert
-  * _Drift size_ beziffert die Stärke des Drifts: wie weit die Daten sich verändern, die sich tatsächlich auch verändern
-* Man sollte beide Perspektiven im Blick haben
-
-</textarea>
-
-</section>
-<section data-markdown class="fragments">
-	<textarea data-template>
-### Wie kann Drift aussehen?
-
-<img src="img/drift_size_ratio.png">
+<img src="img/causal-insurance/age_drift_p0.png">
 
 </textarea>
 </section>
@@ -106,101 +121,9 @@ https://docs.evidentlyai.com/reports/data-drift
 	<textarea data-template>
 ### Wie erkennen wir Drift?
 
-* Es wird ein statistischer Test auf den Eingabe-Daten ausgeführt
-* Die Anfragen in Produktion werden verglichen mit Referenz-Datensatz, den wir zum Training benutzt haben (`datasets/insurance`)
-* Evidently sucht als Default eine passende Metrik aus, es muss also nicht unser Problem sein
+* Es wird ein statistischer Test auf den Verteilungen ausgeführt
+* Die Anfragen in Produktion werden verglichen mit Referenz-Datensatz, den wir zum Training benutzt haben
 
-https://docs.evidentlyai.com/reports/data-drift
-
-... aber ein bisschen Hintergrundwissen kann nicht schaden
-
-
-
-</textarea>
-</section>
-
-<section data-markdown>
-	<textarea data-template>
-## Was sollte man alles über Statistik wissen?
-
-* Daten können kategorial und numerisch sein
-* Die 'Klassiker' der Datenbeschreibung
-  * Mittelwert
-  * Median
-  * Varianz
-  * Standardabweichung:   
-  <math xmlns="http://www.w3.org/1998/Math/MathML">
-    <mstyle displaystyle="true" scriptlevel="0">
-      <msqrt>
-        <mfrac>
-          <mrow>
-            <mo data-mjx-texclass="OP">&#x2211;</mo>
-            <mo stretchy="false">(</mo>
-            <msub>
-              <mi>x</mi>
-              <mrow data-mjx-texclass="ORD">
-                <mi>i</mi>
-              </mrow>
-            </msub>
-            <mo>&#x2212;</mo>
-            <mrow data-mjx-texclass="ORD">
-              <mover>
-                <mi>x</mi>
-                <mo stretchy="false">-</mo>
-              </mover>
-            </mrow>
-            <msup>
-              <mo stretchy="false">)</mo>
-              <mn>2</mn>
-            </msup>
-          </mrow>
-          <mrow>
-            <mi>n</mi>
-            <mo>&#x2212;</mo>
-            <mn>1</mn>
-          </mrow>
-        </mfrac>
-      </msqrt>
-    </mstyle>
-  </math>
-
-</textarea>
-</section>
-
-<section data-markdown>
-	<textarea data-template>
-### Was sollte man alles über Statistik wissen?
-
-* Verteilungen
-  * die wichtigste: Normalverteilung (Mittelwert 0, Standardabweichung 1)
-* Histogramme (Binning)
-
-<img src="img/nobel.svg">
-
-</textarea>
-</section>
-
-<section data-markdown>
-	<textarea data-template>
-### Was sollte man alles über Statistik wissen?
-
-<img src="img/boxplot.png">
-
-</textarea>
-</section>
-
-<section data-markdown class="fragments">
-	<textarea data-template>
-### P-Werte
-
-* die statistische Verteilung der jeweiligen Features
-* weicht diese im Prod signifikant von der Verteilung im Training ab? (Nullhypothese: nein)
-* diese Abweichung wird über eine Metrik berechnet
-* es kommt eine Konfidenz heraus, ob die Nullhypothese stimmt
-* unter 5% Konfidenz geht man von einer Abweichung aus <span style="font-size: 0.95rem">(1% oder 0.1% auch möglich)</span>
-* das bedeutet, dass es eine 5% Wahrscheinlichkeit gibt, dass die Verteilungen eigentlich doch gleich sind, man es aber nur gerade schlechte Beispiele sieht
-
-https://de.wikipedia.org/wiki/P-Wert
 </textarea>
 </section>
 
@@ -219,6 +142,7 @@ es gibt leider nicht den einen passenden Test
 </textarea>
 </section>
 
+
 <section data-markdown>
 	<textarea data-template>
 ### Speziell für Drift-Erkennung in Frage kommende Tests
@@ -233,7 +157,7 @@ https://evidentlyai.com/blog/data-drift-detection-large-datasets
 </textarea>
 </section>
 
-<section data-markdown>
+<section data-markdown  class="fragments">
 	<textarea data-template>
 ### Kolmogorov-Smirnov-Test
 
@@ -249,163 +173,40 @@ https://evidentlyai.com/blog/data-drift-detection-large-datasets
 </textarea>
 </section>
 
-<section data-markdown>
+<section data-markdown class="fragments">
 	<textarea data-template>
-### Population Stability Index
+### P-Werte
 
-* numerisch und kategorisch
-* je höher der Wert, desto stärker der Drift
-  * PSI < 0.1: nicht signifikanter Drift
-  * 0.1 ≤ PSI < 0.3: moderater Drift
-  * PSI ≥ 0.2: signifikanter Drift
-* weniger empfindlich als der KS-Test
-* arbeitet mit Bins, daher unabhängig von der sample size
-
-<math xmlns="http://www.w3.org/1998/Math/MathML" display="block">
-  <mi>P</mi>
-  <mi>S</mi>
-  <mi>I</mi>
-  <mo>=</mo>
-  <mo>&#x2211;<!-- ∑ --></mo>
-  <mrow class="MJX-TeXAtom-ORD">
-
-  </mrow>
-  <mrow class="MJX-TeXAtom-ORD">
-    <mo maxsize="1.623em" minsize="1.623em">(</mo>
-  </mrow>
-  <mrow class="MJX-TeXAtom-ORD">
-    <mo maxsize="1.2em" minsize="1.2em">(</mo>
-  </mrow>
-  <mi>A</mi>
-  <mi>c</mi>
-  <mi>t</mi>
-  <mi>u</mi>
-  <mi>a</mi>
-  <mi>l</mi>
-  <mi mathvariant="normal">&#x0025;<!-- % --></mi>
-  <mo>&#x2212;<!-- − --></mo>
-  <mi>E</mi>
-  <mi>x</mi>
-  <mi>p</mi>
-  <mi>e</mi>
-  <mi>c</mi>
-  <mi>t</mi>
-  <mi>e</mi>
-  <mi>d</mi>
-  <mi mathvariant="normal">&#x0025;<!-- % --></mi>
-  <mrow class="MJX-TeXAtom-ORD">
-    <mo maxsize="1.2em" minsize="1.2em">)</mo>
-  </mrow>
-  <mo>&#x00D7;<!-- × --></mo>
-  <mi>l</mi>
-  <mi>n</mi>
-  <mrow class="MJX-TeXAtom-ORD">
-    <mo maxsize="1.2em" minsize="1.2em">(</mo>
-  </mrow>
-  <mstyle displaystyle="true" scriptlevel="0">
-    <mfrac>
-      <mrow>
-        <mi>A</mi>
-        <mi>c</mi>
-        <mi>t</mi>
-        <mi>u</mi>
-        <mi>a</mi>
-        <mi>l</mi>
-        <mi mathvariant="normal">&#x0025;<!-- % --></mi>
-      </mrow>
-      <mrow>
-        <mi>E</mi>
-        <mi>x</mi>
-        <mi>p</mi>
-        <mi>e</mi>
-        <mi>c</mi>
-        <mi>t</mi>
-        <mi>e</mi>
-        <mi>d</mi>
-        <mi mathvariant="normal">&#x0025;<!-- % --></mi>
-      </mrow>
-    </mfrac>
-  </mstyle>
-  <mrow class="MJX-TeXAtom-ORD">
-    <mo maxsize="1.2em" minsize="1.2em">)</mo>
-  </mrow>
-  <mrow class="MJX-TeXAtom-ORD">
-    <mo maxsize="1.623em" minsize="1.623em">)</mo>
-  </mrow>
-</math>
-
-*Wann nutzen?* Wenn man im Finanzbereich unterwegs ist und/oder 
-wenn bei größeren Datenmengen nur stärkere Veränderungen erkannt werden sollen
-
-https://mwburke.github.io/data%20science/2018/04/29/population-stability-index.html
+* die statistische Verteilung der jeweiligen Features
+* weicht diese im Prod signifikant von der Verteilung im Training ab? (Nullhypothese: nein)
+* diese Abweichung wird über eine Metrik berechnet
+* es kommt eine Konfidenz heraus, ob die Nullhypothese stimmt
+* unter 5% Konfidenz geht man von einer Abweichung aus <span style="font-size: 0.95rem">(1% oder 0.1% auch möglich)</span>
+* das bedeutet, dass es eine 5% Wahrscheinlichkeit gibt, dass die Verteilungen eigentlich doch gleich sind, man es aber nur gerade schlechte Beispiele sieht
 
 </textarea>
 </section>
 
 <section data-markdown>
 	<textarea data-template>
-### Kullback-Leibler-Divergenz
+### P-Werte für unsere beiden potentiellen Drifts
 
-* auch bekannt als relative Entropie
-* numerisch und kategorisch
-* Werte von 0 bis &infin;
-    * je höher der Wert, desto unterschiedlicher die Verteilungen
-* auch hier: Bins &rarr; unabhängig von sample size
-* nicht symmetrisch
-
-*Wann nutzen?* ähnlich zu PSI: bei großen Datensets, wenn nur stärkere Veränderungen entdeckt werden sollen
+<div class="container">
+<div class="col">
+  <img src="img/causal-insurance/age_no_drift_p75.png" style="height: 100%;">
+  <em>p-Wert (Wahrscheinlichkeit der Nullhypothese) = 75%, also kein Drift</em>
+</div>
+<div class="col">
+  <img src="img/causal-insurance/age_drift_p0.png" style="height: 100%;">
+  <em>p-Wert (Wahrscheinlichkeit der Nullhypothese) < 0,1%, also Drift</em>
+  
+</div>
+</div>
 
 </textarea>
 </section>
 
-<section data-markdown>
-	<textarea data-template>
-### Jensen-Shannon-Distanz
-
-* Jensen-Shannon-Distanz ist die Wurzel aus der Divergenz
-* zwischen 0 und 1
-* ab 0.1 gehen wir von einem Drift aus
-* funktioniert auch für kategorische Daten
-* basiert auf KL-Divergenz
-* Histogramme werden verglichen, Größe des Samples daher egal
-* Binning für kategorische Daten offensichtlich
-* Intuition: wie viel Information/Entropie/Überraschung steckt im Unterschied der beiden Verteilungen?
-
-*Wann nutzen?* Auf größeren Datensets (wenn die KL-Divergenz/PSI nicht empfindlich genug sind)
-
-https://en.wikipedia.org/wiki/Jensen%E2%80%93Shannon_divergence
-https://en.wikipedia.org/wiki/Kullback%E2%80%93Leibler_divergence
-</textarea>
-</section>
-
-<section data-markdown>
-	<textarea data-template>
-### Wasserstein-Distanz
-
-_Wenn jede Verteilung als ein Haufen von „Erde“ angehäuft auf dem metrischen Raum betrachtet wird, dann beschreibt diese
-Metrik die minimalen „Kosten“ der Umwandlung eines Haufens in den anderen._
-
-* nicht zu sensitiv, zeigt nur größere Veränderungen an
-* normiert in Veränderungen in Standardabweichungen
-* kann (offensichtlich) über 1 gehen
-* ab 0.1 gehen wir von einem Drift aus
-* funktioniert nur für numerische Daten
-
-*Wann nutzen?* Als Kompromiss zwischen KS (zu empfindlich) und PSI/JS (nicht empfindlich genug)
-
-https://de.wikipedia.org/wiki/Wasserstein-Metrik
-</textarea>
-</section>
-
-<section data-markdown>
-  <textarea data-template>
-### Manche Features driften
-
-<img src="img/feature-drift.png">
-  </textarea>
-</section>
-
-<section data-markdown>
+<section data-markdown class="fragments">
 ## Maßnahmen bei Drift
 
 * *Neue Version des Modells trainieren*
@@ -419,21 +220,6 @@ https://de.wikipedia.org/wiki/Wasserstein-Metrik
 * Sehr schnelle Maßnahme: Fallback
   * Manuell
   * Heuristik / Baseline
-</section>
-
-<section data-markdown>
-	<textarea data-template>
-### Zusammenfassung: Arten von Drift
-
-* _Covariate / Input / Data drift_: Verteilung der Eingabe hat sich geändert
-* _Prior / Label / Prediction drift_: Verteilung der Vorhersage hat sich geändert
-* _Concept / Model drift_: Zusammenhang zwischen Eingabe und Vorhersage hat sich geändert
-
-<img src="https://docs.seldon.io/projects/alibi-detect/en/stable/_images/bg_2d_drift.png" style="height: 100%;">
-
-<small>https://docs.seldon.io/projects/alibi-detect/en/stable/cd/background.html#what-is-drift
-</small>
-</textarea>
 </section>
 
 <section data-markdown class="fragments">

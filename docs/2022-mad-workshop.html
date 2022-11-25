@@ -355,6 +355,83 @@ schlagen.
   </textarea>
 </section>
 
+
+<section data-markdown style="font-size: x-large;">
+  <textarea data-template>
+## Vorbereitung 
+- Zettel (Hanna)
+- Würfel (Olli)
+- Buzzer (Olli)
+- Kugelschreiber (Olli)
+
+## Vor Ort
+- Tische so dass man 4-5 Leute zusammen an einem Tisch hat
+- Kugelschreiber
+- Würfel
+- Buzzer
+
+## Ablauf
+
+- Intro, diese Folien (30 min) 
+  - Plan für den Workshop - Olli
+  - Gruppen von 4-5 - Hanna
+    - Kleine Vorstellung
+  - Kurze Umfrage im Plenum - Olli
+  - Was ist MLOps, Folien - Olli
+  - Was ist ML, Prozess in einem ML Projekt, Folien - Olli
+- Spielregeln (60 min) 
+  - Spielidee - Hanna
+  - Ansätze
+    - Eine Folie Features wie in Anleitung - Olli 
+    - Eine Folie Regelsystem - Olli
+    - ML Ansätze interaktives Demo: https://ml-playground.com - Hanna
+  - Alle Zettel austeilen
+  - Steckbriefe - Hanna
+    - gemeinsam durchgehen
+    - Erklärungen für später auch im Glossar 
+  - Spielvorbereitung - Hanna
+  - Spielablauf, dabei Kalkulationsblatt Beispiel - Olli
+  - Spielende - Olli
+
+- Spielrunde 1 (30 min) - Hanna
+
+PAUSE (15-30 min)
+  
+  - Reflektion - Hanna
+- Drift Vortrag (30 min) - Olli 
+- Spielrunde 2 (30 min) - Hanna
+  - Reflektion - Hanna
+- Abschluss, Zusammenfassung (5 min) Hanna / Olli
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Basis-Satz von Regeln
+
+```
+if training: 
+    return LOW_RISK
+if age < 30:
+    if power > 130:
+        return HIGH_RISK
+    else:
+        return MEDIUM_RISK
+if age > 50:
+    return HIGH_RISK
+if emergency_braking:
+    return LOW_RISK
+if milage > 50:
+    return HIGH_RISK
+if milage > 30:
+    return MEDIUM_RISK
+# default
+return LOW_RISK
+```
+</textarea>
+</section>
+
+
 <section data-markdown class="fragments">
   <textarea data-template>
   ### Bericht der Gruppen
@@ -400,6 +477,191 @@ MLOps
     </textarea>
   </section>
 
+
+  <section data-markdown>
+    <textarea data-template>
+# Intro      
+    </textarea>
+  </section>
+  
+
+  <section data-markdown>
+    <textarea data-template>
+  <img src="img/ml-vs-dev-1.png">		
+    </textarea>
+  </section>
+  
+  <section data-markdown>
+    <textarea data-template>
+  <img src="img/ml-vs-dev-2.png">		
+    </textarea>
+  </section>
+  
+  <section data-markdown>
+    <textarea data-template>
+  ### KI vs Machine Learning vs Deep Learning
+  
+  <img src="img/KI.png">		
+    </textarea>
+  </section>
+  
+  <section data-markdown class="fragments">
+    <textarea data-template>
+  ### Wann ist KI/ML sinnvoll?
+  
+  * Die Lösung des vorliegenden Problems ist unbekannt oder _schwer zu spezifizieren_
+  * Es liegen _Daten_ mit einer klaren, einfachen Eingabe und bestenfalls auch passender Ausgabe vor
+  * Es gibt _Muster_ in der Eingabe, die zur Vorhersage verwendet werden können
+  * Die Lösung des Problems kann Fehler oder _Unsicherheiten_ tolerieren
+    * _80% Genauigkeit_ werden selten übertroffen
+  * Wir sind bereit und in der Lage, in einer initialen Phase _Experimente mit offenem Ausgang_ durchzuführen
+  </textarea>
+  </section>
+  
+  
+  <section data-markdown>
+    <textarea data-template>
+  ### Phasen eines ML Projekts
+  
+  <img src="img/ml-workflow/6.PNG" class="fragment">
+  
+  </textarea>
+  </section>
+  
+    <section data-markdown class="fragments">
+  ### Phase I: Exploration
+  
+  * in der ersten Phase eines Machine Learning Projekts wird die Anwendungsidee validiert und ein
+  funktionsfähiges Modell entwickelt.
+  * dabei ist ein schnelles iterieren und ausprobieren von Ideen zentral
+  * das Ziel ist *nicht* ein sinnvolles Stück Software
+  * Scripting passt hier besser als Programmieren als Ausdruck für die Tätigkeit
+  * das Ziel ist eine schnelle Entwicklung
+  * Phase 1 endet entweder mit
+    * einem funktionsfähigen Modell mit dem man in Phase II übergeht oder
+    * dem Verwerfen des Ansatzes
+  
+    </section>
+  
+    <section data-markdown class="fragments">
+  ###  Was brauchen wir für eine Überprüfung eines Anwendungsfalls?
+  
+  1. Erhoffter *Geschäftsnutzen*
+  1. eine *Metrik* als Maß des Erfolgs
+  1. Verfügbare *Daten*
+  1. (Machine Learning-)*Ansatz*
+  1. *Rahmenbedingungen*
+  
+  </section>
+  
+    <section data-markdown>
+      <textarea data-template>
+  ### Typische Rahmenbedindungen
+  
+  * Datenschutz
+  * Erklärbarkeit
+  * Performance / Latenz
+    * Prediction
+    * Training
+  * Welche Genauigkeit brauchen wir für unseren Anwendungsfall?
+    * Welche Metrik: Accuracy vs False Negatives vs False Positives
+    * Fallbacks
+  * Unerwünschte Biases
+  * Stabilität: wenn mit neuen, aber ähnlichen Daten trainiert wird, sollte sich das Modell vergleichbar verhalten 
+  
+  </textarea>
+  </section>  
+  
+  <section data-markdown>
+    <textarea data-template>
+# Exkursion: Drift
+
+</textarea>
+</section>
+
+<section data-markdown>
+    <textarea data-template>
+### Wir erinnern uns: ML Modelle brauchen permanentes Monitoring und Wartung
+
+<img src='img/verfall-2.PNG'>
+
+</textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+### Phasen eines ML Projekts
+
+<img src="img/ml-workflow/6.PNG" class="fragment">
+
+</textarea>
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Daten entstehen über die Zeit
+
+<img src="img/drift-v2.png">
+
+</textarea>
+</section>
+
+	<section data-markdown class="fragments">
+		<textarea data-template>
+### Woher weiß man, dass man ein neues Modell in Produktion braucht?
+
+1. Schon in der Konzeptionsphase prüfen, wie sich das Modell auf neueren Daten verhält
+   * Wie schnell degradiert die Performance?
+   * Mindestens einmal im Jahr, damit man überhaupt noch weiß, wie es geht
+1. Wenn die Vorhersage-Qualität des Modells in Produktion nachlässt
+   * Dafür braucht man die Ground Truth der Daten aus Produktion
+   * Manchmal bekommt man diese unmittelbar nach der Vorhersage, z.B. durch die Reaktion eines menschlichen Benutzers
+   * Oft aber auch erst nach nennenswerter Verzögerung
+1. *Wenn sich die Verteilung der Daten der Anfragen oder Vorhersagen deutlich von denen des Trainings unterscheiden* 
+
+</textarea>
+	</section>
+
+  <section data-markdown class="fragments">
+    <textarea data-template>
+  ### Wie kann Drift aussehen?
+  
+  
+  * Drift size vs. Drift ratio
+    * _Drift ratio_ beziffert den Anteil der Daten, der sich verändert
+    * _Drift size_ beziffert die Stärke des Drifts: wie weit die Daten sich verändern, die sich tatsächlich auch verändern
+  * Man sollte beide Perspektiven im Blick haben
+  
+  </textarea>
+  
+  </section>
+  <section data-markdown class="fragments">
+    <textarea data-template>
+  ### Wie kann Drift aussehen?
+  
+  <img src="img/drift_size_ratio.png" style="height: 100%;">
+  
+  </textarea>
+  </section>
+  
+  <section data-markdown class="fragments">
+    <textarea data-template>
+  ### Wie erkennen wir Drift?
+  
+  * Es wird ein statistischer Test auf den Eingabe-Daten ausgeführt
+  * Die Anfragen in Produktion werden verglichen mit Referenz-Datensatz, den wir zum Training benutzt haben (`datasets/insurance`)
+  * Evidently sucht als Default eine passende Metrik aus, es muss also nicht unser Problem sein
+  
+  https://docs.evidentlyai.com/reports/data-drift
+  
+  ... aber ein bisschen Hintergrundwissen kann nicht schaden
+  
+  
+  
+  </textarea>
+  </section>
+    
+
   <section data-markdown>
     <textarea data-template>
 ### Kontakt 
@@ -422,6 +684,8 @@ MAD 2022, https://mad-summit.de/fundamentals/mlops-wo-machine-learning-auf-softw
 Hanna Lüschow / hanna.lueschow@openknowledge.de
 
 Oliver Zeigermann / oliver.zeigermann@openknowledge.de
+
+<img src="img/mad-qr.png">
 
 Folien: https://bit.ly/mad-2022-mlops
     </textarea>
