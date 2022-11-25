@@ -285,18 +285,8 @@ http://www.gatsby.ucl.ac.uk/~balaji/balaji-siam-uq-2022-invited-talk.pdf
 </section>
  -->
 
- <section data-markdown class="todo">
-  <textarea data-template>
-- Ablauf möglich ohne Slides?
-  - https://www.youtube.com/watch?v=fQdAHqOrM2w
-- Intro: Was ist MLOps und was ist das Ziel das Workshops
-- Hacking the system: https://www.instagram.com/reel/CkQUhLov9_u/?igshid=MDJmNzVkMjY=
-- Ouf Papier link und QR Code auf das hier, hier Slides und Links haben
-- Exkursionen glatt machen
-  </textarea>
-</section>
 
-<section data-markdown class="todo">
+<!-- <section data-markdown class="todo">
   <textarea data-template>
 
 Despite the growing recognition of AI/ML as a crucial pillar of digital transformation, successful deployments and
@@ -307,57 +297,9 @@ https://services.google.com/fh/files/misc/practitioners_guide_to_mlops_whitepape
 https://cloud.google.com/blog/topics/developers-practitioners/using-vertex-ai-rapid-model-prototyping-and-deployment
 </textarea>
 </section>
-
-<section data-markdown class="todo">
-  <textarea data-template>
-### Abstract für das Spiel (auch als morgendlicher Teaser geeignet)
-    
-Wir haben ein kleines Spiel für euch vorbereitet in dem ihr euch einen Machine Learning Ansatz auswählt. Wir stellen
-euch vorher diese Ansätze in einer Einführung vor.
-
-Im Spiel simulieren wir den produktiven Einsatz und ihr könnt nun sehen, wie sich die unterschiedlichen Ansätze
-schlagen.
-</textarea>
-</section>
-
-<section data-markdown style="font-size: x-large;">
-  <textarea data-template>
-## Spielvorbereitung
-
-### Ziel
-* Im Spiel: Möglichst viel Geld machen, und nicht aus dem Geschäft fliegen
-* Für uns: Teilnehmer erleben MLOps, anstatt sich nur Gesabbel anzuhören, MLOps wird erlebbar
-
-### Material Pro Team
-1. Ein Würfel, auch möglich: https://onlinewuerfel.de/
-1. Einen Satz von Zetteln
-   <!-- 1. Überblick: <a href='arbeitsblaetter/blatt1.pdf'>arbeitsblaetter/blatt1.pdf</a> -->
-   1. Entscheidung welcher ML Ansatz: <a href='arbeitsblaetter/ML_Steckbriefe_v1.pdf'>arbeitsblaetter/ML_Steckbriefe_v1.pdf</a>,
-   <a href='arbeitsblaetter/ML_Steckbriefe_v1.docx'>arbeitsblaetter/ML_Steckbriefe_v1.docx</a>
-   1. Spielregeln / Kosten / Gewinn / Ereignisse: <a href='arbeitsblaetter/Spielregeln_v1.pdf'>arbeitsblaetter/Spielregeln_v1.pdf</a>,
-   <a href='arbeitsblaetter/Spielregeln_v1.docx'>arbeitsblaetter/Spielregeln_v1.docx</a>
-   1. Spiel-Tabelle: <a href='arbeitsblaetter/Kalkulationsblatt_v1.pdf'>arbeitsblaetter/Kalkulationsblatt_v1.pdf</a>,
-   <a href='arbeitsblaetter/Kalkulationsblatt_v1.docx'>arbeitsblaetter/Kalkulationsblatt_v1.docx</a>
-  </textarea>
-</section>
-
-<section data-markdown style="font-size: x-large;">
-  <textarea data-template>
-## Ablauf
-
-1. Spielregeln / Kosten / Gewinn / Ereignisse: <a href='arbeitsblaetter/Spielregeln_v1.pdf'>arbeitsblaetter/Spielregeln_v1.pdf</a>,
-<a href='arbeitsblaetter/Spielregeln_v1.docx'>arbeitsblaetter/Spielregeln_v1.docx</a>
-1. <a href="./2022-mad-exkursion-ml-ansaetze.html">Exkursion: ML Ansätze</a> an der Stelle von der es in den Spielregeln verlinkt ist (bit.ly?)
-1. Spiel spielen mit <a href='arbeitsblaetter/Kalkulationsblatt_v1.docx'>arbeitsblaetter/Kalkulationsblatt_v1.docx</a>
-1. <a href="./2022-mad-exkursion-drift.html">Exkursion: Produktion, Drift, Statistik</a>
-1. Spiel noch einmal spielen mit <a href='arbeitsblaetter/Kalkulationsblatt_v1.docx'>arbeitsblaetter/Kalkulationsblatt_v1.docx</a>
-
-  </textarea>
-</section>
-
-<section data-markdown style="font-size: x-large;">
-  <textarea data-template>
-## Vorbereitung 
+ -->
+<!-- 
+## Vorbereitung
 - Zettel (Hanna)
 - Würfel (Olli)
 - Buzzer (Olli)
@@ -370,13 +312,13 @@ schlagen.
 - Buzzer
 
 ## Ablauf
-- Intro, diese Folien (30 min) 
+- Intro (30 min) 
   - Plan für den Workshop - Olli
   - Gruppen von 4-5 - Hanna
     - Kleine Vorstellung
   - Kurze Umfrage im Plenum - Olli
-  - Was ist MLOps, Folien - Olli
   - Was ist ML, Prozess in einem ML Projekt, Folien - Olli
+  - Was ist MLOps, Folien - Olli
 - Spielregeln (60 min) 
   - Spielidee - Hanna
   - Ansätze
@@ -400,282 +342,11 @@ PAUSE (15-30 min)
 - Spielrunde 2 (30 min) - Hanna
   - Reflektion - Hanna
 - Abschluss, Zusammenfassung (5 min) Hanna / Olli
-</textarea>
-</section>
-
-<section data-markdown>
-	<textarea data-template>
-## Basis-Satz von Regeln
-
-```
-if training: 
-    return LOW_RISK
-if age < 30:
-    if power > 130:
-        return HIGH_RISK
-    else:
-        return MEDIUM_RISK
-if age > 50:
-    return HIGH_RISK
-if emergency_braking:
-    return LOW_RISK
-if milage > 50:
-    return HIGH_RISK
-if milage > 30:
-    return MEDIUM_RISK
-# default
-return LOW_RISK
-```
-</textarea>
-</section>
-
-
-<section data-markdown class="fragments">
-  <textarea data-template>
-  ### Bericht der Gruppen
-  
-  1. Wer hat mit welchem Modell gewonnen?
-  1. Welche üblen Ergebnisse sind eingetreten?
-  1. Wart ihr zufrieden mit der Auswahl des Modells?
-  1. Habt ihr Gewinn gemacht?
-  </textarea>
-  </section>
-  
-   <section data-markdown>
-    <textarea data-template>
-### Links      
-
-MLOps
-- https://services.google.com/fh/files/misc/practitioners_guide_to_mlops_whitepaper.pdf
-    </textarea>
-  </section>
-
-  <!-- <section data-markdown>
-    <textarea data-template>
-### Arbeitsblätter      
-
-1. Entscheidung welcher ML Ansatz: <a href='arbeitsblaetter/ML_Steckbriefe_v1.pdf'>arbeitsblaetter/ML_Steckbriefe_v1.pdf</a>,
-<a href='arbeitsblaetter/ML_Steckbriefe_v1.docx'>arbeitsblaetter/ML_Steckbriefe_v1.docx</a>
-1. Spielregeln / Kosten / Gewinn / Ereignisse: <a href='arbeitsblaetter/Spielregeln_v1.pdf'>arbeitsblaetter/Spielregeln_v1.pdf</a>,
-<a href='arbeitsblaetter/Spielregeln_v1.docx'>arbeitsblaetter/Spielregeln_v1.docx</a>
-1. Spiel-Tabelle: <a href='arbeitsblaetter/Kalkulationsblatt_v1.pdf'>arbeitsblaetter/Kalkulationsblatt_v1.pdf</a>,
-<a href='arbeitsblaetter/Kalkulationsblatt_v1.docx'>arbeitsblaetter/Kalkulationsblatt_v1.docx</a>
-
-    </textarea>
-  </section> -->
-
-  <section data-markdown>
-    <textarea data-template>
-### Folien für Exkursionen
-
-* <a href="./2022-mad-exkursion-fallbeispiel.html">Anwendung und Daten</a>
-* <a href="./2022-mad-exkursion-ml-ansaetze.html">Exkursion: ML Ansätze</a>
-* <a href="./2022-mad-exkursion-drift.html">Exkursion: Produktion, Drift, Statistik</a>
-
-    </textarea>
-  </section>
-
-
-  <section data-markdown>
-    <textarea data-template>
-# Intro      
-    </textarea>
-  </section>
-  
-
-  <section data-markdown>
-    <textarea data-template>
-  <img src="img/ml-vs-dev-1.png">		
-    </textarea>
-  </section>
-  
-  <section data-markdown>
-    <textarea data-template>
-  <img src="img/ml-vs-dev-2.png">		
-    </textarea>
-  </section>
-  
-  <section data-markdown>
-    <textarea data-template>
-  ### KI vs Machine Learning vs Deep Learning
-  
-  <img src="img/KI.png">		
-    </textarea>
-  </section>
-  
-  <section data-markdown class="fragments">
-    <textarea data-template>
-  ### Wann ist KI/ML sinnvoll?
-  
-  * Die Lösung des vorliegenden Problems ist unbekannt oder _schwer zu spezifizieren_
-  * Es liegen _Daten_ mit einer klaren, einfachen Eingabe und bestenfalls auch passender Ausgabe vor
-  * Es gibt _Muster_ in der Eingabe, die zur Vorhersage verwendet werden können
-  * Die Lösung des Problems kann Fehler oder _Unsicherheiten_ tolerieren
-    * _80% Genauigkeit_ werden selten übertroffen
-  * Wir sind bereit und in der Lage, in einer initialen Phase _Experimente mit offenem Ausgang_ durchzuführen
-  </textarea>
-  </section>
-  
-  
-  <section data-markdown>
-    <textarea data-template>
-  ### Phasen eines ML Projekts
-  
-  <img src="img/ml-workflow/6.PNG" class="fragment">
-  
-  </textarea>
-  </section>
-  
-    <section data-markdown class="fragments">
-  ### Phase I: Exploration
-  
-  * in der ersten Phase eines Machine Learning Projekts wird die Anwendungsidee validiert und ein
-  funktionsfähiges Modell entwickelt.
-  * dabei ist ein schnelles iterieren und ausprobieren von Ideen zentral
-  * das Ziel ist *nicht* ein sinnvolles Stück Software
-  * Scripting passt hier besser als Programmieren als Ausdruck für die Tätigkeit
-  * das Ziel ist eine schnelle Entwicklung
-  * Phase 1 endet entweder mit
-    * einem funktionsfähigen Modell mit dem man in Phase II übergeht oder
-    * dem Verwerfen des Ansatzes
-  
-    </section>
-  
-    <section data-markdown class="fragments">
-  ###  Was brauchen wir für eine Überprüfung eines Anwendungsfalls?
-  
-  1. Erhoffter *Geschäftsnutzen*
-  1. eine *Metrik* als Maß des Erfolgs
-  1. Verfügbare *Daten*
-  1. (Machine Learning-)*Ansatz*
-  1. *Rahmenbedingungen*
-  
-  </section>
-  
-    <section data-markdown>
-      <textarea data-template>
-  ### Typische Rahmenbedindungen
-  
-  * Datenschutz
-  * Erklärbarkeit
-  * Performance / Latenz
-    * Prediction
-    * Training
-  * Welche Genauigkeit brauchen wir für unseren Anwendungsfall?
-    * Welche Metrik: Accuracy vs False Negatives vs False Positives
-    * Fallbacks
-  * Unerwünschte Biases
-  * Stabilität: wenn mit neuen, aber ähnlichen Daten trainiert wird, sollte sich das Modell vergleichbar verhalten 
-  
-  </textarea>
-  </section>  
-  
-  <section data-markdown>
-    <textarea data-template>
-# Exkursion: Drift
-
-</textarea>
-</section>
-
-<section data-markdown>
-    <textarea data-template>
-### Wir erinnern uns: ML Modelle brauchen permanentes Monitoring und Wartung
-
-<img src='img/verfall-2.PNG'>
-
-</textarea>
-</section>
-
-<section data-markdown>
-  <textarea data-template>
-### Phasen eines ML Projekts
-
-<img src="img/ml-workflow/6.PNG" class="fragment">
-
-</textarea>
-</section>
-
-<section data-markdown>
-	<textarea data-template>
-## Daten entstehen über die Zeit
-
-<img src="img/drift-v2.png">
-
-</textarea>
-</section>
-
-	<section data-markdown class="fragments">
-		<textarea data-template>
-### Woher weiß man, dass man ein neues Modell in Produktion braucht?
-
-1. Schon in der Konzeptionsphase prüfen, wie sich das Modell auf neueren Daten verhält
-   * Wie schnell degradiert die Performance?
-   * Mindestens einmal im Jahr, damit man überhaupt noch weiß, wie es geht
-1. Wenn die Vorhersage-Qualität des Modells in Produktion nachlässt
-   * Dafür braucht man die Ground Truth der Daten aus Produktion
-   * Manchmal bekommt man diese unmittelbar nach der Vorhersage, z.B. durch die Reaktion eines menschlichen Benutzers
-   * Oft aber auch erst nach nennenswerter Verzögerung
-1. *Wenn sich die Verteilung der Daten der Anfragen oder Vorhersagen deutlich von denen des Trainings unterscheiden* 
-
-</textarea>
-	</section>
-
-  <section data-markdown class="fragments">
-    <textarea data-template>
-  ### Wie kann Drift aussehen?
-  
-  
-  * Drift size vs. Drift ratio
-    * _Drift ratio_ beziffert den Anteil der Daten, der sich verändert
-    * _Drift size_ beziffert die Stärke des Drifts: wie weit die Daten sich verändern, die sich tatsächlich auch verändern
-  * Man sollte beide Perspektiven im Blick haben
-  
-  </textarea>
-  
-  </section>
-  <section data-markdown class="fragments">
-    <textarea data-template>
-  ### Wie kann Drift aussehen?
-  
-  <img src="img/drift_size_ratio.png" style="height: 100%;">
-  
-  </textarea>
-  </section>
-  
-  <section data-markdown class="fragments">
-    <textarea data-template>
-  ### Wie erkennen wir Drift?
-  
-  * Es wird ein statistischer Test auf den Eingabe-Daten ausgeführt
-  * Die Anfragen in Produktion werden verglichen mit Referenz-Datensatz, den wir zum Training benutzt haben (`datasets/insurance`)
-  * Evidently sucht als Default eine passende Metrik aus, es muss also nicht unser Problem sein
-  
-  https://docs.evidentlyai.com/reports/data-drift
-  
-  ... aber ein bisschen Hintergrundwissen kann nicht schaden
-  
-  
-  
-  </textarea>
-  </section>
-    
-
-  <section data-markdown>
-    <textarea data-template>
-### Kontakt 
-
-Hanna Lüschow / hanna.lueschow@openknowledge.de
-
-Oliver Zeigermann / oliver.zeigermann@openknowledge.de
-https://www.linkedin.com/in/oliver-zeigermann-34989773/
-https://twitter.com/DJCordhose
-
-    </textarea>
-  </section>
+   -->
 
 			<section data-markdown>
 				<textarea data-template>
-# MLOps – wo Machine Learning auf Softwareentwicklung trifft
+## MLOps – wo Machine Learning auf Softwareentwicklung trifft
 
 MAD 2022, https://mad-summit.de/fundamentals/mlops-wo-machine-learning-auf-softwareentwicklung-trifft/
 
@@ -683,9 +354,10 @@ Hanna Lüschow / hanna.lueschow@openknowledge.de
 
 Oliver Zeigermann / oliver.zeigermann@openknowledge.de
 
-<img src="img/mad-qr.png">
-
 Folien: https://bit.ly/mad-2022-mlops
+<br>
+<img src="img/mad-qr.png" style="height: 200px;">
+
     </textarea>
 			</section>
 
@@ -717,134 +389,451 @@ ML Stratege@OPEN KNOWLEDGE
 
 <section data-markdown>
 	<textarea data-template>
-### Gruppen
-
-1. Tut euch mit euren Nachbarn in Gruppen von ca. 5 Menschen zusammen
-1. Stellt euch kurz einander vor, z.B.
-  * Was macht ihr?
-  * Was wisst ihr schon?
-  * Warum seid ihr hier?
-</textarea>
-</section>
-
-<section data-markdown>
-	<textarea data-template>
 ## Ablauf
 
-### Teil I: Vorbereitung
-1. Story, Überblick Vogelperspektive
-1. Anwendung und Daten
-1. Exkursion: ML Ansätze
-1. Spielvorbereitung: ML Ansatz auswählen
+### Teil I: 
+1. Intro
+1. Spielregeln
+1. ML Ansätze
+1. Spielrunde 1
 
-### Teil II: Betrieb
-1. Exkursion: Produktion, Drift, Statistik
-1. Spielverlauf: Model in Produktion betreiben
-1. Bericht / Auswertung
+### PAUSE
+
+### Teil II 
+1. Drift verstehen
+1. Spielrunde 2
+1. Abschluss, Zusammenfassung
 </textarea>
 </section>
 
 <section data-markdown>
   <textarea data-template>
-# Teil I
+### Arbeitsblätter      
 
-Vorbereitung
+1. Entscheidung welcher ML Ansatz: <a href='arbeitsblaetter/Steckbriefe.pdf'>arbeitsblaetter/Steckbriefe.pdf</a>
+1. Spielregeln / Kosten / Gewinn / Ereignisse: <a href='arbeitsblaetter/Spielregeln.pdf'>arbeitsblaetter/Spielregeln.pdf</a>,
+1. Spiel-Tabelle: <a href='arbeitsblaetter/Kalkulationsblatt.pdf'>arbeitsblaetter/Kalkulationsblatt.pdf</a>
+
   </textarea>
 </section>
 
 <section data-markdown>
 	<textarea data-template>
-## Story, Überblick Vogelperspektive
+### Gruppen und Umfrage
 
-### <a href='arbeitsblaetter/blatt1.pdf'>Blatt I</a>
-
-<!-- <a href="https://miro.com/app/board/uXjVPPE7mCg=/?share_link_id=235653251419">Story, Überblick Vogelperspektive</a> -->
+1. Tut euch mit euren Nachbarn in Gruppen von 4-5 Menschen zusammen
+1. Stellt euch kurz einander vor, z.B.
+   * Was macht ihr?
+   * Was wisst ihr schon?
+   * Warum seid ihr hier?
+1. Umfrage im Plenum  
 </textarea>
 </section>
 
 <section data-markdown>
-	<textarea data-template>
-## Anwendung und Daten
+  <textarea data-template>
+# Intro
+  </textarea>
+</section>
 
-<a href="./2022-mad-exkursion-fallbeispiel.html">Anwendung und Daten</a>
+<section data-markdown>
+  <textarea data-template>
+<img src="img/ml-vs-dev-1.png">		
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+<img src="img/ml-vs-dev-2.png">		
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+### KI vs Machine Learning vs Deep Learning
+
+<img src="img/KI.png">		
+  </textarea>
+</section>
+
+<section data-markdown class="fragments">
+  <textarea data-template>
+### Wann ist KI/ML sinnvoll?
+
+* Die Lösung des vorliegenden Problems ist unbekannt oder _schwer zu spezifizieren_
+* Es liegen _Daten_ mit einer klaren, einfachen Eingabe und bestenfalls auch passender Ausgabe vor
+* Es gibt _Muster_ in der Eingabe, die zur Vorhersage verwendet werden können
+* Die Lösung des Problems kann Fehler oder _Unsicherheiten_ tolerieren
+  * _80% Genauigkeit_ werden selten übertroffen
+* Wir sind bereit und in der Lage, in einer initialen Phase _Experimente mit offenem Ausgang_ durchzuführen
+</textarea>
+</section>
+
+
+<section data-markdown>
+  <textarea data-template>
+### Phasen eines ML Projekts
+
+<img src="img/ml-workflow/6.PNG" class="fragment">
+
+</textarea>
+</section>
+
+  <section data-markdown class="fragments">
+###  Was brauchen wir für eine Überprüfung eines Anwendungsfalls?
+
+1. Erhoffter *Geschäftsnutzen*
+1. eine *Metrik* als Maß des Erfolgs
+1. Verfügbare *Daten*
+1. (Machine Learning-)*Ansatz*
+1. *Rahmenbedingungen*
+
+</section>
+
+  <section data-markdown>
+    <textarea data-template>
+### Typische Rahmenbedindungen
+
+* Datenschutz
+* Erklärbarkeit
+* Performance / Latenz
+  * Prediction
+  * Training
+* Welche Genauigkeit brauchen wir für unseren Anwendungsfall?
+  * Welche Metrik: Accuracy vs False Negatives vs False Positives
+  * Fallbacks
+* Unerwünschte Biases
+* Stabilität: wenn mit neuen, aber ähnlichen Daten trainiert wird, sollte sich das Modell vergleichbar verhalten 
+
+</textarea>
+</section>  
+
+<section data-markdown>
+  <textarea data-template>
+## Spielidee    
+
+Zusammen in der Anleitung durchgehen
+  </textarea>
+</section>  
+
+<section data-markdown>
+  <textarea data-template>
+### Features
+
+<img src="img/features.jpg">
+  </textarea>
+</section>  
+
+<section data-markdown>
+	<textarea data-template>
+## Basis-Satz von Regeln
+
+```
+if training: 
+    return LOW_RISK
+if age < 30:
+    if power > 130:
+        return HIGH_RISK
+    else:
+        return MEDIUM_RISK
+if age > 50:
+    return HIGH_RISK
+if emergency_braking:
+    return LOW_RISK
+if milage > 50:
+    return HIGH_RISK
+if milage > 30:
+    return MEDIUM_RISK
+# default
+return LOW_RISK
+```
 </textarea>
 </section>
 
 <section data-markdown>
-	<textarea data-template>
-## Exkursion: ML Ansätze
+  <textarea data-template>
+### ML Ansätze
 
-<a href="./2022-mad-exkursion-ml-ansaetze.html">Exkursion: ML Ansätze</a>
+<a href='https://ml-playground.com'><img src='img/ml-playground.png' style="height: 400px"></a>
+
+https://ml-playground.com
+  </textarea>
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+### Kandidaten für eure Ansätze
+
+_die wichtigste Architektur-Entscheidung_
+
+1. Deep Learning: 3 Dense-Schichten mit jeweils 100 Neuronen, auf allen 6 Features 
+1. KNN: Nächste Nachbarn auf den Features Alter und Leistung
+1. Decision Tree: auf allen 6 Features
+1. Regelsystem: auf allen 6 Features
+</textarea>
+</section>
+
+
+<section data-markdown>
+  <textarea data-template>
+# Spielrunde 1    
+  </textarea>
+</section>
+  
+<section data-markdown>
+<textarea data-template>
+### Bericht der Gruppen
+
+* Bist du zufrieden mit deiner Entscheidung?
+* Welche Erkenntnisse hast du in der Spielrunde gehabt?
+* Welches Wissen fehlt dir noch?
 </textarea>
 </section>
 
 <section data-markdown>
-	<textarea data-template>
-## Spielvorbereitung: ML Ansatz auswählen
+  <textarea data-template>
+## Drift
 
-### <a href='arbeitsblaetter/ML_Steckbriefe_v1.pdf'>Blatt II - Welches Modell bringst du in Produktion?</a>
+</textarea>
+</section>
 
-Entscheide dich anhand der gezeigten Kriterien
+<section data-markdown>
+  <textarea data-template>
+### ML Systeme sind dynamisch
+
+<img src='img/verfall-2.PNG'>
+
+</textarea>
+</section>
+
+
+<section data-markdown class="fragments">
+  <textarea data-template>
+### Woher weiß man, dass man ein neues Modell in Produktion braucht?
+
+1. Schon in der Explorationsphase prüfen, wie sich das Modell auf neueren Daten verhält
+ * Wie schnell degradiert die Performance?
+ * Mindestens einmal im Jahr, damit man überhaupt noch weiß, wie es geht
+1. Wenn die Metrik des Modells in Produktion nachlässt
+ * Dafür braucht man die Ground Truth der Daten aus Produktion
+ * Manchmal bekommt man diese unmittelbar nach der Vorhersage durch die Reaktion eines menschlichen Benutzers
+ * Oft aber auch erst nach nennenswerter Verzögerung 
+1. *Wenn sich die Verteilung der Daten der Anfragen oder Vorhersagen deutlich von denen des Trainings unterscheiden* 
 
 </textarea>
 </section>
 
 <section data-markdown>
 <textarea data-template>
-### Bericht der Gruppen
+### Verteilung?
 
-* Wir haben unterschiedliche Modelle mit unterschiedlichen Eigenschaften
-* Welcher Ansatz passt am ehesten?
-* Welche Kompromisse gehst du ein?
+* Verteilungen
+* die wichtigste: Normalverteilung aka Gauß-Verteilung
+* Histogramme (Binning)
+
+<img src="img/nobel.svg">
+
+</textarea>
+</section>
+
+
+<section data-markdown class="fragments">
+  <textarea data-template>
+### Verteilungen
+
+<img src="img/causal-insurance/age-reference.png">
+
+Anhand des Alters der Versicherten zum Zeitpunkt des Trainings
+</textarea>
+</section>
+
+
+<section data-markdown class="fragments">
+<textarea data-template>
+### Zum Zeitpunkt des Trainings?
+
+<img src="img/drift_entschlackt.png" style="height: 100%;">
+
+</textarea>
+</section>
+
+<!-- <section data-markdown class="fragments">
+<textarea data-template>
+### So sieht die Verteilung jetzt aus
+
+<img src="img/causal-insurance/age-current.png">
+
+</textarea>
+</section>
+-->
+<section data-markdown class="fragments">
+<textarea data-template>
+### Driftet das?
+
+<img src="img/causal-insurance/age_no_drift_p75.png">
+
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+<textarea data-template>
+### Und das?
+
+<img src="img/causal-insurance/age_drift_p0.png">
+
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+<textarea data-template>
+### Wie erkennen wir Drift?
+
+* Es wird ein statistischer Test auf den Verteilungen ausgeführt
+* Die Anfragen in Produktion werden verglichen mit Referenz-Datensatz, den wir zum Training benutzt haben
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+## Welcher statistischer Test / welche Metrik?
+
+es gibt leider nicht den einen passenden Test
+
+* manche passen nur gut für kleine (< 1000) Datenmengen
+* unsere Datenmengen sind größer als 1000
+* manche können nicht nur auf numerischen, sondern kategorischen Daten arbeiten
+* wir brauchen beides
+* manche sind zwischen 0 und 1 normiert
+* das ist uns eher egal
+</textarea>
+</section>
+
+
+<section data-markdown>
+<textarea data-template>
+### Speziell für Drift-Erkennung in Frage kommende Tests
+
+* Kolmogorov-Smirnov-Test
+* Population Stability Index
+* Kullback-Leibler-Divergenz
+* Jensen-Shannon-Distanz  
+* Wasserstein-Distanz
+
+https://evidentlyai.com/blog/data-drift-detection-large-datasets
+</textarea>
+</section>
+
+<section data-markdown  class="fragments">
+<textarea data-template>
+### Kolmogorov-Smirnov-Test
+
+* numerisch
+* wird gerne als Default gewählt, kann bei großen Datenmengen aber zu empfindlich sein
+* Vorteil: keine Normalverteilung vorausgesetzt
+* ein 'typischer' statistischer Test mit p als Rückgabewert
+* Nullhypothese: die beiden Verteilungen sind gleich
+* Drift bei p-Wert unter 0.05
+
+*Wann nutzen?* Wenn Drift schnell entdeckt werden muss oder die Datenmengen kleiner ausfallen
+
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+<textarea data-template>
+### P-Werte
+
+* die statistische Verteilung der jeweiligen Features
+* weicht diese im Prod signifikant von der Verteilung im Training ab? (Nullhypothese: nein)
+* diese Abweichung wird über eine Metrik berechnet
+* es kommt eine Konfidenz heraus, ob die Nullhypothese stimmt
+* unter 5% Konfidenz geht man von einer Abweichung aus <span style="font-size: 0.95rem">(1% oder 0.1% auch möglich)</span>
+* das bedeutet, dass es eine 5% Wahrscheinlichkeit gibt, dass die Verteilungen eigentlich doch gleich sind, man es aber nur gerade schlechte Beispiele sieht
+
+</textarea>
+</section>
+
+<section data-markdown>
+<textarea data-template>
+### P-Werte für unsere beiden potentiellen Drifts
+
+<div class="container">
+<div class="col">
+<img src="img/causal-insurance/age_no_drift_p75.png" style="height: 100%;">
+<em>p-Wert (Wahrscheinlichkeit der Nullhypothese) = 75%, also kein Drift</em>
+</div>
+<div class="col">
+<img src="img/causal-insurance/age_drift_p0.png" style="height: 100%;">
+<em>p-Wert (Wahrscheinlichkeit der Nullhypothese) < 0,1%, also Drift</em>
+
+</div>
+</div>
+
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+## Maßnahmen bei Drift
+
+* *Neue Version des Modells trainieren*
+  * Neue Daten aufnehmen (und labeln)
+  * Neue Features erzeugen
+  * Modell Architektur ändern (oder fixen) und neu trainieren
+* Schnelle Maßnahme
+  * Pre-/Post-Processing des Modells neu kalibrieren
+  * Schwellwerte für Anwendung anpassen
+  * Bestimmte Bereiche ausklammern 
+* Sehr schnelle Maßnahme: Fallback
+  * Manuell
+  * Heuristik / Baseline
+</section>
+
+<section data-markdown>
+  <textarea data-template>
+### Hacking the system / Adversarial Attacks
+
+https://www.instagram.com/reel/CkQUhLov9_u/?igshid=MDJmNzVkMjY=
+</textarea>
+</section>
+
+<section data-markdown class="fragments">
+<textarea data-template>
+### Was kann man sonst noch machen
+
+* Outlier-Detection
+  * Unser Modell wird nicht extrapolieren können
+  * Werte außerhalb des Trainings-Bereichs werden wahrscheinlich unrealistisch sicher vorhergesagt
+  * Ausreißer müssen ohne Ground Truth entdeckt werden 
+* Adversarial Detection
+  * Bestimmte Eingaben können absichtlich eine grob falsche Vorhersage herbei führen 
+  * Solche Eingaben können erkannt und korrigiert werden
+  * Dazu kann z.B. ein Autoencoder benutzt werden, der die Eingabe korrigiert
+
+
+<small>https://docs.seldon.io/projects/alibi-detect/en/stable/od/methods.html
+<br>
+https://docs.seldon.io/projects/alibi-detect/en/stable/ad/methods.html
+</small>
 </textarea>
 </section>
 
 <section data-markdown>
   <textarea data-template>
-# Teil II
-
-Betrieb
+# Spielrunde 2    
   </textarea>
 </section>
-
-
-<section data-markdown>
+  
+<section data-markdown class="fragments">
   <textarea data-template>
-### Wie kann man ML in Produktion bringen?
+### Bericht der Gruppen
 
-<img src="img/Typical_Deployment_of_a_Machine_Learning_Service.PNG">
-</textarea>
-</section>
-
-
-<section data-markdown>
-	<textarea data-template>
-## Exkursion: Produktion, Drift, Statistik
-
-<a href="./2022-mad-exkursion-drift.html">Exkursion: Produktion, Drift, Statistik</a>
-</textarea>
-</section>
-
-
-<section data-markdown>
-	<textarea data-template>
-## Spielverlauf: Model in Produktion betreiben
-
-### <a href='arbeitsblaetter/Spielregeln_v1.pdf'>Blatt III: Spielregeln, Kosten/Gewinn, Ereignisse</a>
-
-</textarea>
-</section>
-
-<section data-markdown>
-  <textarea data-template>
-### 5 Runden spielen
-
-### <a href='arbeitsblaetter/Kalkulationsblatt_v1.pdf'>Blatt IV: Spiel-Tabelle</a>
-
-Würfel, auch online möglich: https://onlinewuerfel.de/
-</textarea>
-</section>
-
+1. Wer hat mit welchem Modell gewonnen?
+1. Welche üblen Ergebnisse sind eingetreten?
+1. Wart ihr zufrieden mit der Auswahl des Modells?
+1. Habt ihr Gewinn gemacht?
+  </textarea>
+  </section>
 
 <section data-markdown class="fragments">
 <textarea data-template>
