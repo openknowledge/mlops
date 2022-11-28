@@ -359,7 +359,7 @@ ML Stratege@OPEN KNOWLEDGE
 	<textarea data-template>
 ## Ablauf
 
-### Teil I: 
+### Teil I
 1. Intro
 1. Spielregeln
 1. ML Ansätze
@@ -388,10 +388,24 @@ ML Stratege@OPEN KNOWLEDGE
 </section>
 
 <section data-markdown>
-  <textarea data-template>
-# Intro
-  </textarea>
+	<textarea data-template>
+## Ablauf
+
+### Teil I
+1. *Intro*
+1. Spielregeln
+1. ML Ansätze
+1. Spielrunde 1
+
+### PAUSE
+
+### Teil II 
+1. Drift verstehen
+1. Spielrunde 2
+1. Abschluss, Zusammenfassung
+</textarea>
 </section>
+
 
 <section data-markdown>
   <textarea data-template>
@@ -465,6 +479,49 @@ ML Stratege@OPEN KNOWLEDGE
 </textarea>
 </section>  
 
+<section data-markdown class="fragments">
+### Was ist MLOps?
+
+* MLOps ist abgeleitet von DevOps
+* Durch MLOps kommt ML in Produktion und wird in Betrieb gehalten
+* Dazu kommen eine Reihe von Werkzeugen und Praktiken zum Einsatz
+* Überschneidung aus
+  * Softwareentwicklung
+  * Operations
+  * Data Science
+</section>
+
+<section data-markdown class="fragments">
+### Warum MLOps?
+
+* im akademischen Leben zählt für einen Wettbewerb häufig nur der Score (Güte) des Modells
+* dieser Ansatz hat sich im Bereich des Data Science auch in der Praxis breit gemacht
+* die Praxis ist aber keine Kaggle Competition
+* In-Sample Evaluation (auch wenn wir die vorher abgetrennt haben) sagt nur bedingt etwas für Eignung in
+einer praktsichen Anwendung aus
+* Out-Of-Sample Evaluation häufig erst im produktiven Betrieb möglich (evtl nur mitlaufen lassen)
+</section>
+
+<section data-markdown>
+	<textarea data-template>
+## Ablauf
+
+### Teil I
+1. Intro
+1. *Spielregeln*
+1. ML Ansätze
+1. Spielrunde 1
+
+### PAUSE
+
+### Teil II 
+1. Drift verstehen
+1. Spielrunde 2
+1. Abschluss, Zusammenfassung
+</textarea>
+</section>
+
+
 <section data-markdown>
   <textarea data-template>
 ## Spielidee    
@@ -472,6 +529,26 @@ ML Stratege@OPEN KNOWLEDGE
 Zusammen in der Anleitung durchgehen
   </textarea>
 </section>  
+
+<section data-markdown>
+	<textarea data-template>
+## Ablauf
+
+### Teil I
+1. Intro
+1. Spielregeln
+1. *ML Ansätze*
+1. Spielrunde 1
+
+### PAUSE
+
+### Teil II 
+1. Drift verstehen
+1. Spielrunde 2
+1. Abschluss, Zusammenfassung
+</textarea>
+</section>
+
 
 <section data-markdown>
   <textarea data-template>
@@ -530,6 +607,24 @@ _die wichtigste Architektur-Entscheidung_
 </textarea>
 </section>
 
+<section data-markdown>
+	<textarea data-template>
+## Ablauf
+
+### Teil I
+1. Intro
+1. Spielregeln
+1. ML Ansätze
+1. *Spielrunde 1*
+
+### PAUSE
+
+### Teil II 
+1. Drift verstehen
+1. Spielrunde 2
+1. Abschluss, Zusammenfassung
+</textarea>
+</section>
 
 <section data-markdown>
   <textarea data-template>
@@ -548,6 +643,25 @@ _die wichtigste Architektur-Entscheidung_
 </section>
 
 <section data-markdown>
+	<textarea data-template>
+## Ablauf
+
+### Teil I
+1. Intro
+1. Spielregeln
+1. ML Ansätze
+1. Spielrunde 1
+
+### PAUSE
+
+### Teil II 
+1. *Drift verstehen*
+1. Spielrunde 2
+1. Abschluss, Zusammenfassung
+</textarea>
+</section>
+
+<section data-markdown>
   <textarea data-template>
 ## Drift
 
@@ -562,7 +676,6 @@ _die wichtigste Architektur-Entscheidung_
 
 </textarea>
 </section>
-
 
 <section data-markdown class="fragments">
   <textarea data-template>
@@ -730,6 +843,22 @@ https://evidentlyai.com/blog/data-drift-detection-large-datasets
 </textarea>
 </section>
 
+<section data-markdown style="font-size: x-large;">
+	<textarea data-template>
+## Drift erfordert Interpretation
+
+Wenn die Welt sich ändert, ist Drift zu erwarten und damit ok
+
+|   | Positive Interpretation, keine Maßnahme erforderlich  | Negative Interpretation, Maßnahme erforderlich  |
+|---|---|---|
+| *Data und Prediction Drift*  | wichtige Features haben sich geändert, Modell kommt klar und extrapoliert gut, z.B.: Höheres Alter, mehr Risiko  |  wichtige Features haben sich geändert, Modell extrapoliert nicht sinnvoll |
+| *Data aber kein Prediction Drift*  | keine wichtigen Features geändert, das Modell ist robust genug für den Drift  | wichtige Features geändert, Modell extrapoliert nicht sinnvoll |
+| *Prediction aber kein Data Drift*  | ???  | wahrscheinlich Concept Drift, neue Analyse der Situation notwendig |
+|   |   |   |
+
+</textarea>
+</section>
+
 <section data-markdown class="fragments">
 ## Maßnahmen bei Drift
 
@@ -825,6 +954,25 @@ https://www.instagram.com/reel/CkQUhLov9_u/?igshid=MDJmNzVkMjY=
 </textarea>
 </section>
 
+<section data-markdown>
+	<textarea data-template>
+## Ablauf
+
+### Teil I
+1. Intro
+1. Spielregeln
+1. ML Ansätze
+1. Spielrunde 1
+
+### PAUSE
+
+### Teil II 
+1. Drift verstehen
+1. *Spielrunde 2*
+1. Abschluss, Zusammenfassung
+</textarea>
+</section>
+
 
 <section data-markdown>
   <textarea data-template>
@@ -842,6 +990,25 @@ https://www.instagram.com/reel/CkQUhLov9_u/?igshid=MDJmNzVkMjY=
 1. Habt ihr Gewinn gemacht?
   </textarea>
   </section>
+
+<section data-markdown>
+	<textarea data-template>
+## Ablauf
+
+### Teil I
+1. Intro
+1. Spielregeln
+1. ML Ansätze
+1. Spielrunde 1
+
+### PAUSE
+
+### Teil II 
+1. Drift verstehen
+1. Spielrunde 2
+1. *Abschluss, Zusammenfassung*
+</textarea>
+</section>
 
 <section data-markdown class="fragments">
 <textarea data-template>
