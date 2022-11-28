@@ -441,7 +441,7 @@ ML Stratege@OPEN KNOWLEDGE
 
 * Die Lösung des vorliegenden Problems ist unbekannt oder _schwer zu spezifizieren_
 * Es liegen _Daten_ mit einer klaren, einfachen Eingabe und bestenfalls auch passender Ausgabe vor
-* Es gibt _Muster_ in der Eingabe, auf die reagiert werden können
+* Es gibt _Muster_ in der Eingabe, auf die reagiert werden kann
 * Die Lösung des Problems kann Fehler oder _Unsicherheiten_ tolerieren
   * _80% Genauigkeit_ werden selten übertroffen
 * Wir sind bereit und in der Lage, in einer initialen Phase _Experimente mit offenem Ausgang_ durchzuführen
@@ -461,7 +461,7 @@ ML Stratege@OPEN KNOWLEDGE
   <section data-markdown class="fragments">
 ###  Was brauchen wir für eine Überprüfung eines Anwendungsfalls?
 
-1. Erhoffter *Geschäftsnutzen*
+1. Erhofften *Geschäftsnutzen*
 1. eine *Metrik* als Maß des Erfolgs
 1. Verfügbare *Daten*
 1. (Machine Learning-)*Ansatz*
@@ -471,7 +471,7 @@ ML Stratege@OPEN KNOWLEDGE
 
   <section data-markdown>
     <textarea data-template>
-### Typische Rahmenbedindungen
+### Typische Rahmenbedingungen
 
 * Datenschutz
 * Erklärbarkeit
@@ -506,7 +506,7 @@ ML Stratege@OPEN KNOWLEDGE
 * dieser Ansatz hat sich im Bereich des Data Science auch in der Praxis breit gemacht
 * die Praxis ist aber keine Kaggle Competition
 * In-Sample Evaluation (auch wenn wir die vorher abgetrennt haben) sagt nur bedingt etwas für Eignung in
-einer praktsichen Anwendung aus
+einer praktischen Anwendung aus
 * Out-Of-Sample Evaluation häufig erst im produktiven Betrieb möglich (evtl nur mitlaufen lassen)
 </section>
 
@@ -606,7 +606,7 @@ https://ml-playground.com
 
 <section data-markdown>
   <textarea data-template>
-### Steckbriefe in der Zusammenfassung Kandidaten für eure Ansätze
+### Steckbriefe in der Zusammenfassung als Kandidaten für eure Ansätze
 
 _die wichtigste Architektur-Entscheidung_
 
@@ -695,14 +695,14 @@ _die wichtigste Architektur-Entscheidung_
   <textarea data-template>
 ### Woher weiß man, dass man ein neues Modell in Produktion braucht?
 
-1. Schon in der Explorationsphase prüfen, wie sich das Modell auf neueren Daten verhält
- * Wie schnell degradiert die Performance?
- * Mindestens einmal im Jahr, damit man überhaupt noch weiß, wie es geht
-1. Wenn die Metrik des Modells in Produktion nachlässt
- * Dafür braucht man die Ground Truth der Daten aus Produktion
- * Manchmal bekommt man diese unmittelbar nach der Vorhersage durch die Reaktion eines menschlichen Benutzers
- * Oft aber auch erst nach nennenswerter Verzögerung 
-1. *Wenn sich die Verteilung der Daten der Anfragen oder Vorhersagen deutlich von denen des Trainings unterscheiden* 
+* Schon in der Explorationsphase prüfen, wie sich das Modell auf neueren Daten verhält
+  * Wie schnell degradiert die Performance?
+  * Mindestens einmal im Jahr, damit man überhaupt noch weiß, wie es geht
+* Wenn die Metrik des Modells in Produktion nachlässt
+  * Dafür braucht man die Ground Truth der Daten aus Produktion
+  * Manchmal bekommt man diese unmittelbar nach der Vorhersage durch die Reaktion eines menschlichen Benutzers
+  * Oft aber auch erst nach nennenswerter Verzögerung 
+* *Wenn sich die Verteilung der Daten der Anfragen oder Vorhersagen deutlich von der des Trainings unterscheidet* 
 
 </textarea>
 </section>
@@ -711,7 +711,6 @@ _die wichtigste Architektur-Entscheidung_
 <textarea data-template>
 ### Verteilung?
 
-* Verteilungen
 * die wichtigste: Normalverteilung aka Gauß-Verteilung
 * Histogramme (Binning)
 
@@ -727,7 +726,7 @@ _die wichtigste Architektur-Entscheidung_
 
 <img src="img/causal-insurance/age-reference.png">
 
-Anhand des Alters der Versicherten zum Zeitpunkt des Trainings
+Das Alter der Versicherten zum Zeitpunkt des Trainings
 </textarea>
 </section>
 
@@ -773,7 +772,7 @@ Anhand des Alters der Versicherten zum Zeitpunkt des Trainings
 ### Wie erkennen wir Drift?
 
 * Es wird ein statistischer Test auf den Verteilungen ausgeführt
-* Die Anfragen in Produktion werden verglichen mit Referenz-Datensatz, den wir zum Training benutzt haben
+* Die Anfragen in Produktion werden verglichen mit dem Referenz-Datensatz, den wir zum Training benutzt haben
 
 </textarea>
 </section>
@@ -786,7 +785,7 @@ es gibt leider nicht den einen passenden Test
 
 * manche passen nur gut für kleine (< 1000) Datenmengen
 * unsere Datenmengen sind größer als 1000
-* manche können nicht nur auf numerischen, sondern kategorischen Daten arbeiten
+* manche können nicht nur auf numerischen, sondern auch auf kategorischen Daten arbeiten
 * wir brauchen beides
 <!-- * manche sind zwischen 0 und 1 normiert
 * das ist uns eher egal -->
@@ -829,11 +828,11 @@ https://evidentlyai.com/blog/data-drift-detection-large-datasets
 ### P-Werte
 
 * die statistische Verteilung der jeweiligen Features
-* weicht diese im Prod signifikant von der Verteilung im Training ab? (Nullhypothese: nein)
+* weicht diese in Produktion signifikant von der Verteilung im Training ab? (Nullhypothese: nein)
 * diese Abweichung wird über eine Metrik berechnet
 * es kommt eine Konfidenz heraus, ob die Nullhypothese stimmt
 * unter 5% Konfidenz geht man von einer Abweichung aus <span style="font-size: 0.95rem">(1% oder 0.1% auch möglich)</span>
-* das bedeutet, dass es eine 5% Wahrscheinlichkeit gibt, dass die Verteilungen eigentlich doch gleich sind, man es aber nur gerade schlechte Beispiele sieht
+* das bedeutet, dass es eine 5%-Wahrscheinlichkeit gibt, dass die Verteilungen eigentlich doch gleich sind, man aber nur gerade schlechte Beispiele sieht
 
 </textarea>
 </section>
@@ -879,7 +878,7 @@ Wenn die Welt sich ändert, ist Drift zu erwarten und damit ok
 * *Neue Version des Modells trainieren*
   * Neue Daten aufnehmen (und labeln)
   * Neue Features erzeugen
-  * Modell Architektur ändern (oder fixen) und neu trainieren
+  * Modell-Architektur ändern (oder fixen) und neu trainieren
 * Schnelle Maßnahme
   * Pre-/Post-Processing des Modells neu kalibrieren
   * Schwellwerte für Anwendung anpassen
@@ -1030,12 +1029,12 @@ https://www.instagram.com/reel/CkQUhLov9_u/?igshid=MDJmNzVkMjY=
 <textarea data-template>
 ### Zusammenfassung
 
-1. Machine Learning Projekte können in Phasen gedacht werden
+1. Machine Learning-Projekte können in Phasen gedacht werden
 1. In der ersten Phase macht man möglichst schnelle Experimente
 1. Sollte sich eine Idee als tragfähig erweisen, professionalisiert man die Idee
 1. Dies ist Voraussetzung und Grundlage für Produktion
-1. In Produktion ergeben sich besondere Herausforderung im Bereich Monitoring
-1. Typischerweise müssen Machine Learning Systeme regelmäßig nachtrainiert und gepflegt werden
+1. In Produktion ergeben sich besondere Herausforderungen im Bereich Monitoring
+1. Typischerweise müssen Machine Learning-Systeme regelmäßig nachtrainiert und gepflegt werden
 </textarea>
 </section>
 
@@ -1044,7 +1043,7 @@ https://www.instagram.com/reel/CkQUhLov9_u/?igshid=MDJmNzVkMjY=
 ### Spielt das Spiel gern auch mit euren Kollegen
 
 Arbeitsblätter
-1. Entscheidung welcher ML Ansatz: <a href='arbeitsblaetter/Steckbriefe.pdf'>arbeitsblaetter/Steckbriefe.pdf</a>
+1. Entscheidung für ML-Ansatz: <a href='arbeitsblaetter/Steckbriefe.pdf'>arbeitsblaetter/Steckbriefe.pdf</a>
 1. Spielregeln / Kosten / Gewinn / Ereignisse: <a href='arbeitsblaetter/Spielregeln.pdf'>arbeitsblaetter/Spielregeln.pdf</a>
 1. Spiel-Tabelle: <a href='arbeitsblaetter/Kalkulationsblatt.pdf'>arbeitsblaetter/Kalkulationsblatt.pdf</a>
 
