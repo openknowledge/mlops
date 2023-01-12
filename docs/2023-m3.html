@@ -26,25 +26,6 @@
 <!-- 
 M3 Workshop
 
-MLOps mit Python
-
-Viele Unternehmen haben die Phase des reinen Experimentierens mit Machine Learning hinter sich gelassen und fragen sich
-nun, wie man ein Machine Learning Modell so betreibt wie ein traditionelles Stück Software. Also wie man es in Produktion bringt und dort
-erfolgreich hält. MLOps ist der Name für diesen Ansatz. 
-
-In diesem Workshop werden wir uns anhand eines durchgängigen Beispiel durch die Phasen eines Machine Learning Projekts bewegen:
-- Exploration: Entwicklung eines Modells mit Jupyter Notebooks und TensorFlow
-- Professionalisierung: Refactoring in Module
-- Produktion und Monitoring: Produktivsetzung mit Flask und Docker, Monitoring mit Prometheus, Evidently und Grafana
-
-Als ML Werkzeug werden wir TensorFlow nutzen, allerdings ist dies nur ein Beispiel und alles gezeigte gilt auch für alle
-anderen Frameworks. Es wird lediglich Erfahrung mit Python und ein Verständnis für ein Machine Learning Projekt
-vorausgesetzt. Alles andere wird - soweit nötig - im Workshop eingeführt.
-
-Lernziel:
-Teilnehmer sollen anhand eines in sich stimmigen Satzes von Werkzeugen die Konzepte und Ansätze im Bereich MLOps kennen lernen und diskutieren können.
-
----
 
 Aus: https://arxiv.org/abs/2007.06299
 The machine learning lifecycle extends beyond the deployment stage. Monitoring deployed models is crucial for 
@@ -56,25 +37,28 @@ in each of these areas with some recent examples of production ready solutions u
 
 ---
 
-OOP
+M3
 
-Titel: MLOps - wie bringt man ein Machine Learning Modell in Produktion und hält es dort?
+Titel: MLOps mit TensorFlow, Docker und Kubernetes 
+Untertitel: Wie bringt man ein Machine Learning Modell in Produktion und hält es dort?
+
+Nur Titel: MLOps - wie bringt man ein Machine Learning Modell in Produktion und hält es dort?
+
+Level: Fortgeschritten
 
 MLOps beschäftigt sich mit dem Thema, ein Machine Learning Modell in Produktion zu bringen und es dort erfolgreich zu betreiben.
 
-Ein Machine Learning Modell läuft fast immer als Teil eines komplexeren Software Systems. 
-Und so ist die die erste Herausforderung ist, das vermeintlich fertige Modell in in ein solches System zu integrieren.
-Für die Produktion müssen Metriken erarbeitet werden, die die Performanz des Modells auch in Zukunft bewerten können.
-Da es häufig (zumindest zeitnah) keine gesicherten Erkenntnisse über die Qualität der Vorhersage gibt, müssen 
-Platzhalter dafür gefunden werden.
-Ebenso muss überlegt werden, wie man die Ursache für die Verschlechterung der Vorhersagequalität eigentlich gemacht werden sollte und wie man 
+Dementsprechend besteht der Workshop aus drei Teilen:  
+1. Professionalisierung: Umwandlung eines bestehenden Notebooks in Libraries, Tests, Scripte und ein resillienten Modell
+2. Produktivsetzung: Erstellen eines OpenAPI Server, Betrieb mit Docker und Kubernetes  
+3. Monitoring: Drift Detection mit Prometheus, Evidently und Grafana 
 
-die für einzelne Beispiele 
+Dieser Workshop hat den Schwerpunkt auf den späteren Phasen eines Machine Learning Projekts, also der Professionalisierung und dem Betrieb. 
+Er schließt damit an den MLOps Workshop der letztjährigen M3 an. 
 
-Sobald das Modell in Produktion ist, muss es auf eine 
 
-https://en.wikipedia.org/wiki/MLOps
-
+Lernziel:
+Teilnehmer sollen anhand eines in sich stimmigen Satzes von Werkzeugen die Konzepte und Ansätze im Bereich MLOps kennen lernen und diskutieren können.
 -->
 
 <section data-markdown class="preparation">
