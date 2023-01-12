@@ -291,6 +291,7 @@ https://cloud.google.com/blog/topics/developers-practitioners/using-vertex-ai-ra
 </section>
  -->
 
+<!-- 
 SOFTWARE ARCHITECTURE IS NOT A SWEARWORD
 
 Workshop 1.5 hour - Suggested by Oliver Zeigermann
@@ -341,7 +342,7 @@ Weiteres wichtiges Thema in Dev: Wie managen wir Änderungen?
 - API
 - Major/Minor
 ---
-
+ -->
 <section data-markdown class="todo">
   <textarea data-template>
 # Intro    
@@ -368,6 +369,36 @@ Weiteres wichtiges Thema in Dev: Wie managen wir Änderungen?
 </textarea>
 </section>
 
+<section data-markdown class="fragment todo">
+  <textarea data-template>
+### When I tell people I do architecture work
+
+* hier die ganzen Vorurteile
+* dann: man kann ja auch andere Architektur-Arbeit machen
+  </textarea>
+</section>
+
+
+<section data-markdown class="todo">
+  <textarea data-template>
+# Architecture == Over engineering ?
+
+TypeAdapterRuntimeTypeWrapper
+
+```
+[INFO] GCLOUD: Caused by: java.lang.NoSuchMethodError: 'com.google.gson.stream.JsonWriter com.google.gson.stream.JsonWriter.value(java.lang.Boolean)'       
+[1] [INFO] GCLOUD:      at com.google.gson.internal.bind.TypeAdapters$3.write(TypeAdapters.java:150)
+[1] [INFO] GCLOUD:      at com.google.gson.internal.bind.TypeAdapters$3.write(TypeAdapters.java:135)
+[1] [INFO] GCLOUD:      at com.google.gson.internal.bind.TypeAdapterRuntimeTypeWrapper.write(TypeAdapterRuntimeTypeWrapper.java:70)
+[1] [INFO] GCLOUD:      at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$1.write(ReflectiveTypeAdapterFactory.java:196)
+[1] [INFO] GCLOUD:      at com.google.gson.internal.bind.ReflectiveTypeAdapterFactory$Adapter.write(ReflectiveTypeAdapterFactory.java:368)
+[INFO] GCLOUD:  at com.google.gson.Gson.toJson(Gson.java:842)
+[1] [INFO] GCLOUD:      at com.google.gson.Gson.toJson(Gson.java:812)
+[1] [INFO] GCLOUD:      at com.google.gson.Gson.toJson(Gson.java:759)
+[1] [INFO] GCLOUD:      at com.floreysoft.ultradox.server.entity.ItemEntity.setItem(ItemEntity.java:75)
+```
+</textarea>
+</section>
 
 
 			<section data-markdown>
