@@ -10,3 +10,4 @@ datasets/kdd_k_neighbors_classifier
 *.h5
 !model/*
 *.DS_Store
+.vscode/settings.json
